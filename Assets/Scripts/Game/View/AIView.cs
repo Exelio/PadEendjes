@@ -6,7 +6,7 @@ public class AIView : MonoBehaviour
 {
     public Transform TransSelf;
 
-    public float Speed = 5;
+    public float Speed = 10;
     public Transform[] Waypoints;
 
     private int _index = 0;
@@ -70,4 +70,22 @@ public class AIView : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Speed = 0;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Speed = 10;
+        }
+    }
+
+
 }
