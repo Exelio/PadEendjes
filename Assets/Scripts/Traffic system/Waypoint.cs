@@ -6,12 +6,13 @@ public class Waypoint : MonoBehaviour
 {
     public Waypoint PreviousWaypoint;
     public Waypoint NextWaypoint;
-
-    [Range(0, 5)] public float Width = 1f;
-
+    
     public List<Waypoint> BrancheWaypoints;
 
+    [Range(0, 5)] public float Width = 1f;
     [Range(0, 1f)] public float BranchRatio = 0.5f;
+
+    public int Number { get; set; }
 
     public Vector3 GetPosition()
     {

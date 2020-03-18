@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 public class WaypointManager : EditorWindow
@@ -49,7 +48,7 @@ public class WaypointManager : EditorWindow
             {
                 CreateBefore();
             }
-            if(GUILayout.Button("Create Waypint After"))
+            if(GUILayout.Button("Create Waypoint After"))
             {
                 CreateAfter();
             }
@@ -58,14 +57,42 @@ public class WaypointManager : EditorWindow
                 Remove();
             }
         }
+
+        for (int i = 0; i < WaypointRoot.childCount; i++)
+        {
+            ChangeWaypointName(WaypointRoot.GetChild(i)?.GetComponent<Waypoint>());
+        }
+    }
+
+    private void ChangeWaypointName(Waypoint waypoint)
+    {
+        if (waypoint == null) return;
+
+        if (waypoint.PreviousWaypoint != null && waypoint.NextWaypoint != null)
+        {
+            waypoint.name = "Waypoint" + waypoint.Number + " From" + waypoint.PreviousWaypoint.Number + "To" + waypoint.NextWaypoint.Number;
+        }
+        else if (waypoint.PreviousWaypoint != null)
+        {
+            waypoint.name = "Waypoint" + waypoint.Number + " From" + waypoint.PreviousWaypoint.Number;
+        }
+        else if(waypoint.NextWaypoint != null)
+        {
+            waypoint.name = "Waypoint" + waypoint.Number + " From" + waypoint.NextWaypoint.Number;
+        }
+        else
+        {
+            waypoint.name = "Waypoint" + waypoint.Number + " NO From or To";
+        }
     }
 
     private void CreateWaypoint()
     {
-        GameObject waypointObj = new GameObject("Waypoint" + WaypointRoot.childCount, typeof(Waypoint));
+        GameObject waypointObj = new GameObject("Waypoint", typeof(Waypoint));
         waypointObj.transform.SetParent(WaypointRoot, false);
 
         Waypoint wp = waypointObj.GetComponent<Waypoint>();
+        wp.Number = WaypointRoot.childCount;
 
         if(WaypointRoot.childCount > 1)
         {
@@ -85,6 +112,8 @@ public class WaypointManager : EditorWindow
         waypointObj.transform.SetParent(WaypointRoot, false);
 
         Waypoint wp = waypointObj.GetComponent<Waypoint>();
+        wp.Number = WaypointRoot.childCount;
+
         Waypoint swp = Selection.activeGameObject.GetComponent<Waypoint>();
 
         wp.transform.position = swp.transform.position;
@@ -109,6 +138,8 @@ public class WaypointManager : EditorWindow
         waypointObj.transform.SetParent(WaypointRoot, false);
 
         Waypoint wp = waypointObj.GetComponent<Waypoint>();
+        wp.Number = WaypointRoot.childCount;
+
         Waypoint swp = Selection.activeGameObject.GetComponent<Waypoint>();
 
         wp.transform.position = swp.transform.position;
@@ -146,10 +177,12 @@ public class WaypointManager : EditorWindow
 
     private void AddBranch()
     {
-        GameObject waypointObj = new GameObject("Waypoint" + WaypointRoot.childCount, typeof(Waypoint));
+        GameObject waypointObj = new GameObject("BrancheWaypoint", typeof(Waypoint));
         waypointObj.transform.SetParent(WaypointRoot, false);
 
         Waypoint wp = waypointObj.GetComponent<Waypoint>();
+        wp.Number = WaypointRoot.childCount;
+
         Waypoint branchedFrom = Selection.activeGameObject.GetComponent<Waypoint>();
         branchedFrom.BrancheWaypoints.Add(wp);
 
