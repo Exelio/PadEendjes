@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AIView : MonoBehaviour
 {
@@ -39,36 +37,19 @@ public class AIView : MonoBehaviour
 
         TransSelf.Translate(Vector3.forward * Speed * Time.deltaTime, Space.Self);
     }
+
     void GoToNextNode()
     {
         _index++;
         if (_index < Waypoints.Length)
         {
-            //TransSelf.LookAt(Waypoints[_index].position);
+            TransSelf.LookAt(Waypoints[_index].position);
         }
         else
         {
             _index = 0;
         }
 
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (Waypoints != null)
-        {
-            for (int i = 0; i < Waypoints.Length; i++)
-            {
-                Gizmos.color = Color.magenta;
-                Gizmos.DrawWireCube(Waypoints[i].position, Vector3.one * 0.5f);
-
-                if (i < Waypoints.Length - 1)
-                {
-                    Gizmos.DrawLine(Waypoints[i].position, Waypoints[i + 1].position);
-
-                }
-            }
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -83,9 +64,7 @@ public class AIView : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Speed = 10;
+            Speed = 1;
         }
     }
-
-
 }
