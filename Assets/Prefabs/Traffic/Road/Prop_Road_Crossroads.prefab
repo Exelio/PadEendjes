@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7384633460437014273}
   - component: {fileID: 1954698297121762615}
   - component: {fileID: 5196295070609510862}
-  - component: {fileID: 5773655238097052957}
+  - component: {fileID: 7624095555336133343}
   m_Layer: 0
   m_Name: Prop_Road_Crossroads
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &5773655238097052957
-BoxCollider:
+--- !u!64 &7624095555336133343
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,6 +92,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.010000076, z: 1}
-  m_Center: {x: 0.5, y: 0.005, z: 0}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5841235814408968154, guid: e3d12aac7f0811c49a4be33e08a8aa54, type: 3}

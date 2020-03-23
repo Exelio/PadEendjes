@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5483941982191857089}
   - component: {fileID: 3549371497957726199}
   - component: {fileID: 7096951703636896526}
-  - component: {fileID: 8809526810564059089}
+  - component: {fileID: 358788736498871802}
   m_Layer: 0
   m_Name: Prop_Road_Straight
   m_TagString: Untagged
@@ -81,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8809526810564059089
-BoxCollider:
+--- !u!64 &358788736498871802
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -91,6 +91,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.59999996, y: 0.01000006, z: 1}
-  m_Center: {x: 0.29999998, y: 0.005000008, z: 0}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6288191131932274102, guid: d6e9af8aabab4384b89393bead5fa5b6, type: 3}

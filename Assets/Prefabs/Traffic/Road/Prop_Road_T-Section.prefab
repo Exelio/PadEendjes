@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3691203676570921784}
   - component: {fileID: 5648301804902879502}
   - component: {fileID: 2116205821491998199}
-  - component: {fileID: 388035207782390036}
+  - component: {fileID: 2842456705805286877}
   m_Layer: 0
   m_Name: Prop_Road_T-Section
   m_TagString: Untagged
@@ -82,8 +82,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &388035207782390036
-BoxCollider:
+--- !u!64 &2842456705805286877
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,6 +92,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 0.01000006, z: 1}
-  m_Center: {x: 0.5, y: 0.005000008, z: 0}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7984524199589771079, guid: 2c137dc2eb82a03418eb490fb3ee83f8, type: 3}
