@@ -11,6 +11,7 @@ public class Waypoint : MonoBehaviour
 
     [Range(0, 5)] public float Width = 1f;
     [Range(0, 1f)] public float BranchRatio = 0.5f;
+    [Range(0.1f, 1)] public float SphereRadius = 0.5f;
 
     public int Number { get; set; }
 

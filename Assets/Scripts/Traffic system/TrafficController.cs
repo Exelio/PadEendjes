@@ -34,7 +34,7 @@ public class TrafficController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = _waypoint.transform.position;
+        transform.position = _waypoint.transform.position;        
         _checkSpeed = _speed;
         _rigid = GetComponent<Rigidbody>();
     }
@@ -48,6 +48,7 @@ public class TrafficController : MonoBehaviour
             Move();
             CheckForward();
         }
+        else { _checkSpeed = 0; _currentSpeed = 0; }
     }
 
     private void Move()
@@ -56,8 +57,7 @@ public class TrafficController : MonoBehaviour
         destinationDirection.y = 0;
         _currentSpeed = _rigid.velocity.magnitude;
 
-        if (_currentSpeed <= _checkSpeed)
-            _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
+        if (_currentSpeed <= _checkSpeed) _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
 
         Quaternion targetRotation = Quaternion.LookRotation(destinationDirection); 
         var slerp = Quaternion.Slerp(transform.rotation,targetRotation, _rotationSpeed * Time.deltaTime);
@@ -66,24 +66,22 @@ public class TrafficController : MonoBehaviour
 
     private void CheckDestinationReached()
     {
-        if (Vector3.Distance(transform.position, _waypoint.transform.position) <= _distance)
-        {
-            _reachedDestination = true;
-        }
-        else
-        {
-            _reachedDestination = false;
-        }
+        if (Vector3.Distance(transform.position, _waypoint.transform.position) <= _distance) _reachedDestination = true;
+        else  _reachedDestination = false;
     }
 
     private void CheckForward()
     {
         RaycastHit hit;
-        bool _hitDetection = Physics.BoxCast(_carFront.position + (_carFront.transform.forward * (_maxDistance / 2)), _carFront.localScale * _maxDistance, _carFront.forward, out hit, _carFront.rotation, _maxDistance);
+        bool hitDetection = Physics.BoxCast(_carFront.position + (transform.forward * (_maxDistance / 2)), _carFront.localScale, transform.forward, out hit, _carFront.rotation, _maxDistance);
 
-        if (_hitDetection)
-        {
-            _checkSpeed = hit.transform.GetComponent<TrafficController>().CurrentSpeed;
+        if (hitDetection) 
+        { 
+            float speed = hit.transform.GetComponent<TrafficController>().CurrentSpeed;
+
+            if (speed <= 0.1f) _checkSpeed = 0;
+
+            else _checkSpeed = speed; 
         }
         else _checkSpeed = _speed;
     }
@@ -91,6 +89,6 @@ public class TrafficController : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(_carFront.position + (_carFront.forward * _maxDistance/2), _carFront.localScale * _maxDistance);
+        Gizmos.DrawWireCube(_carFront.position + (transform.forward * _maxDistance/2), _carFront.localScale * _maxDistance);
     }
 }
