@@ -102,6 +102,7 @@ public class WaypointManager : EditorWindow
             //set the transform of the waypoint
             wp.transform.position = wp.PreviousWaypoint.transform.position;
             wp.transform.forward = wp.PreviousWaypoint.transform.forward;
+            wp.Width = wp.PreviousWaypoint.Width;
         }
         Selection.activeGameObject = wp.gameObject;
     }
@@ -118,8 +119,9 @@ public class WaypointManager : EditorWindow
 
         wp.transform.position = swp.transform.position;
         wp.transform.forward = swp.transform.forward;
+        wp.Width = swp.Width;
 
-        if(swp.PreviousWaypoint != null)
+        if (swp.PreviousWaypoint != null)
         {
             wp.PreviousWaypoint = swp.PreviousWaypoint;
             swp.PreviousWaypoint.NextWaypoint = wp;
@@ -144,6 +146,7 @@ public class WaypointManager : EditorWindow
 
         wp.transform.position = swp.transform.position;
         wp.transform.forward = swp.transform.forward;
+        wp.Width = swp.Width;
 
         wp.PreviousWaypoint = swp;
 
