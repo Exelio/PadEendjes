@@ -10,8 +10,9 @@ public class Waypoint : MonoBehaviour
     public List<Waypoint> BrancheWaypoints;
 
     [Range(0, 5)] public float Width = 1f;
-    [Range(0, 1f)] public float BranchRatio = 0.5f;
-    [Range(0.1f, 1)] public float SphereRadius = 0.5f;
+    [Tooltip("chance to go to branches in %")] [Range(0, 1f)] public float BranchRatio = 0.5f;
+    [Tooltip("Editor sphere radius")] [Range(0.1f, 1)] public float SphereRadius = 0.5f;
+    [Tooltip("maximum speed to go to the next waypoint")]public float MaxSpeed = 2f;
 
     public int Number { get; set; }
 

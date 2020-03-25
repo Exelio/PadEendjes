@@ -5,7 +5,7 @@ public class TrafficController : MonoBehaviour
 {
     [Header("Movement variables")]
     [Tooltip("The acceleration of the vehicle")] [SerializeField] private float _accelerationSpeed;
-    [Range(1, 8)] [Tooltip("Max car speed")] [SerializeField] private float _speed; public float Speed => _speed;
+    [Range(1, 8)] [Tooltip("Max car speed")] [SerializeField] private float _maxSpeed; public float Speed => _maxSpeed;
     [Tooltip("The speed the car turns")] [SerializeField] private float _rotationSpeed;
     [Range(0,2)] [Tooltip("Distance until change waypoint")] [SerializeField] private float _distance = 0.1f;
     [Tooltip("The distance between the cars")] [SerializeField] private float _maxDistance = 2f;
@@ -34,9 +34,17 @@ public class TrafficController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform.position = _waypoint.transform.position;        
-        _checkSpeed = _speed;
+        SetPosition();
+
+        _checkSpeed = _maxSpeed;
         _rigid = GetComponent<Rigidbody>();
+    }
+
+    private void SetPosition()
+    {
+        Transform wpTrans = _waypoint.transform;
+        transform.position = wpTrans.position;
+        transform.rotation = Quaternion.Euler(wpTrans.forward);
     }
 
     // Update is called once per frame
@@ -75,15 +83,17 @@ public class TrafficController : MonoBehaviour
         RaycastHit hit;
         bool hitDetection = Physics.BoxCast(_carFront.position + (transform.forward * (_maxDistance / 2)), _carFront.localScale, transform.forward, out hit, _carFront.rotation, _maxDistance);
 
-        if (hitDetection) 
-        { 
+        if (hitDetection)
+        {
             float speed = hit.transform.GetComponent<TrafficController>().CurrentSpeed;
 
             if (speed <= 0.1f) _checkSpeed = 0;
 
-            else _checkSpeed = speed; 
+            else _checkSpeed = speed;
         }
-        else _checkSpeed = _speed;
+        else _checkSpeed = _waypoint.PreviousWaypoint.MaxSpeed;
+
+        _checkSpeed = Mathf.Clamp(_checkSpeed, 0, _maxSpeed);
     }
 
     private void OnDrawGizmos()

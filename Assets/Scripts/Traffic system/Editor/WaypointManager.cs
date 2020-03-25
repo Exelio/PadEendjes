@@ -103,6 +103,7 @@ public class WaypointManager : EditorWindow
             wp.transform.position = wp.PreviousWaypoint.transform.position;
             wp.transform.forward = wp.PreviousWaypoint.transform.forward;
             wp.Width = wp.PreviousWaypoint.Width;
+            wp.MaxSpeed = wp.PreviousWaypoint.MaxSpeed;
         }
         Selection.activeGameObject = wp.gameObject;
     }
@@ -120,6 +121,7 @@ public class WaypointManager : EditorWindow
         wp.transform.position = swp.transform.position;
         wp.transform.forward = swp.transform.forward;
         wp.Width = swp.Width;
+        wp.MaxSpeed = swp.MaxSpeed;
 
         if (swp.PreviousWaypoint != null)
         {
@@ -147,6 +149,7 @@ public class WaypointManager : EditorWindow
         wp.transform.position = swp.transform.position;
         wp.transform.forward = swp.transform.forward;
         wp.Width = swp.Width;
+        wp.MaxSpeed = swp.MaxSpeed;
 
         wp.PreviousWaypoint = swp;
 

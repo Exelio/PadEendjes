@@ -95,11 +95,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b3e5d767d245c74a842022aee5725e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _accelerationSpeed: 40
-  _speed: 4
+  _accelerationSpeed: 30
+  _maxSpeed: 4
   _rotationSpeed: 2.5
-  _distance: 1
-  _maxDistance: 4
+  _distance: 1.5
+  _maxDistance: 5
   _carFront: {fileID: 1510633368}
   _currentSpeed: 0
 --- !u!114 &6535889815771397255
