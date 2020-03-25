@@ -9,11 +9,6 @@ public class TrafficWaypointNavigator : MonoBehaviour
     private void Awake()
     {
         _tfController = GetComponent<TrafficController>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
         _tfController.Waypoint = _currentWaypoint;
     }
 

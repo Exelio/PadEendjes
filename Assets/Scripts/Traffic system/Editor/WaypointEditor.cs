@@ -50,7 +50,7 @@ public class WaypointEditor
     {
         CheckSelected(type);
 
-        Gizmos.DrawSphere(wp.transform.position, .1f);
+        Gizmos.DrawSphere(wp.transform.position, 1f);
 
         Gizmos.color *= 2f;
         Gizmos.DrawLine(wp.transform.position + (wp.transform.right * wp.Width / 2f), wp.transform.position - (wp.transform.right * wp.Width / 2f));
