@@ -44,7 +44,11 @@ public class TrafficController : MonoBehaviour
     {
         Transform wpTrans = _waypoint.transform;
         transform.position = wpTrans.position;
-        transform.rotation = Quaternion.Euler(wpTrans.forward);
+        Vector3 degrees = wpTrans.rotation.eulerAngles;
+        transform.rotation = Quaternion.Euler(degrees);
+        _waypoint = _waypoint.NextWaypoint;
+
+        Debug.Log($"{this.name} \n waypoint transform: \n position = {wpTrans.position}, rotation = {wpTrans.rotation.eulerAngles}. \n car transform: \n position = {transform.position}, rotation = {transform.rotation.eulerAngles}");
     }
 
     // Update is called once per frame
@@ -83,9 +87,10 @@ public class TrafficController : MonoBehaviour
         RaycastHit hit;
         bool hitDetection = Physics.BoxCast(_carFront.position + (transform.forward * (_maxDistance / 2)), _carFront.localScale, transform.forward, out hit, _carFront.rotation, _maxDistance);
 
-        if (hitDetection)
+        if (hitDetection && hit.transform.GetComponent<TrafficController>() != null)
         {
-            float speed = hit.transform.GetComponent<TrafficController>().CurrentSpeed;
+            float speed = _checkSpeed;
+            speed = hit.transform.GetComponent<TrafficController>().CurrentSpeed;
 
             if (speed <= 0.1f) _checkSpeed = 0;
 
@@ -94,11 +99,5 @@ public class TrafficController : MonoBehaviour
         else _checkSpeed = _waypoint.PreviousWaypoint.MaxSpeed;
 
         _checkSpeed = Mathf.Clamp(_checkSpeed, 0, _maxSpeed);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(_carFront.position + (transform.forward * _maxDistance/2), _carFront.localScale * _maxDistance);
     }
 }
