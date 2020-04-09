@@ -13,11 +13,15 @@ namespace Game
 
         [SerializeField] private PlayerView _player;
 
+        [SerializeField] private RewardView _reward;
+
         private PlayerEngine _playerEngine;
 
         private PlayerStateMachine _playerStateMachine;
 
         private InputHandler _inputHandler;
+
+        private RewardBehaviour _rewardBeh;
 
         private void Start()
         {
@@ -26,6 +30,8 @@ namespace Game
             _inputHandler = new InputHandler();
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
+
+            _rewardBeh = new RewardBehaviour(_reward);
 
             StartCoroutine(LateInitialize());
         }
