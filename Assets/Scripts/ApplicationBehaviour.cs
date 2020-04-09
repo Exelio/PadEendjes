@@ -12,8 +12,8 @@ namespace Game
         public event EventHandler Initialized;
 
         [SerializeField] private PlayerView _player;
-
         [SerializeField] private RewardView _reward;
+        [SerializeField] private DuckView _duck;
 
         private PlayerEngine _playerEngine;
 
@@ -32,8 +32,14 @@ namespace Game
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
 
             _rewardBeh = new RewardBehaviour(_reward);
+            _duck.OnCaught += DuckCaught;
 
             StartCoroutine(LateInitialize());
+        }
+
+        private void DuckCaught(object sender, EventArgs e)
+        {
+            _rewardBeh.CaughtDuck();
         }
 
         private void Update()
