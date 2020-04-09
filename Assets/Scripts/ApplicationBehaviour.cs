@@ -30,11 +30,17 @@ namespace Game
             _inputHandler = new InputHandler();
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
-
             _rewardBeh = new RewardBehaviour(_reward);
+
             _duck.OnCaught += DuckCaught;
+            _duck.OnScared += DuckScared;
 
             StartCoroutine(LateInitialize());
+        }
+
+        private void DuckScared(object sender, EventArgs e)
+        {
+            _rewardBeh.LostDuck();
         }
 
         private void DuckCaught(object sender, EventArgs e)
