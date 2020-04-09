@@ -13,7 +13,7 @@ namespace InputHandling
         public void Update()
         {
             if (Input.GetButtonDown("AButton"))
-                ACommand?.Execute(true);
+                ACommand?.Execute();
 
             float horizontalLeft = Input.GetAxis("LStickHorizontal");
             float verticalLeft = Input.GetAxis("LStickVertical");

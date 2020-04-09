@@ -6,34 +6,24 @@ namespace Model
     {
         private readonly PlayerEngine _player;
 
-        public Idle(PlayerBehaviour playerBehaviour, PlayerEngine player) : base(playerBehaviour)
-        {
-            _player = player;
-        }
+        public Idle(PlayerStateMachine playerStateMachine, PlayerEngine player) : base(playerStateMachine) => _player = player;
 
-        public override void Idling()
+        public override void FixedUpdate()
         {
-            _player.ApplyRotation(P_PlayerBehaviour.Direction.X, P_PlayerBehaviour.Direction.Y);
             _player.ApplyIdle();
+            _player.ApplyRotation(_playerStateMachine.Direction.X, _playerStateMachine.Direction.Y);
             _player.FixedPlayerUpdate();
-        }
 
-        public override void Moving()
-        {
-            if (P_PlayerBehaviour.Direction.Length() != 0)
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Move);
-        }
+            if (_playerStateMachine.Direction.Length() != 0)
+                _playerStateMachine.SetPlayerState(_playerStateMachine.Move);
 
-        public override void Jumping()
-        {
-            if (P_PlayerBehaviour.IsTriggered)
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Jump);
-        }
-
-        public override void Falling()
-        {
             if (!_player.IsGrounded)
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Fall);
+                _playerStateMachine.SetPlayerState(_playerStateMachine.Fall);
+        }
+
+        public override void Interact()
+        {
+            _player.ApplyInteraction();
         }
     }
 
@@ -41,60 +31,26 @@ namespace Model
     {
         private readonly PlayerEngine _player;
 
-        public Move(PlayerBehaviour playerBehaviour, PlayerEngine player) : base(playerBehaviour)
-        {
-            _player = player;
-        }
+        public Move(PlayerStateMachine playerStateMachine, PlayerEngine player) : base(playerStateMachine) => _player = player;
 
-        public override void Idling()
+        public override void FixedUpdate()
         {
-            if (P_PlayerBehaviour.Direction.Length() == 0)
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Idle);
-        }
-
-        public override void Moving()
-        {
-            _player.ApplyRotation(P_PlayerBehaviour.Direction.X, P_PlayerBehaviour.Direction.Y);
-            _player.ApplyMovement(P_PlayerBehaviour.Direction.X, P_PlayerBehaviour.Direction.Y);
+            _player.ApplyRotation(_playerStateMachine.Direction.X, _playerStateMachine.Direction.Y);
+            _player.ApplyMovement(_playerStateMachine.Direction.X, _playerStateMachine.Direction.Y);
             _player.FixedPlayerUpdate();
-        }
 
-        public override void Jumping()
-        {
-            if (P_PlayerBehaviour.IsTriggered)
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Jump);
-        }
+            if (_playerStateMachine.Direction.Length() == 0)
+                _playerStateMachine.SetPlayerState(_playerStateMachine.Idle);
 
-        public override void Falling()
-        {
             if (!_player.IsGrounded)
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Fall);
-        }
-    }
+                _playerStateMachine.SetPlayerState(_playerStateMachine.Fall);
 
-    public class Jump : PlayerStates
-    {
-        private readonly PlayerEngine _player;
-
-        public Jump(PlayerBehaviour playerBehaviour, PlayerEngine player) : base(playerBehaviour)
-        {
-            _player = player;
+            _player.ApplyIdle();
         }
 
-        public override void Idling() { }
-        public override void Moving() { }
-
-        public override void Jumping()
+        public override void Interact()
         {
-            _player.ApplyRotation(P_PlayerBehaviour.Direction.X, P_PlayerBehaviour.Direction.Y);
-            _player.ApplyJump();
-            _player.FixedPlayerUpdate();
-        }
-
-        public override void Falling()
-        {
-            if (!_player.IsGrounded)
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Fall);
+            _player.ApplyInteraction();
         }
     }
 
@@ -102,30 +58,33 @@ namespace Model
     {
         private readonly PlayerEngine _player;
 
-        public Fall(PlayerBehaviour playerBehaviour, PlayerEngine player) : base(playerBehaviour)
-        {
-            _player = player;
-        }
+        public Fall(PlayerStateMachine playerStateMachine, PlayerEngine player) : base(playerStateMachine) => _player = player;
 
-        public override void Idling()
-        {
-            if (_player.IsGrounded)
-            {
-                P_PlayerBehaviour.IsTriggered = false;
-
-                P_PlayerBehaviour.SetPlayerState(P_PlayerBehaviour.Idle);
-            }
-        }
-
-        public override void Moving() { }
-        public override void Jumping() { }
-
-        public override void Falling()
+        public override void FixedUpdate()
         {
             _player.ApplyGravity();
-            _player.ApplyRotation(P_PlayerBehaviour.Direction.X, P_PlayerBehaviour.Direction.Y);
-            _player.ApplyJumpMovement(P_PlayerBehaviour.Direction.X, P_PlayerBehaviour.Direction.Y);
+            _player.ApplyRotation(_playerStateMachine.Direction.X, _playerStateMachine.Direction.Y);
             _player.FixedPlayerUpdate();
+
+            if (_player.IsGrounded)
+                _playerStateMachine.SetPlayerState(_playerStateMachine.Idle);
         }
     }
+
+//    public class Interact : PlayerStates
+//    {
+//        private readonly PlayerEngine _player;
+
+//        public Interact(PlayerStateMachine playerStateMachine, PlayerEngine player) : base(playerStateMachine) => _player = player;
+
+//        public override void FixedUpdate()
+//        {
+//            _player.ApplyGravity();
+//            _player.ApplyRotation(_playerStateMachine.Direction.X, _playerStateMachine.Direction.Y);
+//            _player.FixedPlayerUpdate();
+
+//            if (_player.IsGrounded)
+//                _playerStateMachine.SetPlayerState(_playerStateMachine.Idle);
+//        }
+//    }
 }

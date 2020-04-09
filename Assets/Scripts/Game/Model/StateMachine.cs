@@ -4,8 +4,8 @@ namespace Model
 {
     public abstract class StateMachine
     {
-        protected PlayerStates P_PlayerState;
+        protected PlayerStates _playerState;
 
-        public void SetPlayerState(PlayerStates playerState) => P_PlayerState = playerState;
+        public void SetPlayerState(PlayerStates playerState) => _playerState = playerState;
     }
 }

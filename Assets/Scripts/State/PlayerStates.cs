@@ -4,22 +4,11 @@ namespace State
 {
     public abstract class PlayerStates
     {
-        protected PlayerBehaviour P_PlayerBehaviour;
+        protected PlayerStateMachine _playerStateMachine;
 
-        public PlayerStates(PlayerBehaviour playerBehaviour) => P_PlayerBehaviour = playerBehaviour;
+        public PlayerStates(PlayerStateMachine playerStateMachine) => _playerStateMachine = playerStateMachine;
 
-        public virtual void FixedUpdate()
-        {
-            Idling();
-            Moving();
-            Jumping();
-            Falling();
-        }
-
-        //Character States
-        public virtual void Idling() { }
-        public virtual void Moving() { }
-        public virtual void Jumping() { }
-        public virtual void Falling() { }
+        public virtual void FixedUpdate() { }
+        public virtual void Interact() { }
     }
 }

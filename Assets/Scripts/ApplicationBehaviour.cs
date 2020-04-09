@@ -15,17 +15,17 @@ namespace Game
 
         private PlayerEngine _playerEngine;
 
-        private PlayerBehaviour _playerBehaviour;
+        private PlayerStateMachine _playerStateMachine;
 
         private InputHandler _inputHandler;
 
         private void Start()
         {
             _playerEngine = new PlayerEngine(_player);
-            _playerBehaviour = new PlayerBehaviour(_playerEngine);
+            _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _inputHandler = new InputHandler();
-            _inputHandler.LeftStickCommand = new MoveCommand(_playerBehaviour);
-            _inputHandler.ACommand = new JumpCommand(_playerBehaviour);
+            _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
+            _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
 
             StartCoroutine(LateInitialize());
         }
@@ -37,7 +37,7 @@ namespace Game
 
         private void FixedUpdate()
         {
-            _playerBehaviour.FixedUpdate();
+            _playerStateMachine.FixedUpdate();
         }
 
         private IEnumerator LateInitialize()

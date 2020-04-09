@@ -2,27 +2,26 @@
 
 namespace Model
 {
-    public class PlayerBehaviour : StateMachine
+    public class PlayerStateMachine : StateMachine
     {
         public Vector2 Direction { get; set; }
 
-        public bool IsTriggered { get; set; }
-
         public Idle Idle { get; }
         public Move Move { get; }
-        public Jump Jump { get; }
         public Fall Fall { get; }
+        //public Interact Interact { get; }
 
-        public PlayerBehaviour(PlayerEngine engine)
+        public PlayerStateMachine(PlayerEngine engine)
         {
             Idle = new Idle(this, engine);
             Move = new Move(this, engine);
-            Jump = new Jump(this, engine);
             Fall = new Fall(this, engine);
+            //Interact = new Interact(this, engine);
 
             SetPlayerState(Idle);
         }
 
-        public void FixedUpdate() => P_PlayerState?.FixedUpdate();
+        public void FixedUpdate() => _playerState?.FixedUpdate();
+        public void RequestInteraction() => _playerState?.Interact();
     }
 }

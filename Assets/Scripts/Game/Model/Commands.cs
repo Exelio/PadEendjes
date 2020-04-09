@@ -10,7 +10,7 @@ namespace InputHandling
 
     public interface IImpulseCommand
     {
-        void Execute(bool isTriggered);
+        void Execute();
     }
 }
 
@@ -18,31 +18,31 @@ namespace Model
 {
     public class MoveCommand : IDirectionalCommand
     {
-        private readonly PlayerBehaviour _playerBehaviour;
+        private readonly PlayerStateMachine _playerStateMachine;
 
-        public MoveCommand(PlayerBehaviour playerBehaviour)
+        public MoveCommand(PlayerStateMachine playerBehaviour)
         {
-            _playerBehaviour = playerBehaviour;
+            _playerStateMachine = playerBehaviour;
         }
 
         public void Execute(Vector2 direction)
         {
-            _playerBehaviour.Direction = direction;
+            _playerStateMachine.Direction = direction;
         }
     }
 
-    public class JumpCommand : IImpulseCommand
+    public class InteractCommand : IImpulseCommand
     {
-        private readonly PlayerBehaviour _playerBehaviour;
+        private readonly PlayerStateMachine _playerStateMachine;
 
-        public JumpCommand(PlayerBehaviour playerBehaviour)
+        public InteractCommand(PlayerStateMachine playerStateMachine)
         {
-            _playerBehaviour = playerBehaviour;
+            _playerStateMachine = playerStateMachine;
         }
 
-        public void Execute(bool isTriggered)
+        public void Execute()
         {
-            _playerBehaviour.IsTriggered = isTriggered;
+            _playerStateMachine.RequestInteraction();
         }
     }
 }
