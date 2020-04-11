@@ -38,15 +38,9 @@ namespace Game
             StartCoroutine(LateInitialize());
         }
 
-        private void DuckScared(object sender, EventArgs e)
-        {
-            _rewardBeh.LostDuck();
-        }
+        private void DuckScared(object sender, EventArgs e){ _rewardBeh.LostDuck();}
 
-        private void DuckCaught(object sender, EventArgs e)
-        {
-            _rewardBeh.CaughtDuck();
-        }
+        private void DuckCaught(object sender, EventArgs e){ _rewardBeh.CaughtDuck();}
 
         private void Update()
         {
