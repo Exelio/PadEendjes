@@ -7,6 +7,7 @@ public class TrafficLightView : MonoBehaviour
     public event Action<bool> OnLightChange;
     [Header("Logic variables")]
     [SerializeField] private float _timeTillSwitch;
+    [SerializeField] private float _orangeLightTime = 1f;
 
     [Header("Looks variables")]
     [SerializeField] private Material _greenLight;
@@ -23,6 +24,7 @@ public class TrafficLightView : MonoBehaviour
 
     private IEnumerator ChangeLight()
     {
+        //Debug.Log($"Change light {name}");
         switch (_isRedLight)
         {
             case true:
@@ -30,12 +32,12 @@ public class TrafficLightView : MonoBehaviour
                 _isRedLight = false;
                 OnLightChange?.Invoke(_isRedLight);
                 ChangeLightColor(_orangeLight);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(_orangeLightTime);
                 ChangeLightColor(_redlight);
                 StartCoroutine(ChangeLight());
                 break;
             case false:
-                yield return new WaitForSeconds(_timeTillSwitch);
+                yield return new WaitForSeconds(_timeTillSwitch - _orangeLightTime);
                 _isRedLight = true;
                 OnLightChange?.Invoke(_isRedLight);
                 ChangeLightColor(_greenLight);

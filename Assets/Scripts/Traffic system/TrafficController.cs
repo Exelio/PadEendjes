@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class TrafficController : MonoBehaviour
@@ -22,6 +23,7 @@ public class TrafficController : MonoBehaviour
     }
 
     private bool _reachedDestination = false; public bool ReachedDestination => _reachedDestination;
+    private bool _behindVehicle = false;
 
     private Rigidbody _rigid;
 
@@ -48,32 +50,42 @@ public class TrafficController : MonoBehaviour
         transform.rotation = Quaternion.Euler(degrees);
         _wp = _wp.NextWaypoint;
 
-        Debug.Log($"{this.name} \n waypoint transform: \n position = {wpTrans.position}, rotation = {wpTrans.rotation.eulerAngles}. \n car transform: \n position = {transform.position}, rotation = {transform.rotation.eulerAngles}");
+        //Debug.Log($"{this.name} \n waypoint transform: \n position = {wpTrans.position}, rotation = {wpTrans.rotation.eulerAngles}. \n car transform: \n position = {transform.position}, rotation = {transform.rotation.eulerAngles}");
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (_wp != null)
         {
-            CheckDestinationReached();
-            Move();
+            CheckDestinationReached();           
             CheckForward();
         }
         else { _checkSpeed = 0; _currentSpeed = 0; }
     }
 
+    private void FixedUpdate()
+    {
+        if (_wp != null) Move();
+    }
+
     private void Move()
     {
-            Vector3 destinationDirection = _wp.transform.position - transform.position;
-            destinationDirection.y = 0;
-            _currentSpeed = _rigid.velocity.magnitude;
+        Debug.Log("Move");
+        Vector3 destinationDirection = _wp.transform.position - transform.position;
+        destinationDirection.y = 0;
+        _currentSpeed = _rigid.velocity.magnitude;
 
-            if (_currentSpeed <= _checkSpeed) _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
+        if (_currentSpeed <= _checkSpeed) _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
 
-            Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
-            var slerp = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-            transform.rotation = slerp;
+        Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
+        var slerp = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+        transform.rotation = slerp;
+    }
+
+    public void ChangeCheckSpeed()
+    {
+        _checkSpeed = _wp.MaxSpeed;
     }
 
     private void CheckDestinationReached()
@@ -84,14 +96,25 @@ public class TrafficController : MonoBehaviour
 
     private void CheckForward()
     {
+        float speed = 0;
         RaycastHit hit;
         bool hitDetection = Physics.BoxCast(_carFront.position + (transform.forward * (_maxDistance / 2)), _carFront.localScale, transform.forward, out hit, _carFront.rotation, _maxDistance);
 
         if (hitDetection && hit.transform.GetComponent<TrafficController>() != null)
         {
-            float speed = _checkSpeed;
+            _behindVehicle = true;
             speed = hit.transform.GetComponent<TrafficController>().CurrentSpeed;
+        }
+        else _behindVehicle = false;
 
+        if(_checkSpeed != speed)
+            ChangeSpeed(speed);
+    }
+
+    private void ChangeSpeed(float speed)
+    {
+        if (_behindVehicle)
+        {
             if (speed <= 0.1f) _checkSpeed = 0;
 
             else _checkSpeed = speed;

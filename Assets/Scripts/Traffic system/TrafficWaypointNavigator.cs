@@ -21,8 +21,9 @@ public class TrafficWaypointNavigator : MonoBehaviour
             {
                 _currentWaypoint = _currentWaypoint.NextWaypoint;
                 _tfController.Waypoint = _currentWaypoint;
+                _tfController.ChangeCheckSpeed();
             }
-            else _tfController.Waypoint = null;
+            else { _tfController.Waypoint = null;}
         }        
     }
 }
