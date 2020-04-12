@@ -11,13 +11,13 @@ public class TrafficController : MonoBehaviour
     [Tooltip("The distance between the cars")] [SerializeField] private float _maxDistance = 2f;
     [Tooltip("Vehicle front position")] [SerializeField] private Transform _carFront;
 
-    private Waypoint _waypoint;
+    private Waypoint _wp;
     public Waypoint Waypoint
     {
-        get => _waypoint;
+        get => _wp;
         set
         {
-            _waypoint = value;
+            _wp = value;
         }
     }
 
@@ -42,11 +42,11 @@ public class TrafficController : MonoBehaviour
 
     private void SetPosition()
     {
-        Transform wpTrans = _waypoint.transform;
+        Transform wpTrans = _wp.transform;
         transform.position = wpTrans.position;
         Vector3 degrees = wpTrans.rotation.eulerAngles;
         transform.rotation = Quaternion.Euler(degrees);
-        _waypoint = _waypoint.NextWaypoint;
+        _wp = _wp.NextWaypoint;
 
         Debug.Log($"{this.name} \n waypoint transform: \n position = {wpTrans.position}, rotation = {wpTrans.rotation.eulerAngles}. \n car transform: \n position = {transform.position}, rotation = {transform.rotation.eulerAngles}");
     }
@@ -54,7 +54,7 @@ public class TrafficController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_waypoint != null)
+        if (_wp != null)
         {
             CheckDestinationReached();
             Move();
@@ -65,20 +65,20 @@ public class TrafficController : MonoBehaviour
 
     private void Move()
     {
-        Vector3 destinationDirection = _waypoint.transform.position - transform.position;
-        destinationDirection.y = 0;
-        _currentSpeed = _rigid.velocity.magnitude;
+            Vector3 destinationDirection = _wp.transform.position - transform.position;
+            destinationDirection.y = 0;
+            _currentSpeed = _rigid.velocity.magnitude;
 
-        if (_currentSpeed <= _checkSpeed) _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
+            if (_currentSpeed <= _checkSpeed) _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
 
-        Quaternion targetRotation = Quaternion.LookRotation(destinationDirection); 
-        var slerp = Quaternion.Slerp(transform.rotation,targetRotation, _rotationSpeed * Time.deltaTime);
-        transform.rotation = slerp;
+            Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
+            var slerp = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
+            transform.rotation = slerp;
     }
 
     private void CheckDestinationReached()
     {
-        if (Vector3.Distance(transform.position, _waypoint.transform.position) <= _distance) _reachedDestination = true;
+        if (Vector3.Distance(transform.position, _wp.transform.position) <= _distance) _reachedDestination = true;
         else  _reachedDestination = false;
     }
 
@@ -96,7 +96,7 @@ public class TrafficController : MonoBehaviour
 
             else _checkSpeed = speed;
         }
-        else _checkSpeed = _waypoint.PreviousWaypoint.MaxSpeed;
+        else _checkSpeed = _wp.PreviousWaypoint.MaxSpeed;
 
         _checkSpeed = Mathf.Clamp(_checkSpeed, 0, _maxSpeed);
     }

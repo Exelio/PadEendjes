@@ -17,8 +17,12 @@ public class TrafficWaypointNavigator : MonoBehaviour
     {
         if (_tfController.ReachedDestination)
         {
-            _currentWaypoint = _currentWaypoint.NextWaypoint;
-            _tfController.Waypoint = _currentWaypoint;
-        }
+            if (_currentWaypoint.IsDriveable)
+            {
+                _currentWaypoint = _currentWaypoint.NextWaypoint;
+                _tfController.Waypoint = _currentWaypoint;
+            }
+            else _tfController.Waypoint = null;
+        }        
     }
 }
