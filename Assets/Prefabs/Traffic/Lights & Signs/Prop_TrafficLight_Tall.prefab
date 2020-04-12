@@ -113,6 +113,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeTillSwitch: 10
   _orangeLightTime: 1
+  _renderer: {fileID: 4310256487012281868}
   _greenLight: {fileID: 2100000, guid: 6abed9fc93101334a8a7417475bde0ec, type: 2}
-  _redlight: {fileID: 2100000, guid: b31870db132cc694e9dd69f0a4d8c98a, type: 2}
+  _redLight: {fileID: 2100000, guid: b31870db132cc694e9dd69f0a4d8c98a, type: 2}
   _orangeLight: {fileID: 2100000, guid: 93d13c03aa3dc9f4fa66b7b897a36cf2, type: 2}
+  _greenLightOff: {fileID: 2100000, guid: ad4af4e2ec084154ba28951bbba758e6, type: 2}
+  _redLightOff: {fileID: 2100000, guid: 3c5cbb755a012464e841f3ba1124aa1c, type: 2}
+  _orangeLightOff: {fileID: 2100000, guid: afcaaec1b8134c14db38d5feda62c602, type: 2}

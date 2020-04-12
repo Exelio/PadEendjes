@@ -61,7 +61,10 @@ public class TrafficController : MonoBehaviour
             CheckDestinationReached();           
             CheckForward();
         }
-        else { _checkSpeed = 0; _currentSpeed = 0; }
+        else { _checkSpeed = 0; _currentSpeed = 0;}
+
+        if (name == "Bus")
+            Debug.Log($"Bus checkspeed = {_checkSpeed} -> speed = {_currentSpeed} -> acceleration {_accelerationSpeed}");
     }
 
     private void FixedUpdate()
@@ -71,7 +74,6 @@ public class TrafficController : MonoBehaviour
 
     private void Move()
     {
-        Debug.Log("Move");
         Vector3 destinationDirection = _wp.transform.position - transform.position;
         destinationDirection.y = 0;
         _currentSpeed = _rigid.velocity.magnitude;

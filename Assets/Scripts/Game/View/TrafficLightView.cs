@@ -10,15 +10,21 @@ public class TrafficLightView : MonoBehaviour
     [SerializeField] private float _orangeLightTime = 1f;
 
     [Header("Looks variables")]
-    [SerializeField] private Material _greenLight;
-    [SerializeField] private Material _redlight;
-    [SerializeField] private Material _orangeLight;
+    [SerializeField] private Renderer _renderer;
+    [SerializeField] private Material _greenLight, _redLight, _orangeLight;
+    [SerializeField] private Material _greenLightOff, _redLightOff, _orangeLightOff;
+
+    private Material[] _lightMaterials; 
 
     private bool _isRedLight;
     public bool IsRedLight { get => _isRedLight; set { _isRedLight = value; } }
 
     public void Initialize()
     {
+        _lightMaterials = _renderer.sharedMaterials;
+
+        if(!_isRedLight) ChangeLightColor(_redLight, _greenLightOff, _orangeLightOff);
+        else ChangeLightColor(_redLightOff, _greenLight, _orangeLightOff);
         StartCoroutine(ChangeLight());
     }
 
@@ -31,27 +37,27 @@ public class TrafficLightView : MonoBehaviour
                 yield return new WaitForSeconds(_timeTillSwitch);
                 _isRedLight = false;
                 OnLightChange?.Invoke(_isRedLight);
-                ChangeLightColor(_orangeLight);
+                ChangeLightColor(_redLightOff, _greenLightOff, _orangeLight);
                 yield return new WaitForSeconds(_orangeLightTime);
-                ChangeLightColor(_redlight);
+                ChangeLightColor(_redLight, _greenLightOff, _orangeLightOff);
                 StartCoroutine(ChangeLight());
                 break;
             case false:
                 yield return new WaitForSeconds(_timeTillSwitch - _orangeLightTime);
                 _isRedLight = true;
                 OnLightChange?.Invoke(_isRedLight);
-                ChangeLightColor(_greenLight);
+                ChangeLightColor(_redLightOff, _greenLight, _orangeLightOff);
                 StartCoroutine(ChangeLight());
                 break;
         }
     }
 
-    private void ChangeLightColor(Material mat)
+    private void ChangeLightColor(Material red, Material green, Material orange)
     {
-        _greenLight.DisableKeyword("_EMISSION");
-        _redlight.DisableKeyword("_EMISSION");
-        _orangeLight.DisableKeyword("_EMISSION");
+        _lightMaterials[2] = red;
+        _lightMaterials[3] = orange;
+        _lightMaterials[4] = green;
 
-        mat.EnableKeyword("_EMISSION");
+        _renderer.sharedMaterials = _lightMaterials;
     }
 }
