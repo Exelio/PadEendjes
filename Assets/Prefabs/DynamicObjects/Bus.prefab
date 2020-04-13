@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1241422840}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CheckPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9062010583868926119}
   - component: {fileID: 9062010583868926118}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spot Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9062010584940676148}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,7 +164,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9062010585601972031}
   - component: {fileID: 9062010585601972030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -259,7 +259,7 @@ GameObject:
   - component: {fileID: 9062010585786319236}
   - component: {fileID: 9062010585786319237}
   - component: {fileID: 9062010585786319238}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,13 @@ MonoBehaviour:
   _rotationSpeed: 3
   _distance: 2
   _maxDistance: 4
+  _checkAngle: 50
   _carFront: {fileID: 1241422840}
+  _checkDimensions: {x: 0, y: 0, z: 0}
+  _checkLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _checkSpeed: 0
   _currentSpeed: 0
 --- !u!114 &9062010585786319237
 MonoBehaviour:
@@ -415,6 +421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Bus_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4323690999579386552, guid: 849038f7c41a3e748be36a20f1becd11,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 849038f7c41a3e748be36a20f1becd11, type: 3}

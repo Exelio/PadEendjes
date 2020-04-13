@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -10,7 +12,9 @@ public class TrafficController : MonoBehaviour
     [Tooltip("The speed the car turns")] [SerializeField] private float _rotationSpeed;
     [Range(0,2)] [Tooltip("Distance until change waypoint")] [SerializeField] private float _distance = 0.1f;
     [Tooltip("The distance between the cars")] [SerializeField] private float _maxDistance = 2f;
+    [Tooltip("The max angle between the car in front and this before it isn.t in front anymore")][SerializeField] private float _checkAngle = 50f;
     [Tooltip("Vehicle front position")] [SerializeField] private Transform _carFront;
+    [SerializeField] private LayerMask _checkLayer;
 
     private Waypoint _wp;
     public Waypoint Waypoint
@@ -30,8 +34,11 @@ public class TrafficController : MonoBehaviour
     private Waypoint _destinationWP;
     private Transform _destinationTrans;
 
-    private float _checkSpeed;
+    [SerializeField] private float _checkSpeed; public float CheckSpeed => _checkSpeed;
     [SerializeField] private float _currentSpeed; public float CurrentSpeed => _currentSpeed;
+
+    private float speed = 0;
+    private List<Collider> _hitList = new List<Collider>();
 
     // Start is called before the first frame update
     void Start()
@@ -46,7 +53,7 @@ public class TrafficController : MonoBehaviour
     {
         Transform wpTrans = _wp.transform;
         transform.position = wpTrans.position;
-        Vector3 degrees = wpTrans.rotation.eulerAngles;
+        Vector3 degrees = wpTrans.localRotation.eulerAngles;
         transform.rotation = Quaternion.Euler(degrees);
         _wp = _wp.NextWaypoint;
 
@@ -62,9 +69,6 @@ public class TrafficController : MonoBehaviour
             CheckForward();
         }
         else { _checkSpeed = 0; _currentSpeed = 0;}
-
-        if (name == "Bus")
-            Debug.Log($"Bus checkspeed = {_checkSpeed} -> speed = {_currentSpeed} -> acceleration {_accelerationSpeed}");
     }
 
     private void FixedUpdate()
@@ -78,11 +82,21 @@ public class TrafficController : MonoBehaviour
         destinationDirection.y = 0;
         _currentSpeed = _rigid.velocity.magnitude;
 
-        if (_currentSpeed <= _checkSpeed) _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
+        ChangeCurrentSpeed();
 
         Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
         var slerp = Quaternion.Slerp(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
         transform.rotation = slerp;
+    }
+
+    private void ChangeCurrentSpeed()
+    {
+        if (Math.Abs(_checkSpeed - _currentSpeed) <= .5f) 
+        { 
+            _currentSpeed = _checkSpeed; 
+            transform.position += transform.forward * Time.deltaTime * _currentSpeed; 
+        }
+        else if (_currentSpeed <= _checkSpeed) _rigid.AddForce(transform.forward * _accelerationSpeed, ForceMode.Force);
     }
 
     public void ChangeCheckSpeed()
@@ -98,22 +112,59 @@ public class TrafficController : MonoBehaviour
 
     private void CheckForward()
     {
-        float speed = 0;
-        RaycastHit hit;
-        bool hitDetection = Physics.BoxCast(_carFront.position + (transform.forward * (_maxDistance / 2)), _carFront.localScale, transform.forward, out hit, _carFront.rotation, _maxDistance);
+        Checkcast(out _hitList);
 
-        if (hitDetection && hit.transform.GetComponent<TrafficController>() != null)
+        if (_hitList.Count > 0)
         {
-            _behindVehicle = true;
-            speed = hit.transform.GetComponent<TrafficController>().CurrentSpeed;
+            foreach (var item in _hitList)
+            {
+                if(item.GetComponent<TrafficController>() != null && item.name != this.name)
+                {
+                    CheckHit(item.GetComponent<TrafficController>());
+                }
+            }
         }
-        else _behindVehicle = false;
 
-        if(_checkSpeed != speed)
-            ChangeSpeed(speed);
+        ChangeSpeed();
+
+        if (!_behindVehicle) _checkSpeed = _wp.PreviousWaypoint.MaxSpeed;
+
+        _hitList.Clear();
+        _behindVehicle = false;
     }
 
-    private void ChangeSpeed(float speed)
+    private void CheckHit(TrafficController controller)
+    {
+        if (controller == null) return;
+
+        if (CheckAngle(controller.gameObject.transform))
+        {
+            _behindVehicle = true;
+
+            speed = controller.speed - 0.5f;
+        }
+        else _behindVehicle = false;
+    }
+
+    private void Checkcast(out List<Collider> hitList)
+    {
+        //hitDetection = Physics.BoxCast(_carFront.position + (transform.forward * (_maxDistance / 2)), 
+        //    _carFront.localScale, transform.forward, out hit, _carFront.rotation, _maxDistance);
+
+        //hitDetection = Physics.SphereCast(_carFront.position + (transform.forward * _maxDistance / 2), _maxDistance, transform.forward, out hit);
+        //hitDetection = Physics.CheckSphere(_carFront.position + (transform.forward * _maxDistance / 2), _maxDistance, _checkLayer);
+        Collider[] hits = Physics.OverlapSphere(_carFront.position + (transform.forward * _maxDistance / 2), _maxDistance, _checkLayer);
+        hitList = hits.ToList();
+    }
+
+    private bool CheckAngle(Transform t)
+    {
+        //float angle = Vector3.Angle(t.localRotation.eulerAngles, transform.localRotation.eulerAngles);
+        //return angle <= _checkAngle;
+        return true;
+    }
+
+    private void ChangeSpeed()
     {
         if (_behindVehicle)
         {
@@ -121,8 +172,17 @@ public class TrafficController : MonoBehaviour
 
             else _checkSpeed = speed;
         }
-        else _checkSpeed = _wp.PreviousWaypoint.MaxSpeed;
 
         _checkSpeed = Mathf.Clamp(_checkSpeed, 0, _maxSpeed);
+
+        speed = _checkSpeed;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawRay(_carFront.position, transform.forward * _maxDistance);
+        Gizmos.DrawWireSphere(_carFront.position + (transform.forward * _maxDistance / 2), _maxDistance);
     }
 }

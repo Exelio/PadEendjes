@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1510633368}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: CheckPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510633367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.02}
+  m_LocalPosition: {x: 0, y: 0.63, z: 2.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6535889815771397248}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6535889815771397249}
   - component: {fileID: 6535889815771397255}
   - component: {fileID: 6535889815771397251}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,8 +99,14 @@ MonoBehaviour:
   _maxSpeed: 8
   _rotationSpeed: 2.5
   _distance: 1.5
-  _maxDistance: 5
+  _maxDistance: 4
+  _checkAngle: 50
   _carFront: {fileID: 1510633368}
+  _checkDimensions: {x: 0, y: 0, z: 0}
+  _checkLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  _checkSpeed: 0
   _currentSpeed: 0
 --- !u!114 &6535889815771397255
 MonoBehaviour:
@@ -138,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6535889816023365480}
   - component: {fileID: 6535889816023365481}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6535889816724144450}
   - component: {fileID: 6535889816724144451}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Spot Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6535889816740584163}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,6 +416,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Prop_Car_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8612294351772937663, guid: f521a23458bd3c344b662e562ebbae18,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f521a23458bd3c344b662e562ebbae18, type: 3}
