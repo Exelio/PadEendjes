@@ -13,7 +13,7 @@ namespace Game
 
         [SerializeField] private PlayerView _player;
         [SerializeField] private RewardView _reward;
-        [SerializeField] private DuckView _duck;
+        [SerializeField] private DuckView _duckling;
 
         private PlayerEngine _playerEngine;
 
@@ -21,7 +21,7 @@ namespace Game
 
         private InputHandler _inputHandler;
 
-        private RewardBehaviour _rewardBeh;
+        private RewardBehaviour _rewardBehaviour;
 
         private void Start()
         {
@@ -30,17 +30,23 @@ namespace Game
             _inputHandler = new InputHandler();
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
-            _rewardBeh = new RewardBehaviour(_reward);
+            _rewardBehaviour = new RewardBehaviour(_reward);
 
-            _duck.OnCaught += DuckCaught;
-            _duck.OnScared += DuckScared;
+            _duckling.OnCaught += DuckCaught;
+            _duckling.OnScared += DuckScared;
 
             StartCoroutine(LateInitialize());
         }
 
-        private void DuckScared(object sender, EventArgs e){ _rewardBeh.LostDuck();}
+        private void DuckScared(object sender, EventArgs e)
+        {
+            _rewardBehaviour.LostDuck();
+        }
 
-        private void DuckCaught(object sender, EventArgs e){ _rewardBeh.CaughtDuck();}
+        private void DuckCaught(object sender, EventArgs e)
+        {
+            _rewardBehaviour.CaughtDuck();
+        }
 
         private void Update()
         {
