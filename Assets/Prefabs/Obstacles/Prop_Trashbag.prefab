@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2017261775094549134}
   - component: {fileID: 7396536055386812600}
   - component: {fileID: 3862205230967475265}
+  - component: {fileID: 6075929594945341351}
   m_Layer: 0
   m_Name: Prop_Trashbag
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &6075929594945341351
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3289203591963408541}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.55
+  m_Height: 1.75
+  m_Direction: 2
+  m_Center: {x: 0.026369512, y: 0.027413644, z: 0.7035958}

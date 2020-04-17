@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 895665798113941128}
   - component: {fileID: 8157441638734720190}
   - component: {fileID: 2452637260920164423}
+  - component: {fileID: 977400757603194606}
   m_Layer: 0
   m_Name: Prop_FlowerBush02
   m_TagString: Untagged
@@ -82,3 +83,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &977400757603194606
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4194349426419606683}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.4595754
+  m_Center: {x: -0.070015214, y: -0.072958104, z: 0.5073398}
