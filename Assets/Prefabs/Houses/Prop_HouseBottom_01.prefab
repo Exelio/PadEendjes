@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7729860757224325281}
   - component: {fileID: 1593990423957322391}
   - component: {fileID: 4981672450771273326}
+  - component: {fileID: 2935242984004988175}
   m_Layer: 0
   m_Name: Prop_HouseBottom_01
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &2935242984004988175
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6709979438634791602}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.0565352, y: 6.0554404, z: 2.5000005}
+  m_Center: {x: 0.0012123585, y: 0.0017756228, z: 1.2500002}
