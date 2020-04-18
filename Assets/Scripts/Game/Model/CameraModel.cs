@@ -1,6 +1,6 @@
 ﻿using View;
 using UnityEngine;
-using Boxsun.Math;
+using System;
 
 namespace Model
 {
@@ -28,8 +28,14 @@ namespace Model
         {
             _view = view;
             _cameraVariables = _view.Variables;
-            _cameraState = CameraStates.ThirdPersonState;
 
+            InitializePosition();
+        }
+
+        private void InitializePosition()
+        {
+            _view.Variables.Camera.transform.localPosition = _view.Variables.ThirdPersonCameraTransform.localPosition;
+            _cameraState = CameraStates.ThirdPersonState;
             Cursor.lockState = CursorLockMode.Confined;
         }
 
