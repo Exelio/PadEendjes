@@ -30,7 +30,6 @@ public class TrafficLightView : MonoBehaviour
 
     private IEnumerator ChangeLight()
     {
-        //Debug.Log($"Change light {name}");
         switch (_isRedLight)
         {
             case true:
