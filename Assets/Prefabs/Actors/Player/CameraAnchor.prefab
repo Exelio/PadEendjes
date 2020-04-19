@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2076328011651739943}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -162,9 +162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _variables:
-    SlerpSpeed: 1.5
+    SlerpSpeed: 3
     TransitionSpeed: 1
-    MouseRotationSpeed: 2.5
+    MouseRotationSpeed: 3
     Offset: {x: 0, y: 1.28, z: 0}
     VerticalLookAngle: {x: -30, y: 30}
     HorizontalLookAngle: {x: -30, y: 30}
