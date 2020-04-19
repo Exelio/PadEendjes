@@ -7214,11 +7214,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level_One
       objectReference: {fileID: 0}
-    - target: {fileID: 5664610004815178574, guid: d821bcd852dd0c04cbd9c39292a6fee1,
-        type: 3}
-      propertyPath: _stats.Speed
-      value: 2.5
-      objectReference: {fileID: 0}
     - target: {fileID: 6526454260673240588, guid: d821bcd852dd0c04cbd9c39292a6fee1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7273,11 +7268,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8784898533847358150, guid: d821bcd852dd0c04cbd9c39292a6fee1,
-        type: 3}
-      propertyPath: _vehicles.Array.size
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8784898533847358150, guid: d821bcd852dd0c04cbd9c39292a6fee1,
         type: 3}
