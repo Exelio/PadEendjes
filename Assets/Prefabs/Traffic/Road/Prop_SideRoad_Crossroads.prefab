@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1940036265692698429}
   - component: {fileID: 7473549907726576907}
   - component: {fileID: 3786378709988659698}
-  - component: {fileID: 3222111595096958253}
+  - component: {fileID: 5129464371441704331}
   m_Layer: 0
   m_Name: Prop_SideRoad_Crossroads
   m_TagString: Untagged
@@ -60,6 +60,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 39e2b19707610bb44ae26b369b23f7d4, type: 2}
+  - {fileID: 2100000, guid: acfe8129820eacb40813bb8f1f406b0c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3222111595096958253
-BoxCollider:
+--- !u!64 &5129464371441704331
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,6 +91,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.00000005284853, z: 0.7}
-  m_Center: {x: 0.35, y: 0.000000011324685, z: -0.15}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2814905084679163624, guid: f4787b3f967eb134f94eff6b64af716d, type: 3}

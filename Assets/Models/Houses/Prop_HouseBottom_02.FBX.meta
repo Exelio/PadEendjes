@@ -8,27 +8,27 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_BlackMetal
-    second: {fileID: 2100000, guid: 9232390355840ec4986a62dd8c6150a9, type: 2}
+    second: {fileID: 2100000, guid: 7111f7cd5bce9be4e9b370fe6db17cb3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Door
-    second: {fileID: 2100000, guid: bf5fadf1a502e384c8a75e172e1943ec, type: 2}
+    second: {fileID: 2100000, guid: 3fecd25b5a7b32c4fb291d4c43d286c7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Glass
-    second: {fileID: 2100000, guid: 78d93f5f0cfff3544b4e5185f89a47c7, type: 2}
+    second: {fileID: 2100000, guid: 74157e745b0f8534c938346a15da6e32, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_HouseWall
-    second: {fileID: 2100000, guid: 62e4b56265ec7ed4ba597a22f0a809ca, type: 2}
+    second: {fileID: 2100000, guid: eeeb8d00c1f668343ba8884302b51c5c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Window
-    second: {fileID: 2100000, guid: 15464a1f8dc8e7e4f87f8f8bc133e67e, type: 2}
+    second: {fileID: 2100000, guid: 52f6f6ff1a56a254b9b96682bb023274, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

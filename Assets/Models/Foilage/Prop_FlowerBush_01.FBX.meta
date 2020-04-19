@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 01801f02209d45241b7ca07ba26487ae
+guid: 0636d4876b1e00840b706d5dde76c66d
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -8,22 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_FlowerCenter
-    second: {fileID: 2100000, guid: f6d531aed9b64934f88e15b2c868132a, type: 2}
+    second: {fileID: 2100000, guid: 818fa1b7800481a4aa044cf948e46f1f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Petal
-    second: {fileID: 2100000, guid: 1e4f049f1f18d8b4cb560b0625ab3e53, type: 2}
+    second: {fileID: 2100000, guid: 456827ad6ed62aa48bbcc14b399f7cd9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: MAT_Stem
-    second: {fileID: 2100000, guid: 16f1676d7be7a744cb397bac3b72a334, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Mat_Petals2
-    second: {fileID: 2100000, guid: bd0e77dd1f33fe3408372efe4b7d0006, type: 2}
+      name: MAT_Tree
+    second: {fileID: 2100000, guid: bbdfe733099bb61418f8ad48b00a8451, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

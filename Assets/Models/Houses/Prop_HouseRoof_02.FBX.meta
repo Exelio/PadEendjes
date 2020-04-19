@@ -8,22 +8,22 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Glass
-    second: {fileID: 2100000, guid: 0cf88476fc25fc94dba7c060a95b44c1, type: 2}
+    second: {fileID: 2100000, guid: 74157e745b0f8534c938346a15da6e32, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_HouseWall
-    second: {fileID: 2100000, guid: dba63fe733def6d46917a4e0a254bf4a, type: 2}
+    second: {fileID: 2100000, guid: eeeb8d00c1f668343ba8884302b51c5c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Roof
-    second: {fileID: 2100000, guid: 9fd2f1ba02860f04e9c287c4b7d3f5c7, type: 2}
+    second: {fileID: 2100000, guid: 97c114f4505548845b21be2075923572, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Window
-    second: {fileID: 2100000, guid: 99dafbda7a29fa64fa1d03aca31190e4, type: 2}
+    second: {fileID: 2100000, guid: 52f6f6ff1a56a254b9b96682bb023274, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

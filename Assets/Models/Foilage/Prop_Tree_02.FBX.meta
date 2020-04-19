@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Tree
-    second: {fileID: 2100000, guid: e3fa113f1c57f6846b0dfb04912a8cc4, type: 2}
+    second: {fileID: 2100000, guid: bbdfe733099bb61418f8ad48b00a8451, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Trunk
-    second: {fileID: 2100000, guid: 57e82507588a87442aee9d95bba7780f, type: 2}
+    second: {fileID: 2100000, guid: 4056f5330dd9ba348bc44f4c79646c40, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

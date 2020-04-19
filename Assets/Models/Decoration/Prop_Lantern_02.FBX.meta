@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_BlackMetal
-    second: {fileID: 2100000, guid: e7eeb966a4331884e93f4924ab58a548, type: 2}
+    second: {fileID: 2100000, guid: 7111f7cd5bce9be4e9b370fe6db17cb3, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: MAT_Lamp
-    second: {fileID: 2100000, guid: 2a8250785a9d9a243866933c0038288b, type: 2}
+    second: {fileID: 2100000, guid: 915c4325b7f661a4ba094dc1b58cb869, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

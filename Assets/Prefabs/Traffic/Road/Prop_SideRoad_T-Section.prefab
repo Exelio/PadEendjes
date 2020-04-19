@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3098507306104431917}
   - component: {fileID: 6222599494018637595}
   - component: {fileID: 389442818756207586}
-  - component: {fileID: 2115357166425102137}
+  - component: {fileID: 8507703368967474901}
   m_Layer: 0
   m_Name: Prop_SideRoad_T-Section
   m_TagString: Untagged
@@ -60,6 +60,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 39e2b19707610bb44ae26b369b23f7d4, type: 2}
+  - {fileID: 2100000, guid: acfe8129820eacb40813bb8f1f406b0c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -80,8 +81,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2115357166425102137
-BoxCollider:
+--- !u!64 &8507703368967474901
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,6 +91,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.00000003774895, z: 0.5}
-  m_Center: {x: 0.35, y: 0.000000018874475, z: -0.25}
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1279298603244733655, guid: 106534d00101b1b408ebd9b9f8259960, type: 3}
