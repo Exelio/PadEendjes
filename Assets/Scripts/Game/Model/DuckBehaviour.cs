@@ -11,7 +11,7 @@ public class DuckBehaviour
 	private float _time;
 	private float _timeTillIdleChange;
 
-	private float _speed = 0;
+	private float _distance = 0;
 	private Vector3 _lastPosition = Vector3.zero;
 
 	public DuckBehaviour(DuckView view)
@@ -31,12 +31,12 @@ public class DuckBehaviour
 
 	private void DuckCaught(object sender, EventArgs e)
 	{
-		OnScared?.Invoke();
+		OnCaught?.Invoke();
 	}
 
 	public void Update()
 	{
-		if(_speed <= 0.01f)
+		if(_distance <= _view.MaxDistance)
 			CheckIdleChange();
 
 		CheckSpeed();
@@ -44,7 +44,7 @@ public class DuckBehaviour
 
 	private void CheckSpeed()
 	{
-		_view.Animator.SetFloat("DuckSpeed", _speed);
+		_view.Animator.SetFloat("DuckDistance", _distance);
 	}
 
 	public void FixedUpdate()
@@ -54,9 +54,6 @@ public class DuckBehaviour
 			FollowTarget();
 			LookAtTarget();
 		}
-
-		_speed = (_view.transform.position - _lastPosition).magnitude;
-		_lastPosition = _view.transform.position;
 	}
 
 	private void CheckIdleChange()
@@ -83,14 +80,15 @@ public class DuckBehaviour
 
 	private void FollowTarget()
 	{
-		if (Vector3.Distance(_view.transform.position, _view.FollowTarget.position) >= _view.MaxDistance)
+		_distance = Vector3.Distance(_view.transform.position, _view.FollowTarget.position);
+		if (_distance >= _view.MaxDistance)
 		{
 			_view.transform.position = Vector3.Lerp(_view.Transform.position, _view.FollowTarget.position - (_view.FollowTarget.forward * _view.TargetOffset), _view.FollowSpeed);
 		}
 		else
 		{
 			_lastPosition = _view.transform.position;
-			_speed = 0;
+			_distance = 0;
 		}
 	}
 }

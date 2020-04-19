@@ -89,7 +89,6 @@ namespace Model
             if (_duckList.Count <= 1)
             {
                 view.OnInteract(_view.transform);
-                Debug.Log($"Oninteract {_view.name} = followtarget");
             }
             else
                 view.OnInteract(_duckList[_duckList.Count - 2].transform);

@@ -9,8 +9,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: DuckSpeed
-    m_EventTreshold: 0.5
+    m_ConditionEvent: DuckDistance
+    m_EventTreshold: 1.35
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2561442096074775917}
   m_Solo: 0
@@ -20,7 +20,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.625
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -91,7 +91,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: DuckSpeed
+  - m_Name: DuckDistance
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -223,8 +223,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: DuckSpeed
-    m_EventTreshold: 0.5
+    m_ConditionEvent: DuckDistance
+    m_EventTreshold: 1.35
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7699007296367614630}
   m_Solo: 0
@@ -234,7 +234,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.85
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -248,8 +248,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 4
-    m_ConditionEvent: DuckSpeed
-    m_EventTreshold: 0.05
+    m_ConditionEvent: DuckDistance
+    m_EventTreshold: 0.76
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1983167012231934194}
   m_Solo: 0
@@ -259,7 +259,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.85
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -311,7 +311,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 3
+    m_ConditionEvent: DuckDistance
+    m_EventTreshold: 0.74
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2561442096074775917}
   m_Solo: 0
@@ -321,7 +324,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.925
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -390,8 +393,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 3
-    m_ConditionEvent: DuckSpeed
-    m_EventTreshold: 0.05
+    m_ConditionEvent: DuckDistance
+    m_EventTreshold: 0.74
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2561442096074775917}
   m_Solo: 0
@@ -401,7 +404,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.925
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1

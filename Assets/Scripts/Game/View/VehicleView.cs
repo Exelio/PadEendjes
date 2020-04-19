@@ -5,7 +5,6 @@ using UnityEngine;
 public struct VehicleVariables
 {
     [Header("Movement variables")]
-    [Tooltip("starting waypoint")] public Waypoint StartWaypoint;
     [Tooltip("The acceleration of the vehicle")] public float AccelerationSpeed;
     [Range(1, 15)] [Tooltip("Max car speed")] public float MaxSpeed; 
     [Tooltip("The speed the car turns")] public float RotationSpeed;
@@ -23,6 +22,9 @@ public class VehicleView : MonoBehaviour
 {
     public VehicleVariables ViewVariables => _variables;
     [SerializeField] private VehicleVariables _variables;
+    [Tooltip("starting waypoint")] public Waypoint StartWaypoint;
 
     [SerializeField] private float _checkSpeed; public float CheckSpeed { get => _checkSpeed; set { _checkSpeed = value; } }
+
+    public void DestroyVehicle() { Destroy(this.gameObject); }
 }

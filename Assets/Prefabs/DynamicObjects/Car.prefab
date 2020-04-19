@@ -95,18 +95,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _variables:
-    StartWaypoint: {fileID: 0}
     AccelerationSpeed: 60
-    MaxSpeed: 8
+    MaxSpeed: 6
     RotationSpeed: 3
     RigidBody: {fileID: 6535889815771397250}
     Distance: 1
-    MaxDistance: 2
+    MaxDistance: 4
     CheckAngle: 50
     CheckLayer:
       serializedVersion: 2
       m_Bits: 3584
     CarFront: {fileID: 1510633368}
+  StartWaypoint: {fileID: 0}
+  _checkSpeed: 0
 --- !u!65 &6535889815771397251
 BoxCollider:
   m_ObjectHideFlags: 0

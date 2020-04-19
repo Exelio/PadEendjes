@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1d8330505114a43b33c676d554c662, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeTillSwitch: 10
+  _timeTillSwitch: 6
   _orangeLightTime: 1
   _renderer: {fileID: 1772710704579675393}
   _greenLight: {fileID: 2100000, guid: 6abed9fc93101334a8a7417475bde0ec, type: 2}

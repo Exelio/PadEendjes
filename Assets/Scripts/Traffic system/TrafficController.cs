@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class TrafficController
 {
+    public event Action<TrafficController> OnDestroy;
+    public bool IsStopping { get; set; }
+
     private VehicleView _view; //view of the vehicle
 
     private Waypoint _wp;
@@ -18,7 +21,7 @@ public class TrafficController
     }
 
     private bool _reachedDestination = false; public bool ReachedDestination => _reachedDestination;
-    private bool _isSomethingInFront = false;
+    private bool _isSomethingInFront = false; 
 
     private Waypoint _destinationWP;
     private Transform _destinationTrans;
@@ -32,7 +35,7 @@ public class TrafficController
     public TrafficController(VehicleView view)
     {
         _view = view;
-        _navigator = new TrafficWaypointNavigator(this, _view.ViewVariables.StartWaypoint);
+        _navigator = new TrafficWaypointNavigator(this, _view.StartWaypoint);
         Initialize();
     }
 
@@ -66,6 +69,11 @@ public class TrafficController
     public void FixedUpdate()
     {
         if (_wp != null) Move();
+        else if(_wp == null && !IsStopping) 
+        {
+            OnDestroy?.Invoke(this);
+            _view.DestroyVehicle(); 
+        }
     }
 
     private void Move()
@@ -93,7 +101,8 @@ public class TrafficController
 
     public void ChangeCheckSpeed()
     {
-        _view.CheckSpeed = _wp.MaxSpeed;
+        if(_wp != null)
+            _view.CheckSpeed = _wp.MaxSpeed;
     }
 
     private void CheckDestinationReached()

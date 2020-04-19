@@ -24,11 +24,12 @@ public class TrafficWaypointNavigator
         {
             if (_currentWaypoint.IsDriveable)
             {
+                _tfController.IsStopping = false;
                 _currentWaypoint = _currentWaypoint.NextWaypoint;
                 _tfController.Waypoint = _currentWaypoint;
                 _tfController.ChangeCheckSpeed();
             }
-            else { _tfController.Waypoint = null;}
+            else { _tfController.Waypoint = null; _tfController.IsStopping = true; }
         }        
     }
 }

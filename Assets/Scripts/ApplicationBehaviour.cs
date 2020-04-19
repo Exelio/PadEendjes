@@ -38,21 +38,9 @@ namespace Game
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
             _rewardBehaviour = new RewardBehaviour(_reward);
-            CreateVehicleModels();
             CreateDucklingModels();
 
-            CheckDucks();
-
             StartCoroutine(LateInitialize());
-        }
-
-        private void CheckDucks()
-        {
-            foreach (var duckling in _duckBehaviours)
-            {
-                duckling.OnCaught += DuckCaught;
-                duckling.OnScared += DuckScared;
-            }
         }
 
         private void CreateDucklingModels()
@@ -61,15 +49,8 @@ namespace Game
             {
                 DuckBehaviour controller = new DuckBehaviour(view);
                 _duckBehaviours.Add(controller);
-            }
-        }
-
-        private void CreateVehicleModels()
-        {
-            foreach (var view in _vehicles)
-            {
-                TrafficController controller = new TrafficController(view);
-                _vehicleBehaviours.Add(controller);
+                controller.OnCaught += DuckCaught;
+                controller.OnScared += DuckScared;
             }
         }
 
@@ -88,7 +69,6 @@ namespace Game
             _inputHandler.Update();
             InputCamera();
 
-            UpdateVehicles();
             UpdateDucks();
         }
 
@@ -112,14 +92,6 @@ namespace Game
             _cameraModel.MouseY = mouseY;
         }
 
-        private void UpdateVehicles()
-        {
-            foreach (var behaviour in _vehicleBehaviours)
-            {
-                behaviour.Update();
-            }
-        }
-
         private void FixedUpdateDucks()
         {
             foreach (var behaviour in _duckBehaviours)
@@ -131,18 +103,9 @@ namespace Game
         private void FixedUpdate()
         {
             _playerStateMachine.FixedUpdate();
-            FixedUpdateVehicles();
 
             _cameraModel.FixedUpdate();
             FixedUpdateDucks();
-        }
-
-        private void FixedUpdateVehicles()
-        {
-            foreach (var behaviour in _vehicleBehaviours)
-            {
-                behaviour.FixedUpdate();
-            }
         }
 
         private IEnumerator LateInitialize()

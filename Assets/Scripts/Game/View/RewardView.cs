@@ -7,6 +7,7 @@ namespace View
     public struct RewardVariables
     {
         public int DucksNeeded;
+        public int MaxDucks;
         public int MaxMistakes;
 
         [HideInInspector] public bool IsLevelComplete;
