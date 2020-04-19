@@ -321,7 +321,7 @@ MonoBehaviour:
     CheckAngle: 50
     CheckLayer:
       serializedVersion: 2
-      m_Bits: 1024
+      m_Bits: 3584
     CarFront: {fileID: 1241422840}
 --- !u!65 &9062010585786319238
 BoxCollider:

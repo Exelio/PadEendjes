@@ -18,13 +18,13 @@ public class TrafficController
     }
 
     private bool _reachedDestination = false; public bool ReachedDestination => _reachedDestination;
-    private bool _behindVehicle = false;
+    private bool _isSomethingInFront = false;
 
     private Waypoint _destinationWP;
     private Transform _destinationTrans;
 
-    [SerializeField] private float _checkSpeed; public float CheckSpeed => _checkSpeed;
-    [SerializeField] private float _currentSpeed; public float CurrentSpeed => _currentSpeed;
+    private float _speed; public float Speed => _speed;
+    private float _currentSpeed; public float CurrentSpeed => _currentSpeed;
 
     private List<Collider> _hitList = new List<Collider>();
     private TrafficWaypointNavigator _navigator;
@@ -40,7 +40,7 @@ public class TrafficController
     {
         _navigator.Initialize();
         SetPosition();
-        _checkSpeed = _view.ViewVariables.MaxSpeed;
+        _speed = _view.ViewVariables.MaxSpeed;
     }
 
     private void SetPosition()
@@ -60,7 +60,7 @@ public class TrafficController
             CheckDestinationReached();           
             CheckForward();
         }
-        else { _checkSpeed = 0; _currentSpeed = 0;}
+        else { _speed = 0; _currentSpeed = 0;}
     }
 
     public void FixedUpdate()
@@ -72,7 +72,7 @@ public class TrafficController
     {
         Vector3 destinationDirection = _wp.transform.position - _view.transform.position;
         destinationDirection.y = 0;
-        _currentSpeed = _view.ViewVariables.RigidBody.velocity.magnitude;
+        _speed = _view.ViewVariables.RigidBody.velocity.magnitude;
 
         ChangeCurrentSpeed();
 
@@ -83,17 +83,17 @@ public class TrafficController
 
     private void ChangeCurrentSpeed()
     {
-        if (Math.Abs(_checkSpeed - _currentSpeed) <= .5f) 
-        { 
-            _currentSpeed = _checkSpeed;
+        if (Math.Abs(_view.CheckSpeed - _speed) <= .5f) 
+        {
+            _speed = _view.CheckSpeed;
             _view.transform.position += _view.transform.forward * Time.deltaTime * _currentSpeed; 
         }
-        else if (_currentSpeed <= _checkSpeed) _view.ViewVariables.RigidBody.AddForce(_view.transform.forward * _view.ViewVariables.AccelerationSpeed, ForceMode.Force);
+        else if (_speed <= _view.CheckSpeed) _view.ViewVariables.RigidBody.AddForce(_view.transform.forward * _view.ViewVariables.AccelerationSpeed, ForceMode.Force);
     }
 
     public void ChangeCheckSpeed()
     {
-        _checkSpeed = _wp.MaxSpeed;
+        _view.CheckSpeed = _wp.MaxSpeed;
     }
 
     private void CheckDestinationReached()
@@ -105,32 +105,52 @@ public class TrafficController
     private void CheckForward()
     {
         Checkcast(out _hitList);
+        float speed = 0;
 
         if (_hitList.Count > 0)
         {
             foreach (var item in _hitList)
             {
-                if(item.GetComponent<VehicleView>() != null && item.name != _view.name)
-                {
-                    CheckHit(item.GetComponent<VehicleView>());
-                }
+                speed = CheckIfNotSelf(speed, item);
+            }
+        }
+        else
+            _view.CheckSpeed = _wp.PreviousWaypoint.MaxSpeed;
+
+        if (!_isSomethingInFront) _view.CheckSpeed = _wp.PreviousWaypoint.MaxSpeed;
+
+        _hitList.Clear();
+        _isSomethingInFront = false;
+    }
+
+    private float CheckIfNotSelf(float speed, Collider item)
+    {
+        if (item.name != _view.name)
+        {
+            VehicleView view = item.GetComponent<VehicleView>();
+            if (view != null)
+            {
+                CheckHit(view);
+                speed = view.CheckSpeed;
+                ChangeSpeed(speed);
+            }
+            else
+            {
+                _isSomethingInFront = true;
+                speed = 0;
+                ChangeSpeed(speed);
             }
         }
 
-        ChangeSpeed();
-
-        if (!_behindVehicle) _checkSpeed = _wp.PreviousWaypoint.MaxSpeed;
-
-        _hitList.Clear();
-        _behindVehicle = false;
+        return speed;
     }
 
     private void CheckHit(VehicleView view)
     {
         if (view == null) return;
 
-        _behindVehicle = true;
-        _view.Speed = view.Speed - 0.5f;
+        _isSomethingInFront = true;
+        _view.CheckSpeed = view.CheckSpeed - 0.5f;
     }
 
     private void Checkcast(out List<Collider> hitList)
@@ -150,17 +170,15 @@ public class TrafficController
         return true;
     }
 
-    private void ChangeSpeed()
+    private void ChangeSpeed(float speed)
     {
-        if (_behindVehicle)
+        if (_isSomethingInFront)
         {
-            if (_view.Speed <= 0.1f) _checkSpeed = 0;
+            if (speed <= 0.1f) _view.CheckSpeed = 0;
 
-            else _checkSpeed = _view.Speed;
+            else _view.CheckSpeed = speed;
         }
 
-        _checkSpeed = Mathf.Clamp(_checkSpeed, 0, _view.ViewVariables.MaxSpeed);
-
-        _view.Speed = _checkSpeed;
+        _view.CheckSpeed = Mathf.Clamp(_view.CheckSpeed, 0, _view.ViewVariables.MaxSpeed);
     }
 }

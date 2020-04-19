@@ -24,5 +24,5 @@ public class VehicleView : MonoBehaviour
     public VehicleVariables ViewVariables => _variables;
     [SerializeField] private VehicleVariables _variables;
 
-    private float _speed; public float Speed { get => _speed; set { _speed = value; } }
+    [SerializeField] private float _checkSpeed; public float CheckSpeed { get => _checkSpeed; set { _checkSpeed = value; } }
 }
