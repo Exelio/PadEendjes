@@ -256,8 +256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9062010585786319234}
   - component: {fileID: 9062010585786319235}
-  - component: {fileID: 9062010585786319236}
-  - component: {fileID: 9062010585786319237}
+  - component: {fileID: 2782992940029699269}
   - component: {fileID: 9062010585786319238}
   m_Layer: 10
   m_Name: Bus
@@ -299,7 +298,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &9062010585786319236
+--- !u!114 &2782992940029699269
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -308,35 +307,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 9062010585786319239}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b3e5d767d245c74a842022aee5725e4, type: 3}
+  m_Script: {fileID: 11500000, guid: c7d05f17b3179a243be843c1c5b1c9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _accelerationSpeed: 40
-  _maxSpeed: 5
-  _rotationSpeed: 3
-  _distance: 2
-  _maxDistance: 4
-  _checkAngle: 50
-  _carFront: {fileID: 1241422840}
-  _checkDimensions: {x: 0, y: 0, z: 0}
-  _checkLayer:
-    serializedVersion: 2
-    m_Bits: 1024
-  _checkSpeed: 0
-  _currentSpeed: 0
---- !u!114 &9062010585786319237
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9062010585786319239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00670c00da29fd244ad2563e48048f01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _currentWaypoint: {fileID: 0}
+  _variables:
+    StartWaypoint: {fileID: 0}
+    AccelerationSpeed: 40
+    MaxSpeed: 5
+    RotationSpeed: 3
+    RigidBody: {fileID: 9062010585786319235}
+    Distance: 1
+    MaxDistance: 2
+    CheckAngle: 50
+    CheckLayer:
+      serializedVersion: 2
+      m_Bits: 1024
+    CarFront: {fileID: 1241422840}
 --- !u!65 &9062010585786319238
 BoxCollider:
   m_ObjectHideFlags: 0

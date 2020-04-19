@@ -1,19 +1,24 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(TrafficController))]
-public class TrafficWaypointNavigator : MonoBehaviour
+[RequireComponent(typeof(VehicleView))]
+public class TrafficWaypointNavigator
 {
-    [Tooltip("The wayoint to start on")] [SerializeField] private Waypoint _currentWaypoint;
+    private Waypoint _currentWaypoint;
     private TrafficController _tfController;
 
-    private void Awake()
+    public TrafficWaypointNavigator(TrafficController controller, Waypoint startWaypoint)
     {
-        _tfController = GetComponent<TrafficController>();
+        _tfController = controller;
+        _currentWaypoint = startWaypoint;
+    }
+
+    public void Initialize()
+    {
         _tfController.Waypoint = _currentWaypoint;
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (_tfController.ReachedDestination)
         {
