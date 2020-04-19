@@ -1852,7 +1852,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3264
+  m_Name: pb_Mesh-109206
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2990,6 +2990,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5767032e132f9c47917834e263aad02, type: 3}
+--- !u!4 &1345534259 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7294322862694588834, guid: d821bcd852dd0c04cbd9c39292a6fee1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8784898533606519277}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1346165562
 GameObject:
   m_ObjectHideFlags: 0
@@ -3449,6 +3455,61 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1630209979}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1607083640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1607083642}
+  - component: {fileID: 1607083641}
+  m_Layer: 0
+  m_Name: BendController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1607083641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607083640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e7b24ce92011743a7ce2f104031c78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_curveOrigin: {fileID: 1345534259}
+  m_curvatureScale: -25.96
+  m_xCurvature: 1
+  m_zCurvature: 1
+  m_xFlatMargin: 0
+  m_zFlatMargin: 0
+  m_curveOriginId: 963
+  m_curvatureScaleId: 964
+  m_xCurvatureId: 965
+  m_zCurvatureId: 966
+  m_xFlatMarginId: 967
+  m_zFlatMarginId: 968
+--- !u!4 &1607083642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607083640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1630209978
 GameObject:
@@ -4250,7 +4311,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3246
+  m_Name: pb_Mesh-109188
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
