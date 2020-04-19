@@ -15,7 +15,7 @@ namespace Game
         [SerializeField] private PlayerView _player;
         [SerializeField] private CameraView _camera;
         [SerializeField] private RewardView _reward;
-        [SerializeField] private DuckView _duckling;
+        [SerializeField] private DuckView[] _ducklings;
         [SerializeField] private VehicleView[] _vehicles;
 
         private PlayerEngine _playerEngine;
@@ -27,6 +27,7 @@ namespace Game
 
         private RewardBehaviour _rewardBehaviour;
         private List<TrafficController> _vehicleBehaviours = new List<TrafficController>();
+        private List<DuckBehaviour> _duckBehaviours = new List<DuckBehaviour>();
 
         private void Start()
         {
@@ -38,11 +39,29 @@ namespace Game
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
             _rewardBehaviour = new RewardBehaviour(_reward);
             CreateVehicleModels();
+            CreateDucklingModels();
 
-            //_duckling.OnCaught += DuckCaught;
-            //_duckling.OnScared += DuckScared;
+            CheckDucks();
 
             StartCoroutine(LateInitialize());
+        }
+
+        private void CheckDucks()
+        {
+            foreach (var duckling in _duckBehaviours)
+            {
+                duckling.OnCaught += DuckCaught;
+                duckling.OnScared += DuckScared;
+            }
+        }
+
+        private void CreateDucklingModels()
+        {
+            foreach (var view in _ducklings)
+            {
+                DuckBehaviour controller = new DuckBehaviour(view);
+                _duckBehaviours.Add(controller);
+            }
         }
 
         private void CreateVehicleModels()
@@ -54,12 +73,12 @@ namespace Game
             }
         }
 
-        private void DuckScared(object sender, EventArgs e)
+        private void DuckScared()
         {
             _rewardBehaviour.LostDuck();
         }
 
-        private void DuckCaught(object sender, EventArgs e)
+        private void DuckCaught()
         {
             _rewardBehaviour.CaughtDuck();
         }
@@ -67,7 +86,22 @@ namespace Game
         private void Update()
         {
             _inputHandler.Update();
+            InputCamera();
 
+            UpdateVehicles();
+            UpdateDucks();
+        }
+
+        private void UpdateDucks()
+        {
+            foreach (var behaviour in _duckBehaviours)
+            {
+                behaviour.Update();
+            }
+        }
+
+        private void InputCamera()
+        {
             if (Input.GetKeyDown(KeyCode.C))
                 _cameraModel.HasChanged = true;
 
@@ -76,23 +110,39 @@ namespace Game
 
             _cameraModel.MouseX = mouseX;
             _cameraModel.MouseY = mouseY;
+        }
 
+        private void UpdateVehicles()
+        {
             foreach (var behaviour in _vehicleBehaviours)
             {
                 behaviour.Update();
             }
         }
 
+        private void FixedUpdateDucks()
+        {
+            foreach (var behaviour in _duckBehaviours)
+            {
+                behaviour.FixedUpdate();
+            }
+        }
+
         private void FixedUpdate()
         {
             _playerStateMachine.FixedUpdate();
+            FixedUpdateVehicles();
 
+            _cameraModel.FixedUpdate();
+            FixedUpdateDucks();
+        }
+
+        private void FixedUpdateVehicles()
+        {
             foreach (var behaviour in _vehicleBehaviours)
             {
                 behaviour.FixedUpdate();
             }
-
-            _cameraModel.Update();
         }
 
         private IEnumerator LateInitialize()

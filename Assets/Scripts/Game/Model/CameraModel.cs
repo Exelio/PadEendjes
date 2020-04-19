@@ -39,7 +39,7 @@ namespace Model
             Cursor.lockState = CursorLockMode.Confined;
         }
 
-        public void Update()
+        public void FixedUpdate()
         {
             if (_cameraState == CameraStates.ThirdPersonState)
             {                

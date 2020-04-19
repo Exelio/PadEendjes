@@ -2,6 +2,8 @@
 using View;
 using Utils;
 using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 namespace Model
 {
@@ -17,6 +19,8 @@ namespace Model
 
         private readonly PlayerView _view;
         private readonly EnvironmentQuery _query;
+
+        private List<GameObject> _duckList = new List<GameObject>();
 
         public PlayerEngine(PlayerView view)
         {
@@ -70,7 +74,24 @@ namespace Model
 
         public void ApplyInteraction()
         {
-            _stats.InteractableObject?.GetComponent<DuckView>().OnInteract();
+            DuckView view = _stats.InteractableObject?.GetComponent<DuckView>();
+
+            if (view != null && view.FollowTarget == null)
+            {
+                _duckList.Add(view.gameObject);
+                CheckDuckList(view);
+            }
+        }
+
+        private void CheckDuckList(DuckView view)
+        {
+            if (_duckList.Count <= 1)
+            {
+                view.OnInteract(_view.transform);
+                Debug.Log($"Oninteract {_view.name} = followtarget");
+            }
+            else
+                view.OnInteract(_duckList[_duckList.Count - 2].transform);
         }
 
         private void AssignPlayerStats()
