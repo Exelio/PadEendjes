@@ -169,6 +169,7 @@ MonoBehaviour:
   _timeUntilIdleChange: {x: 10, y: 15}
   _animator: {fileID: 8524072389958186684}
   _rigidbody: {fileID: 1891097517}
+  _collider: {fileID: 830713677}
 --- !u!136 &830713676
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -179,10 +180,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.13
-  m_Height: 0.3925327
+  m_Radius: 0.11961223
+  m_Height: 0.23922446
   m_Direction: 1
-  m_Center: {x: 0, y: 0.19942349, z: 0}
+  m_Center: {x: 0, y: 0.11129986, z: -0.09777404}
 --- !u!135 &830713677
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -29,6 +29,7 @@ namespace View
         [Header("Component variables")]
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private Collider _collider;
 
         private Transform _followTarget;
 
@@ -36,6 +37,7 @@ namespace View
         {
             if (_followTarget == null)
             {
+                _collider.enabled = false;
                 _followTarget = target;
                 OnCaught?.Invoke(this, EventArgs.Empty);
             }

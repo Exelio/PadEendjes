@@ -7,7 +7,7 @@ public struct VehicleVariables
     [Header("Movement variables")]
     [Tooltip("starting waypoint")] public Waypoint StartWaypoint;
     [Tooltip("The acceleration of the vehicle")] public float AccelerationSpeed;
-    [Range(1, 8)] [Tooltip("Max car speed")] public float MaxSpeed; 
+    [Range(1, 15)] [Tooltip("Max car speed")] public float MaxSpeed; 
     [Tooltip("The speed the car turns")] public float RotationSpeed;
     [Tooltip("This rigidbody")] public Rigidbody RigidBody;
 

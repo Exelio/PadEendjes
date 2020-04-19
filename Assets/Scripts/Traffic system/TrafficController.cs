@@ -47,8 +47,8 @@ public class TrafficController
     {
         Transform wpTrans = _wp.transform;
         _view.transform.position = wpTrans.position;
-        Vector3 degrees = wpTrans.localRotation.eulerAngles;
-        _view.transform.rotation = Quaternion.Euler(degrees);
+        //Vector3 degrees = wpTrans.localRotation.eulerAngles;
+        //_view.transform.rotation = Quaternion.Euler(degrees);
         _wp = _wp.NextWaypoint;
     }
 

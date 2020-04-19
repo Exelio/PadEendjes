@@ -20,7 +20,7 @@ public class TrafficWaypointNavigator
     // Update is called once per frame
     public void Update()
     {
-        if (_tfController.ReachedDestination)
+        if (_tfController.ReachedDestination && _currentWaypoint != null)
         {
             if (_currentWaypoint.IsDriveable)
             {

@@ -80,6 +80,7 @@ namespace Model
             {
                 _duckList.Add(view.gameObject);
                 CheckDuckList(view);
+                _stats.InteractableObject = null;
             }
         }
 
