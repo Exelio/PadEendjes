@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace View
 {
@@ -9,6 +10,8 @@ namespace View
         public int DucksNeeded;
         public int MaxDucks;
         public int MaxMistakes;
+        public Text DucksCollected;
+        public Text DucksMax;
 
         [HideInInspector] public bool IsLevelComplete;
         [HideInInspector] public int DuckCount;
