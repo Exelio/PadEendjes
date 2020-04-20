@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 38b01cbfc11e69d46aa205858d08d10a,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2799,8 +2799,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.6
-  m_Center: {x: 2.69, y: -0.27581757, z: -1.05}
+  m_Radius: 1.389042
+  m_Center: {x: 2.5900726, y: -0.27581763, z: -0.93896914}
 --- !u!135 &845013488
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2812,8 +2812,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.6
-  m_Center: {x: -2.05, y: -0.27581757, z: 0.87}
+  m_Radius: 1.111464
+  m_Center: {x: -2.3822784, y: -0.27581763, z: 0.78999996}
 --- !u!135 &845013489
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2825,8 +2825,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 2.0673444
-  m_Center: {x: 0.71, y: -0.22299838, z: 1.1804216}
+  m_Radius: 1.8452828
+  m_Center: {x: 0.71000004, y: -0.22299838, z: 1.1804225}
 --- !u!1 &857269601
 GameObject:
   m_ObjectHideFlags: 0
