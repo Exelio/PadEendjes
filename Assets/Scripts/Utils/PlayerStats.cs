@@ -22,6 +22,11 @@ namespace Utils
         [Tooltip("Set the player's gravity")]
         public float Gravity;
 
+        [Header("Animation Parameters")]
+        [Range(2f, 8f)]
+        [Tooltip("Time till player gets bored")]
+        public float TimeTillBored;
+
         [HideInInspector]
         public Rigidbody Rigidbody;
 

@@ -34,7 +34,7 @@ public class TrafficHub : MonoBehaviour
     {
         foreach (var controller in _controllerList)
         {
-            controller.Update();
+            controller?.Update();
         }
     }
 
@@ -42,7 +42,7 @@ public class TrafficHub : MonoBehaviour
     {
         foreach (var controller in _controllerList)
         {
-            controller.FixedUpdate();
+            controller?.FixedUpdate();
         }
     }
 

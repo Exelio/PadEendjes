@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa9b43a6f9404b443857edd437ee2592, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _animator: {fileID: 8817386889662939298}
   _stats:
     WalkableLayer:
       serializedVersion: 2
@@ -103,6 +104,7 @@ MonoBehaviour:
     Speed: 3
     RotationLerpSpeed: 0.05
     Gravity: 9.87
+    TimeTillBored: 5
     Rigidbody: {fileID: 0}
     Collider: {fileID: 0}
     InteractableObject: {fileID: 0}

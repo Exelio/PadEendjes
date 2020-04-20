@@ -22,6 +22,8 @@ namespace Model
 
         private List<GameObject> _duckList = new List<GameObject>();
 
+        private float _boredTimer;
+
         public PlayerEngine(PlayerView view)
         {
             view.Initialize();
@@ -29,6 +31,7 @@ namespace Model
             _view = view;
             _stats = _view.Stats;
             _query = new EnvironmentQuery();
+            _boredTimer = _stats.TimeTillBored;
 
             ApplicationBehaviour.Instance.Initialized += (obj, args) => AssignPlayerStats();
         }
@@ -40,6 +43,7 @@ namespace Model
             IsGrounded = _query.IsGrounded(_stats.Transform.position, _stats.Collider.radius * 0.9f, _stats.WalkableLayer);
 
             Commit();
+            ApplyAnimation();
         }
 
         public void ApplyGravity()
@@ -53,6 +57,25 @@ namespace Model
             Vector3 cameraRight = Vector3.Scale(Camera.main.transform.right, new Vector3(1, 0, 1)).normalized;
 
             _velocity = cameraRight * horizontal + cameraForward * vertical;
+        }
+
+        private void ApplyAnimation()
+        {
+            _view.MotionAnimation(_velocity.normalized.magnitude);
+
+            if(Mathf.Approximately(_velocity.normalized.magnitude, 0))
+            {
+                _boredTimer -= Time.deltaTime;
+                if(_boredTimer <= 0f)
+                {
+                    _view.SetBoredAnimation(true);
+                }
+            }
+            else
+            {
+                _boredTimer = _stats.TimeTillBored;
+                _view.SetBoredAnimation(false);
+            }
         }
 
         public void ApplyIdle()

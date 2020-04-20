@@ -2293,7 +2293,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3330
+  m_Name: pb_Mesh-15728
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5177,7 +5177,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3312
+  m_Name: pb_Mesh-15710
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8179,6 +8179,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 342249024, guid: d821bcd852dd0c04cbd9c39292a6fee1, type: 3}
+      propertyPath: _variables.MaxDucks
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3203184672139516988, guid: d821bcd852dd0c04cbd9c39292a6fee1,
         type: 3}
       propertyPath: m_Name

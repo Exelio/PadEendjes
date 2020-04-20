@@ -15,8 +15,8 @@ namespace View
             }
         }
 
-        [SerializeField]
-        private PlayerStats _stats;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private PlayerStats _stats;
 
         private LayerMask _interactLayer;
         
@@ -27,6 +27,17 @@ namespace View
             _stats.InteractableObject = null;
 
             _interactLayer = LayerMask.NameToLayer("Interactable");
+        }
+
+        public void MotionAnimation(float direction)
+        {
+            _animator.SetFloat("Direction", direction);
+        }
+
+        public void SetBoredAnimation(bool value)
+        {
+            if(_animator.GetBool("IsBored") != value)
+                _animator.SetBool("IsBored", value);
         }
 
         private void OnTriggerEnter(Collider other)
