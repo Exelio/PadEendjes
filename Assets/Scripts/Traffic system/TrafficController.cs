@@ -1,14 +1,14 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class TrafficController
 {
+    #region Variables
+
     public event Action<TrafficController> OnDestroy;
     public bool IsStopping { get; set; }
-
-    private VehicleView _view; //view of the vehicle
 
     private Waypoint _wp;
     public Waypoint Waypoint
@@ -25,21 +25,28 @@ public class TrafficController
 
     private Waypoint _destinationWP;
     private Transform _destinationTrans;
+    private List<Transform> _visibleTargets = new List<Transform>();
 
     private float _speed; public float Speed => _speed;
     private float _currentSpeed; public float CurrentSpeed => _currentSpeed;
 
-    private List<Collider> _hitList = new List<Collider>();
     private TrafficWaypointNavigator _navigator;
+    private VehicleVariables _variables;
+    private VehicleView _view; //view of the vehicle
+
+    #endregion
 
     public TrafficController(VehicleView view)
     {
         _view = view;
+        _variables = view.ViewVariables;
         _navigator = new TrafficWaypointNavigator(this, _view.StartWaypoint);
         Initialize();
     }
 
-    public void Initialize()
+    #region Initialize
+
+    private void Initialize()
     {
         _navigator.Initialize();
         SetPosition();
@@ -50,43 +57,69 @@ public class TrafficController
     {
         Transform wpTrans = _wp.transform;
         _view.transform.position = wpTrans.position;
-        //Vector3 degrees = wpTrans.localRotation.eulerAngles;
-        //_view.transform.rotation = Quaternion.Euler(degrees);
         _wp = _wp.NextWaypoint;
+        ChangeCheckSpeed(_wp.PreviousWaypoint.MaxSpeed);
     }
+
+    #endregion
+
+    public void ChangeCheckSpeed(float speed = 6.5f)
+    {
+        if (_wp != null)
+        {
+            _view.CheckSpeed = speed;
+            _view.CheckSpeed = Mathf.Clamp(_view.CheckSpeed, 0, _variables.MaxSpeed);
+        }
+    }
+
+    #region Updates
 
     public void Update()
     {
         _navigator.Update();
         if (_wp != null)
         {
-            CheckDestinationReached();           
+            CheckDestinationReached();
             CheckForward();
         }
-        else { _speed = 0; _currentSpeed = 0;}
+        else 
+        { 
+            _speed = 0; 
+            _currentSpeed = 0;
+            CheckDestroy();
+        }
     }
 
     public void FixedUpdate()
     {
         if (_wp != null) Move();
-        else if(_wp == null && !IsStopping) 
-        {
-            OnDestroy?.Invoke(this);
-            _view.DestroyVehicle(); 
-        }
     }
 
+    #endregion
+
+    private void CheckDestinationReached()
+    {
+        if (Vector3.Distance(_view.transform.position, _wp.transform.position) <= _view.ViewVariables.Distance) _reachedDestination = true;
+        else  _reachedDestination = false;
+    }
+
+    private void CheckDestroy()
+    {
+        if (!IsStopping)
+        {
+            OnDestroy?.Invoke(this);
+            _view.DestroyVehicle();
+        }
+    }
+    
     private void Move()
     {
         Vector3 destinationDirection = _wp.transform.position - _view.transform.position;
         destinationDirection.y = 0;
-        _speed = _view.ViewVariables.RigidBody.velocity.magnitude;
+        _speed = _variables.RigidBody.velocity.magnitude;
 
         ChangeCurrentSpeed();
-
-        Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
-        var slerp = Quaternion.Slerp(_view.transform.rotation, targetRotation, _view.ViewVariables.RotationSpeed * Time.deltaTime);
-        _view.transform.rotation = slerp;
+        Rotate(destinationDirection);
     }
 
     private void ChangeCurrentSpeed()
@@ -99,95 +132,85 @@ public class TrafficController
         else if (_speed <= _view.CheckSpeed) _view.ViewVariables.RigidBody.AddForce(_view.transform.forward * _view.ViewVariables.AccelerationSpeed, ForceMode.Force);
     }
 
-    public void ChangeCheckSpeed()
+    private void Rotate(Vector3 destinationDirection)
     {
-        if(_wp != null)
-            _view.CheckSpeed = _wp.MaxSpeed;
-    }
-
-    private void CheckDestinationReached()
-    {
-        if (Vector3.Distance(_view.transform.position, _wp.transform.position) <= _view.ViewVariables.Distance) _reachedDestination = true;
-        else  _reachedDestination = false;
+        Quaternion targetRotation = Quaternion.LookRotation(destinationDirection);
+        var slerp = Quaternion.Slerp(_view.transform.rotation, targetRotation, _view.ViewVariables.RotationSpeed * Time.deltaTime);
+        _view.transform.rotation = slerp;
     }
 
     private void CheckForward()
     {
-        Checkcast(out _hitList);
-        float speed = 0;
+        if (_visibleTargets.Count <= 0) { ChangeCheckSpeed(_wp.PreviousWaypoint.MaxSpeed); return; }
 
-        if (_hitList.Count > 0)
+        foreach (var visibleTarget in _visibleTargets)
         {
-            foreach (var item in _hitList)
-            {
-                speed = CheckIfNotSelf(speed, item);
-            }
-        }
-        else
-            _view.CheckSpeed = _wp.PreviousWaypoint.MaxSpeed;
+            VehicleView view = visibleTarget.GetComponent<VehicleView>();
+            float distance = Vector3.Distance(_view.transform.position, visibleTarget.transform.position);
+            float angle = CheckAngle(visibleTarget.transform);
 
-        if (!_isSomethingInFront) _view.CheckSpeed = _wp.PreviousWaypoint.MaxSpeed;
-
-        _hitList.Clear();
-        _isSomethingInFront = false;
-    }
-
-    private float CheckIfNotSelf(float speed, Collider item)
-    {
-        if (item.name != _view.name)
-        {
-            VehicleView view = item.GetComponent<VehicleView>();
+            Debug.Log($"Distance between {_view.name} and {visibleTarget.name} = {distance}, angle = {angle}");
             if (view != null)
             {
-                CheckHit(view);
-                speed = view.CheckSpeed;
-                ChangeSpeed(speed);
+                CheckCarDirection(view);
             }
-            else
+            else if (distance <= _variables.PedestrianDistance && CheckAngles(angle))
             {
-                _isSomethingInFront = true;
-                speed = 0;
-                ChangeSpeed(speed);
+                ChangeCheckSpeed(0f);
+            }
+            else ChangeCheckSpeed(_wp.PreviousWaypoint.MaxSpeed);
+        }
+    }
+
+    private bool CheckAngles(float angle)
+    {
+        return ((angle < _variables.AngleMaxMin.x && angle > _variables.AngleMaxMin.y) || (angle < -_variables.AngleMaxMin.x && angle > -_variables.AngleMaxMin.y));
+    }
+
+    private void CheckCarDirection(VehicleView view)
+    {
+        float angle = CheckAngle(view.transform);
+
+        if (angle < 25 && angle > -25)
+        {
+            ChangeCheckSpeed(view.CheckSpeed);
+            _isSomethingInFront = true;
+        }
+        else if (angle < 100 && angle > -100)
+            ChangeCheckSpeed(0f);
+    }
+
+    private float CheckAngle(Transform target)
+    {
+        return Vector3.Angle(_view.transform.forward, target.forward);
+    }
+
+    private void FindVisibleTargets()
+    {
+        _visibleTargets.Clear();
+        Collider[] targets = Physics.OverlapSphere(_variables.CarFront.position, _variables.ViewRadius, _variables.TargetMask);
+        
+        foreach (var target in targets)
+        {
+            Transform targetTrans = target.transform;
+            Vector3 dirToTarget = (targetTrans.position - _view.transform.position).normalized;
+
+            if (Vector3.Angle(_view.transform.forward, dirToTarget) < _variables.ViewAngle / 2)
+            {
+                float disToTarget = Vector3.Distance(_view.transform.position, targetTrans.position);
+
+                if (!Physics.Raycast(_view.transform.position + _variables.CarFront.position, dirToTarget, disToTarget, _variables.ObstacleMask) && targetTrans != _view.transform) 
+                    _visibleTargets.Add(targetTrans);
             }
         }
-
-        return speed;
     }
 
-    private void CheckHit(VehicleView view)
+    public IEnumerator FindTargetWithDelay(float delay)
     {
-        if (view == null) return;
-
-        _isSomethingInFront = true;
-        _view.CheckSpeed = view.CheckSpeed - 0.5f;
-    }
-
-    private void Checkcast(out List<Collider> hitList)
-    {
-        //hitDetection = Physics.BoxCast(_carFront.position + (transform.forward * (_maxDistance / 2)), _carFront.localScale, transform.forward, out hit, _carFront.rotation, _maxDistance);
-        //hitDetection = Physics.SphereCast(_carFront.position + (transform.forward * _maxDistance / 2), _maxDistance, transform.forward, out hit);
-        //hitDetection = Physics.CheckSphere(_carFront.position + (transform.forward * _maxDistance / 2), _maxDistance, _checkLayer);
-
-        Collider[] hits = Physics.OverlapSphere(_view.ViewVariables.CarFront.position + (_view.transform.forward * _view.ViewVariables.MaxDistance / 2), _view.ViewVariables.MaxDistance, _view.ViewVariables.CheckLayer);
-        hitList = hits.ToList();
-    }
-
-    private bool CheckAngle(Transform t)
-    {
-        //float angle = Vector3.Angle(t.localRotation.eulerAngles, transform.localRotation.eulerAngles);
-        //return angle <= _checkAngle;
-        return true;
-    }
-
-    private void ChangeSpeed(float speed)
-    {
-        if (_isSomethingInFront)
+        while (true)
         {
-            if (speed <= 0.1f) _view.CheckSpeed = 0;
-
-            else _view.CheckSpeed = speed;
+            yield return new WaitForSeconds(delay);
+            FindVisibleTargets();
         }
-
-        _view.CheckSpeed = Mathf.Clamp(_view.CheckSpeed, 0, _view.ViewVariables.MaxSpeed);
-    }
+    }    
 }

@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-
-[RequireComponent(typeof(VehicleView))]
-public class TrafficWaypointNavigator
+﻿public class TrafficWaypointNavigator
 {
     private Waypoint _currentWaypoint;
     private TrafficController _tfController;
@@ -27,7 +24,7 @@ public class TrafficWaypointNavigator
                 _tfController.IsStopping = false;
                 _currentWaypoint = _currentWaypoint.NextWaypoint;
                 _tfController.Waypoint = _currentWaypoint;
-                _tfController.ChangeCheckSpeed();
+                _tfController.ChangeCheckSpeed(_currentWaypoint.PreviousWaypoint.MaxSpeed);
             }
             else { _tfController.Waypoint = null; _tfController.IsStopping = true; }
         }        

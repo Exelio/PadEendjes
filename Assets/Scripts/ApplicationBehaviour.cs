@@ -16,7 +16,7 @@ namespace Game
         [SerializeField] private CameraView _camera;
         [SerializeField] private RewardView _reward;
         [SerializeField] private DuckView[] _ducklings;
-        [SerializeField] private VehicleView[] _vehicles;
+        [SerializeField] private TrafficHub _trafficHUb;
 
         private PlayerEngine _playerEngine;
         private CameraModel _cameraModel;

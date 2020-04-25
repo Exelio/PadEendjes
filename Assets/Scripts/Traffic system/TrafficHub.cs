@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,7 +65,9 @@ public class TrafficHub : MonoBehaviour
         GameObject obj = Instantiate(_view.gameObject, _startPoints[number - 1].transform);
         VehicleView view = obj.GetComponent<VehicleView>();
         view.StartWaypoint = _startPoints[number - 1];
+        view.transform.parent = null;
         TrafficController controller = new TrafficController(view);
+        StartCoroutine(controller.FindTargetWithDelay(.2f));
         _controllerList.Add(controller);
 
         controller.OnDestroy += Remove;
