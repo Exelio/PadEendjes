@@ -154,7 +154,7 @@ public class TrafficController
             {
                 CheckCarDirection(view);
             }
-            else if (distance <= _variables.PedestrianDistance && CheckAngles(angle))
+            else if (distance <= _variables.PedestrianDistance && CheckAngles(angle, _variables.AngleMaxMin.x, _variables.AngleMaxMin.y))
             {
                 ChangeCheckSpeed(0f);
             }
@@ -162,9 +162,9 @@ public class TrafficController
         }
     }
 
-    private bool CheckAngles(float angle)
+    private bool CheckAngles(float angle, float maxAngle, float minAngle)
     {
-        return ((angle < _variables.AngleMaxMin.x && angle > _variables.AngleMaxMin.y) || (angle < -_variables.AngleMaxMin.x && angle > -_variables.AngleMaxMin.y));
+        return ((angle < maxAngle && angle > minAngle) || (angle < -minAngle && angle > -maxAngle));
     }
 
     private void CheckCarDirection(VehicleView view)
@@ -175,9 +175,13 @@ public class TrafficController
         {
             ChangeCheckSpeed(view.CheckSpeed);
             _isSomethingInFront = true;
+
+            if (Vector3.Distance(_view.transform.position, view.transform.position) <= _variables.VehicleMaxDistance)
+                ChangeCheckSpeed(0f);
         }
-        else if (angle < 100 && angle > -100)
+        else if (angle < 100 && angle > -100 && (angle < -75 && angle > -105))
             ChangeCheckSpeed(0f);
+
     }
 
     private float CheckAngle(Transform target)

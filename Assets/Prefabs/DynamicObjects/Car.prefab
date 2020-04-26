@@ -109,7 +109,7 @@ MonoBehaviour:
       m_Bits: 8192
     AngleMaxMin: {x: 105, y: 75}
     VehicleMaxDistance: 3
-    PedestrianDistance: 5
+    PedestrianDistance: 7
     ViewRadius: 14
     ViewAngle: 150
   StartWaypoint: {fileID: 0}
