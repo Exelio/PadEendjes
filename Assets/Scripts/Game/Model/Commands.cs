@@ -45,4 +45,34 @@ namespace Model
             _playerStateMachine.RequestInteraction();
         }
     }
+
+    public class RotateCameraCommand : IDirectionalCommand
+    {
+        private readonly CameraEngine _cameraEngine;
+
+        public RotateCameraCommand(CameraEngine cameraEngine)
+        {
+            _cameraEngine = cameraEngine;
+        }
+
+        public void Execute(Vector2 direction)
+        {
+            _cameraEngine.ApplyRotation(direction.X, direction.Y);
+        }
+    }
+
+    public class CameraInteractCommand : IImpulseCommand
+    {
+        private readonly CameraEngine _cameraEngine;
+
+        public CameraInteractCommand(CameraEngine cameraEngine)
+        {
+            _cameraEngine = cameraEngine;
+        }
+
+        public void Execute()
+        {
+            _cameraEngine.ToggleAnchorPoint();
+        }
+    }
 }

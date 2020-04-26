@@ -15,9 +15,9 @@ namespace Utils
             return Physics.CheckSphere(origin, radius, groundLayer);
         }
 
-        public bool IsColliding(Vector3 startPoint, Vector3 endPoint)
+        public bool IsColliding(Vector3 position, float radius)
         {
-            return Physics.Linecast(startPoint, endPoint, out _hitInfo);
+            return Physics.CheckSphere(position, radius);
         }
     }
 }

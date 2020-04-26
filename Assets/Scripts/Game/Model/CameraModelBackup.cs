@@ -9,9 +9,9 @@ namespace Model
         ThirdPersonState, ThirdPersonTransition, FirstPersonTransition, FirstPersonState
     }
 
-    public class CameraModel
+    public class CameraModelBackup
     {
-        private CameraView _view;
+        private CameraViewBackup _view;
         private CameraVariables _cameraVariables;
         private CameraStates _cameraState;
 
@@ -24,7 +24,7 @@ namespace Model
         private float _mouseY;
         public float MouseY { get => _mouseY; set { _mouseY = value; } }
 
-        public CameraModel(CameraView view)
+        public CameraModelBackup(CameraViewBackup view)
         {
             _view = view;
             _cameraVariables = _view.Variables;

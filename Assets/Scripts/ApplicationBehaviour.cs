@@ -19,7 +19,7 @@ namespace Game
         [SerializeField] private TrafficHub _trafficHUb;
 
         private PlayerEngine _playerEngine;
-        private CameraModel _cameraModel;
+        private CameraEngine _cameraEngine;
 
         private PlayerStateMachine _playerStateMachine;
 
@@ -33,10 +33,12 @@ namespace Game
         {
             _playerEngine = new PlayerEngine(_player);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
-            _cameraModel = new CameraModel(_camera);
+            _cameraEngine = new CameraEngine(_camera, _player.transform);
             _inputHandler = new InputHandler();
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
+            _inputHandler.RightStickCommand = new RotateCameraCommand(_cameraEngine);
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
+            _inputHandler.YCommand = new CameraInteractCommand(_cameraEngine);
             _rewardBehaviour = new RewardBehaviour(_reward);
             CreateDucklingModels();
 
@@ -67,7 +69,6 @@ namespace Game
         private void Update()
         {
             _inputHandler.Update();
-            InputCamera();
 
             UpdateDucks();
         }
@@ -75,36 +76,20 @@ namespace Game
         private void UpdateDucks()
         {
             foreach (var behaviour in _duckBehaviours)
-            {
                 behaviour.Update();
-            }
-        }
-
-        private void InputCamera()
-        {
-            if (Input.GetKeyDown(KeyCode.C))
-                _cameraModel.HasChanged = true;
-
-            float mouseX = Input.GetAxis("Mouse X");
-            float mouseY = Input.GetAxis("Mouse Y");
-
-            _cameraModel.MouseX = mouseX;
-            _cameraModel.MouseY = mouseY;
         }
 
         private void FixedUpdateDucks()
         {
             foreach (var behaviour in _duckBehaviours)
-            {
                 behaviour.FixedUpdate();
-            }
         }
 
         private void FixedUpdate()
         {
             _playerStateMachine.FixedUpdate();
+            _cameraEngine.FixedCameraUpdate();
 
-            _cameraModel.FixedUpdate();
             FixedUpdateDucks();
         }
 

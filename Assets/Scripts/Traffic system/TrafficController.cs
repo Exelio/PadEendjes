@@ -149,7 +149,7 @@ public class TrafficController
             float distance = Vector3.Distance(_view.transform.position, visibleTarget.transform.position);
             float angle = CheckAngle(visibleTarget.transform);
 
-            Debug.Log($"Distance between {_view.name} and {visibleTarget.name} = {distance}, angle = {angle}");
+            //Debug.Log($"Distance between {_view.name} and {visibleTarget.name} = {distance}, angle = {angle}");
             if (view != null)
             {
                 CheckCarDirection(view);
