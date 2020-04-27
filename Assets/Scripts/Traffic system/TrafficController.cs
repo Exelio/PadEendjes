@@ -21,7 +21,7 @@ public class TrafficController
     }
 
     private bool _reachedDestination = false; public bool ReachedDestination => _reachedDestination;
-    private bool _isSomethingInFront = false; 
+    private bool _isCrossingRoad = false; 
 
     private Waypoint _destinationWP;
     private Transform _destinationTrans;
@@ -147,46 +147,84 @@ public class TrafficController
         {
             VehicleView view = visibleTarget.GetComponent<VehicleView>();
             float distance = Vector3.Distance(_view.transform.position, visibleTarget.transform.position);
-            float angle = CheckAngle(visibleTarget.transform);
+            float forwardAngle = CheckAngle(visibleTarget.transform.forward, _view.transform.forward);
+            float angle = CheckAngle(visibleTarget.transform.position, _view.transform.position);
+            float dotResult = CheckDotProduct(visibleTarget);
+            bool checkAngles = CheckAngles(forwardAngle, _variables.AngleMaxMin.x, _variables.AngleMaxMin.y, dotResult);
 
             //Debug.Log($"Distance between {_view.name} and {visibleTarget.name} = {distance}, angle = {angle}");
             if (view != null)
             {
-                CheckCarDirection(view);
+                CheckCarDirection(view, forwardAngle, dotResult);
             }
-            else if (distance <= _variables.PedestrianDistance && CheckAngles(angle, _variables.AngleMaxMin.x, _variables.AngleMaxMin.y))
+            else if (distance <= _variables.PedestrianDistance && checkAngles)
             {
+                //Debug.Log($"Player wants to cross road = true");
+                _isCrossingRoad = true;
                 ChangeCheckSpeed(0f);
+                SetVelocityToZero();
             }
-            else ChangeCheckSpeed(_wp.PreviousWaypoint.MaxSpeed);
+            else if (_isCrossingRoad && angle < 75 && angle > -75)
+            {
+                //Debug.Log($"Player is crossing road = true");
+                ChangeCheckSpeed(0f);
+                SetVelocityToZero();
+            }
+            else
+            {
+                ChangeCheckSpeed(_wp.PreviousWaypoint.MaxSpeed);
+                _isCrossingRoad = false;
+            }
+
+            if (!checkAngles && distance >= _variables.PedestrianDistance)
+            {
+                //Debug.Log($"Player wants to cross road = false");
+                _isCrossingRoad = false;
+            }
         }
     }
 
-    private bool CheckAngles(float angle, float maxAngle, float minAngle)
+    private bool CheckAngles(float angle, float maxAngle, float minAngle, float dotResult)
     {
-        return ((angle < maxAngle && angle > minAngle) || (angle < -minAngle && angle > -maxAngle));
+        return (angle < maxAngle && angle > minAngle && dotResult < 0) || (angle < -minAngle && angle > -maxAngle && dotResult > 0);
     }
 
-    private void CheckCarDirection(VehicleView view)
+    private void CheckCarDirection(VehicleView view, float angle, float dotResult)
     {
-        float angle = CheckAngle(view.transform);
-
+        Debug.Log($"angle between {_view.name} and {view.name} = {angle}");
         if (angle < 25 && angle > -25)
         {
+            Debug.Log("Car in front");
             ChangeCheckSpeed(view.CheckSpeed);
-            _isSomethingInFront = true;
 
             if (Vector3.Distance(_view.transform.position, view.transform.position) <= _variables.VehicleMaxDistance)
+            {
+                Debug.Log("Car in front");
                 ChangeCheckSpeed(0f);
+                SetVelocityToZero();
+            }
         }
-        else if (angle < 100 && angle > -100 && (angle < -75 && angle > -105))
+        else if (dotResult > 0 && angle < _variables.AngleMaxMin.x && angle > _variables.AngleMaxMin.y)
+        {
             ChangeCheckSpeed(0f);
+            SetVelocityToZero();
+        }
 
     }
 
-    private float CheckAngle(Transform target)
+    private void SetVelocityToZero()
     {
-        return Vector3.Angle(_view.transform.forward, target.forward);
+        _variables.RigidBody.velocity = new Vector3(0, 0, 0);
+    }
+
+    private float CheckDotProduct(Transform trans)
+    {
+        return Vector3.Dot(_view.transform.forward, trans.transform.forward);
+    }
+
+    private float CheckAngle(Vector3 target, Vector3 self)
+    {
+        return Vector3.Angle(self, target);
     }
 
     private void FindVisibleTargets()

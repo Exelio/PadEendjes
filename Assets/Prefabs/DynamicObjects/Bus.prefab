@@ -137,7 +137,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9062010584940676148
 Transform:
   m_ObjectHideFlags: 0
@@ -311,18 +311,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _variables:
-    StartWaypoint: {fileID: 0}
     AccelerationSpeed: 40
     MaxSpeed: 5
     RotationSpeed: 3
     RigidBody: {fileID: 9062010585786319235}
     Distance: 1
-    MaxDistance: 2
-    CheckAngle: 50
-    CheckLayer:
-      serializedVersion: 2
-      m_Bits: 3584
     CarFront: {fileID: 1241422840}
+    TargetMask:
+      serializedVersion: 2
+      m_Bits: 0
+    ObstacleMask:
+      serializedVersion: 2
+      m_Bits: 0
+    AngleMaxMin: {x: 0, y: 0}
+    VehicleMaxDistance: 0
+    VehicleMinDistance: 0
+    PedestrianDistance: 0
+    ViewRadius: 0
+    ViewAngle: 0
+  StartWaypoint: {fileID: 0}
+  _checkSpeed: 0
 --- !u!65 &9062010585786319238
 BoxCollider:
   m_ObjectHideFlags: 0

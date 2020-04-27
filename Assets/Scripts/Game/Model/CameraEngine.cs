@@ -101,7 +101,7 @@ namespace Model
             else
                 _distance = _stats.MaximumDistance;
 
-            Debug.Log(isColliding);
+            //Debug.Log(isColliding);
 
             _stats.BackwardAnchorPoint.localPosition = Vector3.Lerp(_stats.BackwardAnchorPoint.localPosition, _dollyDirection * _distance, _stats.ClipLerpSpeed * Time.deltaTime);
         }

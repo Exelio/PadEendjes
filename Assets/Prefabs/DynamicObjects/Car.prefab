@@ -109,6 +109,7 @@ MonoBehaviour:
       m_Bits: 8192
     AngleMaxMin: {x: 105, y: 75}
     VehicleMaxDistance: 3
+    VehicleMinDistance: 6
     PedestrianDistance: 7
     ViewRadius: 14
     ViewAngle: 150
@@ -326,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6535889816740584163
 Transform:
   m_ObjectHideFlags: 0
