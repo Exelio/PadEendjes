@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5352156735018764162}
   - component: {fileID: 1835823068858678139}
   - component: {fileID: 8679896120855556123}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_MainRoadParking_Crossroads_NoCrossing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

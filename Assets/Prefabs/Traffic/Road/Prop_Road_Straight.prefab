@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3549371497957726199}
   - component: {fileID: 7096951703636896526}
   - component: {fileID: 358788736498871802}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_Road_Straight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

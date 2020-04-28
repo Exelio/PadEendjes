@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2620705881988828350}
   - component: {fileID: 8602464034214867015}
   - component: {fileID: 1330338726864093878}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_SingleRoad_CulDeSac
   m_TagString: Untagged
   m_Icon: {fileID: 0}

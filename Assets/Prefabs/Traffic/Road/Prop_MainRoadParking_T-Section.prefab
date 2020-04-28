@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7476775351527468014}
   - component: {fileID: 1916793114538791384}
   - component: {fileID: 5306744792912506145}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_MainRoadParking_T-Section
   m_TagString: Untagged
   m_Icon: {fileID: 0}

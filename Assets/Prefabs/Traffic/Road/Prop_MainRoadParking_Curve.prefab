@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6658184268539391773}
   - component: {fileID: 1106221103340688356}
   - component: {fileID: 6019137917849905253}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_MainRoadParking_Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}

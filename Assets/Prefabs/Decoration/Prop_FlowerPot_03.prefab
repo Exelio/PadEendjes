@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6853851511085519909}
   - component: {fileID: 2469875978257165843}
   - component: {fileID: 8176929946518819562}
+  - component: {fileID: -5177763044171904671}
   m_Layer: 0
   m_Name: Prop_FlowerPot_03
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &-5177763044171904671
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7585922671126259254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.49991587, y: 0.49991596, z: 0.37610942}
+  m_Center: {x: -0.000000014901161, y: -0.000000007450582, z: 0.17510384}

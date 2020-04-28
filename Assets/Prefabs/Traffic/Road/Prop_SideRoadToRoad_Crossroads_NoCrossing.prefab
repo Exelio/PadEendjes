@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2824904756343372148}
   - component: {fileID: 8361102599451280781}
   - component: {fileID: 2319202378334476575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_SideRoadToRoad_Crossroads_NoCrossing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

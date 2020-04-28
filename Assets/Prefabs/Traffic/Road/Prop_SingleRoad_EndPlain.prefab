@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6791147245359130566}
   - component: {fileID: 937743896577514303}
   - component: {fileID: 4645175454007020729}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_SingleRoad_EndPlain
   m_TagString: Untagged
   m_Icon: {fileID: 0}

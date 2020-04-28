@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3447695123942383169}
   - component: {fileID: 8999358747258479288}
   - component: {fileID: 7812574974771542916}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_SideRoad_Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}

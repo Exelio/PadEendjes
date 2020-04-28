@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3125764302104576355}
   - component: {fileID: 8672942742336290202}
   - component: {fileID: 4315284599247340836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_MainRoad_T-Section_NoCrossing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

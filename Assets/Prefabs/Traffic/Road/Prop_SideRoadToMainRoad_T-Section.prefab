@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6327108179818263126}
   - component: {fileID: 356609239252389551}
   - component: {fileID: 5048958268496208720}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_SideRoadToMainRoad_T-Section
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8029019044572456325}
   - component: {fileID: 4346051857175386492}
   - component: {fileID: 2069423471288160477}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Prop_SingleRoad_Curve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
