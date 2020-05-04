@@ -124,12 +124,15 @@ public class TrafficController
 
     private void ChangeCurrentSpeed()
     {
-        if (Math.Abs(_view.CheckSpeed - _speed) <= .5f) 
+        if (Math.Abs(_view.CheckSpeed - _speed) <= .5f)
         {
             _speed = _view.CheckSpeed;
-            _view.transform.position += _view.transform.forward * Time.deltaTime * _currentSpeed; 
+            _view.transform.position += _view.transform.forward * Time.deltaTime * _currentSpeed;
         }
-        else if (_speed <= _view.CheckSpeed) _view.ViewVariables.RigidBody.AddForce(_view.transform.forward * _view.ViewVariables.AccelerationSpeed, ForceMode.Force);
+        else if (_speed <= _view.CheckSpeed)
+        {
+            _view.ViewVariables.RigidBody.AddForce(_view.transform.forward * _view.ViewVariables.AccelerationSpeed, ForceMode.Force);
+        }
     }
 
     private void Rotate(Vector3 destinationDirection)
@@ -145,7 +148,7 @@ public class TrafficController
 
         foreach (var visibleTarget in _visibleTargets)
         {
-            VehicleView view = visibleTarget.GetComponent<VehicleView>();
+            VehicleView targetView = visibleTarget.GetComponent<VehicleView>();
             float distance = Vector3.Distance(_view.transform.position, visibleTarget.transform.position);
             float forwardAngle = CheckAngle(visibleTarget.transform.forward, _view.transform.forward);
             float angle = CheckAngle(visibleTarget.transform.position, _view.transform.position);
@@ -153,9 +156,9 @@ public class TrafficController
             bool checkAngles = CheckAngles(forwardAngle, _variables.AngleMaxMin.x, _variables.AngleMaxMin.y, dotResult);
 
             //Debug.Log($"Distance between {_view.name} and {visibleTarget.name} = {distance}, angle = {angle}");
-            if (view != null)
+            if (targetView != null)
             {
-                CheckCarDirection(view, forwardAngle, dotResult);
+                CheckCarDirection(targetView, forwardAngle, dotResult);
             }
             else if (distance <= _variables.PedestrianDistance && checkAngles)
             {
@@ -167,6 +170,12 @@ public class TrafficController
             else if (_isCrossingRoad && angle < 75 && angle > -75)
             {
                 //Debug.Log($"Player is crossing road = true");
+                ChangeCheckSpeed(0f);
+                SetVelocityToZero();
+            }
+            else if(!_isCrossingRoad && angle < 30 && angle > -30)
+            {
+                _isCrossingRoad = true;
                 ChangeCheckSpeed(0f);
                 SetVelocityToZero();
             }
