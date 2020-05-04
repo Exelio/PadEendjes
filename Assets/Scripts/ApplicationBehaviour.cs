@@ -31,6 +31,8 @@ namespace Game
 
         private void Start()
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             _playerEngine = new PlayerEngine(_player);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _cameraEngine = new CameraEngine(_camera, _player.transform);
