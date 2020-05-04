@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_Water
-  m_Shader: {fileID: -6465566751694194690, guid: 1fa2a5f711aa14449a0e30f16bb7181d,
+  m_Shader: {fileID: -6465566751694194690, guid: b8de996c91fd4d64197ae6ee5c2d4efc,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -21,11 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_37AAFE25:
-        m_Texture: {fileID: 2800000, guid: d21f775bae57d1b4781659b38657ce91, type: 3}
+        m_Texture: {fileID: 2800000, guid: ad5ac0f4b592c1841bd306ba7c9d3e6d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_B66AF0E1:
-        m_Texture: {fileID: 2800000, guid: 294d10653fb8e44449fdb8de464a5e0a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 09f7d754ad8741c488481a0c5869ca71, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -65,15 +65,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_2E11270D: 0.03
-    - Vector1_39D35881: 1
+    - Vector1_2E11270D: 0
+    - Vector1_39D35881: 1.16
     - Vector1_3B48FD24: -0.27
-    - Vector1_5AE4170F: 0.15
-    - Vector1_80CAEB23: 0.3
-    - Vector1_8E5091B8: -0.33
-    - Vector1_981A3A67: 0.3
-    - Vector1_C1C7D298: 0.767
-    - Vector1_ECB3F2B8: 0.4
+    - Vector1_5AE4170F: 0.09
+    - Vector1_80CAEB23: 0.18
+    - Vector1_8E5091B8: 0.37
+    - Vector1_981A3A67: 0.285
+    - Vector1_C1C7D298: 0
+    - Vector1_ECB3F2B8: 0.223
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -117,13 +117,14 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_27D4D743: {r: 0.27358484, g: 0.8226658, b: 1, a: 0}
-    - Color_51A4B6EC: {r: 0, g: 0.7135715, b: 1, a: 0}
-    - Color_C347D0B: {r: 0.4549662, g: 0.6634097, b: 0.6792453, a: 0}
+    - Color_27D4D743: {r: 0.27450982, g: 0.5647059, b: 0.8980393, a: 0}
+    - Color_51A4B6EC: {r: 1, g: 1, b: 1, a: 0}
+    - Color_C347D0B: {r: 0.47058827, g: 0.67058825, b: 0.8117648, a: 0}
     - _BaseColor: {r: 0, g: 0.93067217, b: 1, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EdgeColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FoamColor: {r: 0.7311321, g: 0.901339, b: 1, a: 1}
     - _RippleColor: {r: 0.4564256, g: 3.9223435, b: 7.4432454, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _TintEnd: {r: 0.40583837, g: 0.5772511, b: 0.9056604, a: 1}
