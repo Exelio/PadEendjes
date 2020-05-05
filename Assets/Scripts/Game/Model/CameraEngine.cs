@@ -67,9 +67,10 @@ namespace Model
                 _stats.PrimaryAnchorPoint.Rotate(Vector3.right, vertical * _stats.RotationSpeed * Time.deltaTime, Space.Self);
         }
 
-        public void ToggleAnchorPoint()
+        public void ToggleAnchorPoint(bool value)
         {
-            _isToggled = !_isToggled;
+            if(_isToggled != value)
+                _isToggled = value;
         }
 
         private void ToggleAnchorPoints()

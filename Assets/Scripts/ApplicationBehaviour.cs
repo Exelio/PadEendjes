@@ -33,6 +33,7 @@ namespace Game
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            
             _playerEngine = new PlayerEngine(_player);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _cameraEngine = new CameraEngine(_camera, _player.transform);
@@ -41,14 +42,24 @@ namespace Game
             _inputHandler.RightStickCommand = new RotateCameraCommand(_cameraEngine);
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
             _inputHandler.YCommand = new CameraInteractCommand(_cameraEngine);
+
+            _reward._maxDuckAmount = _ducklings.Length;
             _rewardBehaviour = new RewardBehaviour(_reward);
             CreateDucklingModels();
 
+            _playerEngine.OnStreetInFront += ChangeCameraView;
             StartCoroutine(LateInitialize());
+        }
+
+        private void ChangeCameraView(bool value)
+        {
+            _cameraEngine.ToggleAnchorPoint(value);
         }
 
         private void CreateDucklingModels()
         {
+            if (_ducklings.Length == 0) return;
+
             foreach (var view in _ducklings)
             {
                 DuckBehaviour controller = new DuckBehaviour(view);
@@ -77,12 +88,14 @@ namespace Game
 
         private void UpdateDucks()
         {
+            if (_ducklings.Length == 0) return;
             foreach (var behaviour in _duckBehaviours)
                 behaviour.Update();
         }
 
         private void FixedUpdateDucks()
         {
+            if (_ducklings.Length == 0) return;
             foreach (var behaviour in _duckBehaviours)
                 behaviour.FixedUpdate();
         }

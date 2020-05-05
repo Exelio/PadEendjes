@@ -167,13 +167,13 @@ public class TrafficController
                 ChangeCheckSpeed(0f);
                 SetVelocityToZero();
             }
-            else if (_isCrossingRoad && angle < 75 && angle > -75)
+            else if (_isCrossingRoad && angle < _variables.PedestrianCrossingAngle && angle > -_variables.PedestrianCrossingAngle)
             {
                 //Debug.Log($"Player is crossing road = true");
                 ChangeCheckSpeed(0f);
                 SetVelocityToZero();
             }
-            else if(!_isCrossingRoad && angle < 30 && angle > -30)
+            else if(!_isCrossingRoad && angle < _variables.PedestrianInFrontAngle && angle > -_variables.PedestrianInFrontAngle)
             {
                 _isCrossingRoad = true;
                 ChangeCheckSpeed(0f);
@@ -200,15 +200,12 @@ public class TrafficController
 
     private void CheckCarDirection(VehicleView view, float angle, float dotResult)
     {
-        Debug.Log($"angle between {_view.name} and {view.name} = {angle}");
-        if (angle < 25 && angle > -25)
+        if (angle < 25 && angle > -25 && Vector3.Distance(_view.transform.position, view.transform.position) <= _variables.VehicleMinDistance)
         {
-            Debug.Log("Car in front");
             ChangeCheckSpeed(view.CheckSpeed);
 
             if (Vector3.Distance(_view.transform.position, view.transform.position) <= _variables.VehicleMaxDistance)
             {
-                Debug.Log("Car in front");
                 ChangeCheckSpeed(0f);
                 SetVelocityToZero();
             }

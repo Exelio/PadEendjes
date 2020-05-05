@@ -30,6 +30,50 @@ Transform:
   m_Father: {fileID: 6535889815771397248}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1929478190257526305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7497219285118635393}
+  - component: {fileID: 861602451678091229}
+  m_Layer: 16
+  m_Name: Window
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7497219285118635393
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929478190257526305}
+  m_LocalRotation: {x: -0.10103663, y: -0, z: -0, w: 0.9948827}
+  m_LocalPosition: {x: 0, y: 1.54, z: 0.846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6535889815771397248}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: -11.598001, y: 0, z: 0}
+--- !u!65 &861602451678091229
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1929478190257526305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5277466, y: 0.63076735, z: 0.047170676}
+  m_Center: {x: 0, y: -0.1204021, z: 0}
 --- !u!1 &6535889815771397254
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +107,7 @@ Transform:
   - {fileID: 1975524313396449667}
   - {fileID: 6535889816740584163}
   - {fileID: 1510633368}
+  - {fileID: 7497219285118635393}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -94,6 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d05f17b3179a243be843c1c5b1c9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checkSpeed: 0
+  StartWaypoint: {fileID: 0}
+  _showDebug: 1
   _variables:
     AccelerationSpeed: 60
     MaxSpeed: 6
@@ -107,14 +155,14 @@ MonoBehaviour:
     ObstacleMask:
       serializedVersion: 2
       m_Bits: 8192
-    AngleMaxMin: {x: 105, y: 75}
+    AngleMaxMin: {x: 105, y: 60}
+    PedestrianCrossingAngle: 50
+    PedestrianInFrontAngle: 30
     VehicleMaxDistance: 3
     VehicleMinDistance: 6
-    PedestrianDistance: 7
+    PedestrianDistance: 8
     ViewRadius: 14
     ViewAngle: 150
-  StartWaypoint: {fileID: 0}
-  _checkSpeed: 0
 --- !u!65 &6535889815771397251
 BoxCollider:
   m_ObjectHideFlags: 0

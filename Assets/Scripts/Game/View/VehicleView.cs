@@ -20,6 +20,8 @@ public struct VehicleVariables
     [Tooltip("Obstacles that can block the fov to a target")] public LayerMask ObstacleMask;
 
     [Tooltip("The angle the player must be in between to cross the road")] public Vector2 AngleMaxMin;
+    [Tooltip("Angle to check when pedestrian is crossing in front of the car")] public float PedestrianCrossingAngle;
+    [Tooltip("Angle to check when pedestrian is in front of the car without crossing the road")] public float PedestrianInFrontAngle;
     [Tooltip("The distance between the cars")] public float VehicleMaxDistance;
     [Tooltip("The distance between the cars")] public float VehicleMinDistance;
     [Tooltip("The distance the player has to be in to let the car stop")] public float PedestrianDistance;
@@ -30,10 +32,12 @@ public struct VehicleVariables
 public class VehicleView : MonoBehaviour
 {
     public VehicleVariables ViewVariables => _variables;
-    [SerializeField] private VehicleVariables _variables;
-    [Tooltip("starting waypoint")] public Waypoint StartWaypoint;
 
     [SerializeField] private float _checkSpeed; public float CheckSpeed { get => _checkSpeed; set { _checkSpeed = value; } }
+    [Tooltip("starting waypoint")] public Waypoint StartWaypoint;
+    [SerializeField] private bool _showDebug; 
+
+    [SerializeField] private VehicleVariables _variables;
 
     public void DestroyVehicle() { Destroy(this.gameObject); }
     
@@ -41,16 +45,33 @@ public class VehicleView : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (!_showDebug) return;
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(_variables.CarFront.position, _variables.ViewRadius);
 
-
+        //fov of the vehicle
         Gizmos.color = Color.red;
         Vector3 viewAngleA = DirFromAngle(-_variables.ViewAngle / 2, false);
         Vector3 viewAngleB = DirFromAngle(_variables.ViewAngle / 2, false);
 
         Gizmos.DrawLine(_variables.CarFront.position, transform.position + viewAngleA * _variables.ViewRadius);
         Gizmos.DrawLine(_variables.CarFront.position, transform.position + viewAngleB * _variables.ViewRadius);
+
+        //pedestrian walking in front when crossing the road
+        Gizmos.color = Color.blue;
+        viewAngleA = DirFromAngle(_variables.PedestrianCrossingAngle, false);
+        viewAngleB = DirFromAngle(-_variables.PedestrianCrossingAngle, false);
+
+        Gizmos.DrawLine(_variables.CarFront.position, transform.position + viewAngleA * _variables.PedestrianDistance);
+        Gizmos.DrawLine(_variables.CarFront.position, transform.position + viewAngleB * _variables.PedestrianDistance);
+
+        //pedestrian in front check
+        Gizmos.color = Color.green;
+        viewAngleA = DirFromAngle(_variables.PedestrianInFrontAngle, false);
+        viewAngleB = DirFromAngle(-_variables.PedestrianInFrontAngle, false);
+
+        Gizmos.DrawLine(_variables.CarFront.position, transform.position + viewAngleA * _variables.PedestrianDistance);
+        Gizmos.DrawLine(_variables.CarFront.position, transform.position + viewAngleB * _variables.PedestrianDistance);
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)

@@ -72,7 +72,7 @@ namespace Model
 
         public void Execute()
         {
-            _cameraEngine.ToggleAnchorPoint();
+            //_cameraEngine.ToggleAnchorPoint();
         }
     }
 }

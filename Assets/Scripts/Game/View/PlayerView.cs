@@ -19,7 +19,9 @@ namespace View
         [SerializeField] private PlayerStats _stats;
 
         private LayerMask _interactLayer;
-        
+        private LayerMask _streetLayer;
+        private LayerMask _crossingRoadLayer;
+
         public void Initialize()
         {
             _stats.Rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -27,6 +29,8 @@ namespace View
             _stats.InteractableObject = null;
 
             _interactLayer = LayerMask.NameToLayer("Interactable");
+            _streetLayer = LayerMask.NameToLayer("Street");
+            _crossingRoadLayer = LayerMask.NameToLayer("CrossingRoad");
         }
 
         public void MotionAnimation(float direction)
@@ -44,11 +48,16 @@ namespace View
         {
             if (other.gameObject.layer == _interactLayer)
                 _stats.InteractableObject = other.gameObject;
+            if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer)
+                _stats.IsOnStreet = true;
+            else
+                _stats.IsOnStreet = false;
         }
 
         private void OnTriggerExit()
         {
             _stats.InteractableObject = null;
+            _stats.IsOnStreet = false;
         }
     }
 }

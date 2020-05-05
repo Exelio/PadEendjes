@@ -9,6 +9,10 @@ namespace Utils
         [Header("Layer Properties")]
         [Tooltip("Assign the walkable layer")]
         public LayerMask WalkableLayer;
+        [Tooltip("Assign the street layer")]
+        public LayerMask StreetLayer;
+        [Tooltip("Assign crossing road layer")]
+        public LayerMask CrossingRoadLayer;
 
         [Header("Movement Parameters")]
         [Tooltip("Set the player's movement speed")]
@@ -27,6 +31,11 @@ namespace Utils
         [Tooltip("Time till player gets bored")]
         public float TimeTillBored;
 
+        [Header("Check Parameters")]
+        [Range(0f, 1f)]
+        [Tooltip("Distance between player and street to change view")]
+        public float DistanceToStreet;
+
         [HideInInspector]
         public Rigidbody Rigidbody;
 
@@ -38,5 +47,8 @@ namespace Utils
 
         [HideInInspector]
         public GameObject InteractableObject;
+
+        [HideInInspector]
+        public bool IsOnStreet;
     }
 }

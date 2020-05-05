@@ -9,6 +9,8 @@ namespace Model
 {
     public class PlayerEngine
     {
+        public event Action<bool> OnStreetInFront;
+
         public bool IsGrounded { get; private set; }
 
         public PlayerStats Stats => _stats;
@@ -23,6 +25,9 @@ namespace Model
         private List<GameObject> _duckList = new List<GameObject>();
 
         private float _boredTimer;
+
+        private bool _isStreetInFront;
+        private bool _isCloseToCrossingRoad;
 
         public PlayerEngine(PlayerView view)
         {
@@ -41,9 +46,27 @@ namespace Model
             _stats = _view.Stats;
 
             IsGrounded = _query.IsGrounded(_stats.Transform.position, _stats.Collider.radius * 0.9f, _stats.WalkableLayer);
+            _isStreetInFront = _query.IsStreetInFront(_stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
+            CheckChangeIsStreetInFront();
+            _isCloseToCrossingRoad = _query.IsCloseToCrossingRoad(_stats.Transform.position, 10f, _stats.CrossingRoadLayer);
 
             Commit();
             ApplyAnimation();
+        }
+
+        private void CheckChangeIsStreetInFront()
+        {
+            bool value = false;
+            if (_isStreetInFront || _stats.IsOnStreet)
+            {
+                value = true;
+            }
+            else
+            {
+                value = false;
+            }
+
+            OnStreetInFront?.Invoke(value);
         }
 
         public void ApplyGravity()
