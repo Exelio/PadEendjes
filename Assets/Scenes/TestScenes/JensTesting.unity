@@ -99,7 +99,7 @@ LightmapSettings:
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: 38b01cbfc11e69d46aa205858d08d10a,
     type: 2}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1015,7 +1015,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-40008
+  m_Name: pb_Mesh-3700
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1934,7 +1934,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-40026
+  m_Name: pb_Mesh-3718
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8724,6 +8724,21 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 2715308634379813277, guid: d821bcd852dd0c04cbd9c39292a6fee1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715308634383564547, guid: d821bcd852dd0c04cbd9c39292a6fee1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2715308635396231573, guid: d821bcd852dd0c04cbd9c39292a6fee1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3203184672139516988, guid: d821bcd852dd0c04cbd9c39292a6fee1,
         type: 3}
       propertyPath: m_Name
@@ -9108,6 +9123,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664610004815178574, guid: d821bcd852dd0c04cbd9c39292a6fee1,
+        type: 3}
+      propertyPath: _stats.DistanceToStreet
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5664610004815178577, guid: d821bcd852dd0c04cbd9c39292a6fee1,
         type: 3}

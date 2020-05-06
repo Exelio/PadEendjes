@@ -50,5 +50,7 @@ namespace Utils
 
         [HideInInspector]
         public bool IsOnStreet;
+        [HideInInspector]
+        public bool IsOnCrossingRoad;
     }
 }

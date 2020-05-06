@@ -30,6 +30,7 @@ namespace View
 
             _interactLayer = LayerMask.NameToLayer("Interactable");
             _streetLayer = LayerMask.NameToLayer("Street");
+
             _crossingRoadLayer = LayerMask.NameToLayer("CrossingRoad");
         }
 
@@ -48,16 +49,23 @@ namespace View
         {
             if (other.gameObject.layer == _interactLayer)
                 _stats.InteractableObject = other.gameObject;
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.gameObject.layer == _crossingRoadLayer) _stats.IsOnCrossingRoad = true;
             if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer)
                 _stats.IsOnStreet = true;
             else
                 _stats.IsOnStreet = false;
+
         }
 
         private void OnTriggerExit()
         {
             _stats.InteractableObject = null;
             _stats.IsOnStreet = false;
+            _stats.IsOnCrossingRoad = false;
         }
     }
 }

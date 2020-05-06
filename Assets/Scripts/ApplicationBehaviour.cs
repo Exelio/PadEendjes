@@ -26,7 +26,6 @@ namespace Game
         private InputHandler _inputHandler;
 
         private RewardBehaviour _rewardBehaviour;
-        private List<TrafficController> _vehicleBehaviours = new List<TrafficController>();
         private List<DuckBehaviour> _duckBehaviours = new List<DuckBehaviour>();
 
         private void Start()
@@ -48,7 +47,13 @@ namespace Game
             CreateDucklingModels();
 
             _playerEngine.OnStreetInFront += ChangeCameraView;
+            _playerEngine.OnMistake += AddMistake;
             StartCoroutine(LateInitialize());
+        }
+
+        private void AddMistake()
+        {
+            _rewardBehaviour.AddMistake();
         }
 
         private void ChangeCameraView(bool value)

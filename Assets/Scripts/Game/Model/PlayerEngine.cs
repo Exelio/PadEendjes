@@ -10,6 +10,7 @@ namespace Model
     public class PlayerEngine
     {
         public event Action<bool> OnStreetInFront;
+        public event Action OnMistake;
 
         public bool IsGrounded { get; private set; }
 
@@ -28,6 +29,8 @@ namespace Model
 
         private bool _isStreetInFront;
         private bool _isCloseToCrossingRoad;
+
+        private bool _mistakeCounted;
 
         public PlayerEngine(PlayerView view)
         {
@@ -49,9 +52,20 @@ namespace Model
             _isStreetInFront = _query.IsStreetInFront(_stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
             CheckChangeIsStreetInFront();
             _isCloseToCrossingRoad = _query.IsCloseToCrossingRoad(_stats.Transform.position, 10f, _stats.CrossingRoadLayer);
+            CheckCorrectStreetCross();
 
             Commit();
             ApplyAnimation();
+        }
+
+        private void CheckCorrectStreetCross()
+        {
+            if (_mistakeCounted) return;
+            if (_stats.IsOnStreet && _isCloseToCrossingRoad && !_stats.IsOnCrossingRoad)
+            {
+                OnMistake?.Invoke();
+                _mistakeCounted = true;
+            }
         }
 
         private void CheckChangeIsStreetInFront()

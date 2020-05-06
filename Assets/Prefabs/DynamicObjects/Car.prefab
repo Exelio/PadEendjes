@@ -161,7 +161,7 @@ MonoBehaviour:
     VehicleMaxDistance: 3
     VehicleMinDistance: 6
     PedestrianDistance: 8
-    ViewRadius: 14
+    ViewRadius: 8
     ViewAngle: 150
 --- !u!65 &6535889815771397251
 BoxCollider:

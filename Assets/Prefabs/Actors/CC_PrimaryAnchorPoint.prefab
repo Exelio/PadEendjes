@@ -202,7 +202,7 @@ MonoBehaviour:
     ClipLerpSpeed: 2
     Offset: {x: 0, y: 1.2, z: 0}
     FollowLerpSpeed: 0.2
-    SwitchLerpSpeed: 0.1
+    SwitchLerpSpeed: 0.075
     RotationSpeed: 120
     PitchClamp: {x: -30, y: 30}
     YawClamp: {x: -60, y: 60}

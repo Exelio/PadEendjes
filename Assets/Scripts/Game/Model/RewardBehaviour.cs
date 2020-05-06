@@ -21,7 +21,11 @@ public class RewardBehaviour
         Debug.Log($"{_variables.DuckCount} ducks/ {_variables.DucksNeeded} ducks TO complete level \n{_variables.DuckCount} ducks/ {_variables.MaxDucks}"); }
     public void LostDuck() { _variables.DuckCount -= 1; }
 
-    public void AddMistake() { _variables.MistakeCount += 1; }
+    public void AddMistake() 
+    {
+        _variables.MistakeCount += 1;
+        Debug.Log($"{_variables.MistakeCount}");
+    }
 
     public bool CheckMistakes() =>  _variables.MistakeCount <= _variables.MaxMistakes;
 
