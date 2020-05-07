@@ -29,8 +29,11 @@ namespace Model
 
         private bool _isStreetInFront;
         private bool _isCloseToCrossingRoad;
+        private bool _isCrossingRoadInFront;
 
         private bool _mistakeCounted;
+
+        private Vector3 _previousForwardPosition;
 
         public PlayerEngine(PlayerView view)
         {
@@ -49,9 +52,10 @@ namespace Model
             _stats = _view.Stats;
 
             IsGrounded = _query.IsGrounded(_stats.Transform.position, _stats.Collider.radius * 0.9f, _stats.WalkableLayer);
-            _isStreetInFront = _query.IsStreetInFront(_stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
+            _isStreetInFront = _query.ShootRay(_stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
             CheckChangeIsStreetInFront();
-            _isCloseToCrossingRoad = _query.IsCloseToCrossingRoad(_stats.Transform.position, 10f, _stats.CrossingRoadLayer);
+            _isCloseToCrossingRoad = _query.CastSphere(_stats.Transform.position, 10f, _stats.CrossingRoadLayer);
+            _isCrossingRoadInFront = _query.ShootRay(_stats.Transform.position, _stats.DistanceToStreet/2, _stats.Transform.forward, _stats.CrossingRoadLayer);
             CheckCorrectStreetCross();
 
             Commit();
@@ -61,11 +65,31 @@ namespace Model
         private void CheckCorrectStreetCross()
         {
             if (_mistakeCounted) return;
+
+            if (_isCrossingRoadInFront) _stats.IsOnCrossingRoad = true;
             if (_stats.IsOnStreet && _isCloseToCrossingRoad && !_stats.IsOnCrossingRoad)
             {
-                OnMistake?.Invoke();
-                _mistakeCounted = true;
+                CountMistake();
             }
+
+            if (_stats.IsOnStreet || _stats.IsOnCrossingRoad)
+            {
+                CheckWalkInStraightLine();
+            }
+        }
+
+        private void CountMistake()
+        {
+            OnMistake?.Invoke();
+            _mistakeCounted = true;
+        }
+
+        private void CheckWalkInStraightLine()
+        {
+            float angle = Mathf.Asin(Vector3.Cross(_stats.Transform.forward, _previousForwardPosition).y) * Mathf.Rad2Deg;
+            if (angle > _stats.MaxAngleDifference || angle < -_stats.MaxAngleDifference)
+                CountMistake();
+            _previousForwardPosition = _stats.Transform.forward;
         }
 
         private void CheckChangeIsStreetInFront()

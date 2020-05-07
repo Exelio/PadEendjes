@@ -64,5 +64,8 @@ namespace Utils
         [Space]
         [Tooltip("Invert vertical controls")]
         public bool IsVerticalInverted;
+
+        [Header("Mistake checking")]
+        public LayerMask VehicleWindowLayer;
     }
 }

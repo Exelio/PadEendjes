@@ -36,6 +36,10 @@ namespace Utils
         [Tooltip("Distance between player and street to change view")]
         public float DistanceToStreet;
 
+        [Range(0, 5)]
+        [Tooltip("Slight difference in crossing road angle")]
+        public float MaxAngleDifference;
+
         [HideInInspector]
         public Rigidbody Rigidbody;
 

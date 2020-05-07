@@ -207,6 +207,9 @@ MonoBehaviour:
     PitchClamp: {x: -30, y: 30}
     YawClamp: {x: -60, y: 60}
     IsVerticalInverted: 1
+    VehicleWindowLayer:
+      serializedVersion: 2
+      m_Bits: 65536
 --- !u!1 &1932817164495613688
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 ﻿using View;
 using Utils;
 using UnityEngine;
+using System;
 
 namespace Model
 {
@@ -34,6 +35,16 @@ namespace Model
 
             ToggleAnchorPoints();
             ObstacleCollision();
+
+            CheckCorrectCrossing();
+        }
+
+        private void CheckCorrectCrossing()
+        {
+            if (!_isToggled) return;
+
+            bool hit = _query.ShootRay(_stats.CameraTransform.position, Mathf.Infinity, _stats.CameraTransform.forward, _stats.VehicleWindowLayer);
+            //Debug.Log(hit);
         }
 
         public void ApplyRotation(float horizontal, float vertical)

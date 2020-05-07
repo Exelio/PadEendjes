@@ -20,12 +20,12 @@ namespace Utils
             return Physics.CheckSphere(position, radius);
         }
 
-        public bool IsStreetInFront(Vector3 origin, float distance, Vector3 direction, LayerMask streetLayer)
+        public bool ShootRay(Vector3 origin, float distance, Vector3 direction, LayerMask streetLayer)
         {
             return Physics.Raycast(origin, direction, distance, streetLayer);
         }
 
-        public bool IsCloseToCrossingRoad(Vector3 origin, float checkRadius, LayerMask crossingRoadLayer)
+        public bool CastSphere(Vector3 origin, float checkRadius, LayerMask crossingRoadLayer)
         {
             return Physics.CheckSphere(origin, checkRadius, crossingRoadLayer);
         }
