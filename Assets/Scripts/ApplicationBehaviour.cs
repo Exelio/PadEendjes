@@ -5,6 +5,7 @@ using UnityEngine;
 using Model;
 using View;
 using System.Collections.Generic;
+using Utils;
 
 namespace Game
 {
@@ -51,7 +52,7 @@ namespace Game
             StartCoroutine(LateInitialize());
         }
 
-        private void AddMistake()
+        private void AddMistake(Mistakes mistake)
         {
             _rewardBehaviour.AddMistake();
         }

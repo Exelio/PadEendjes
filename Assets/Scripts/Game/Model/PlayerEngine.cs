@@ -10,7 +10,7 @@ namespace Model
     public class PlayerEngine
     {
         public event Action<bool> OnStreetInFront;
-        public event Action OnMistake;
+        public event Action<Mistakes> OnMistake;
 
         public bool IsGrounded { get; private set; }
 
@@ -85,7 +85,7 @@ namespace Model
                 if (_mistakeCrossingRoad) return;
 
                 _mistakeCrossingRoad = true;
-                CountMistake();
+                CountMistake(Mistakes.NotUsingCrossingRoad);
             }
 
             if (_stats.IsOnStreet || _stats.IsOnCrossingRoad)
@@ -94,9 +94,9 @@ namespace Model
             }
         }
 
-        private void CountMistake()
+        private void CountMistake(Mistakes mistake)
         {
-            OnMistake?.Invoke();
+            OnMistake?.Invoke(mistake);
             _mistakeCrossingRoad = true;
         }
 
@@ -108,7 +108,7 @@ namespace Model
             if (angle > _stats.MaxAngleDifference || angle < -_stats.MaxAngleDifference)
             {
                 _mistakeStraightCross = true;
-                CountMistake();
+                CountMistake(Mistakes.NotCrossingStraight);
             }
             _previousForwardPosition = _stats.Transform.forward;
         }
