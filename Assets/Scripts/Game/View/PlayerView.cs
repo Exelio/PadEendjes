@@ -1,5 +1,6 @@
 ﻿using Utils;
 using UnityEngine;
+using System;
 
 namespace View
 {
@@ -17,6 +18,8 @@ namespace View
 
         [SerializeField] private Animator _animator;
         [SerializeField] private PlayerStats _stats;
+
+        public event Action OnExitRoad;
 
         private LayerMask _interactLayer;
         private LayerMask _streetLayer;
@@ -66,6 +69,14 @@ namespace View
             _stats.InteractableObject = null;
             _stats.IsOnStreet = false;
             _stats.IsOnCrossingRoad = false;
+
+            OnExitRoad?.Invoke();
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(transform.position, _stats.MaxRadius);
         }
     }
 }

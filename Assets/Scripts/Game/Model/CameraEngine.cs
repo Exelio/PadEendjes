@@ -43,7 +43,7 @@ namespace Model
         {
             if (!_isToggled) return;
 
-            bool hit = _query.ShootRay(_stats.CameraTransform.position, Mathf.Infinity, _stats.CameraTransform.forward, _stats.VehicleWindowLayer);
+            //bool hit = _query.ShootRay(_stats.CameraTransform.position, Mathf.Infinity, _stats.CameraTransform.forward, _stats.VehicleWindowLayer);
             //Debug.Log(hit);
         }
 

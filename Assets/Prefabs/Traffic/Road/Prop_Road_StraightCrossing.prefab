@@ -152,6 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8025588500115155503}
   - component: {fileID: 3545185365183939521}
+  - component: {fileID: 6829769867462853297}
   m_Layer: 15
   m_Name: CrossingRoadLayer
   m_TagString: Untagged
@@ -186,3 +187,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.001045, y: 0.2485652, z: 6.1112165}
   m_Center: {x: -0.05608809, y: 0.13977075, z: 0}
+--- !u!114 &6829769867462853297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6958059420983644472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94fdf777db0448a459c8e48c54407dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsSafeRoad: 0

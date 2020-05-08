@@ -40,6 +40,10 @@ namespace Utils
         [Tooltip("Slight difference in crossing road angle")]
         public float MaxAngleDifference;
 
+        [Range(5, 15)]
+        [Tooltip("Radius to check for a crossing road")]
+        public int MaxRadius;
+
         [HideInInspector]
         public Rigidbody Rigidbody;
 

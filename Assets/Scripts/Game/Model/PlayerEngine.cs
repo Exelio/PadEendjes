@@ -31,9 +31,11 @@ namespace Model
         private bool _isCloseToCrossingRoad;
         private bool _isCrossingRoadInFront;
 
-        private bool _mistakeCounted;
+        private bool _mistakeCrossingRoad;
+        private bool _mistakeStraightCross;
 
         private Vector3 _previousForwardPosition;
+        private RaycastHit _hit;
 
         public PlayerEngine(PlayerView view)
         {
@@ -44,7 +46,15 @@ namespace Model
             _query = new EnvironmentQuery();
             _boredTimer = _stats.TimeTillBored;
 
+            _view.OnExitRoad += ResetMistakeBools;
+
             ApplicationBehaviour.Instance.Initialized += (obj, args) => AssignPlayerStats();
+        }
+
+        private void ResetMistakeBools()
+        {
+            _mistakeCrossingRoad = false;
+            _mistakeStraightCross = false;
         }
 
         public void FixedPlayerUpdate()
@@ -52,10 +62,12 @@ namespace Model
             _stats = _view.Stats;
 
             IsGrounded = _query.IsGrounded(_stats.Transform.position, _stats.Collider.radius * 0.9f, _stats.WalkableLayer);
-            _isStreetInFront = _query.ShootRay(_stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
+            
+            _isCloseToCrossingRoad = _query.CastSphere(_stats.Transform.position, _stats.MaxRadius, _stats.CrossingRoadLayer);
+            _isCrossingRoadInFront = _query.ShootRay(ref _hit, _stats.Transform.position, _stats.DistanceToStreet/2, _stats.Transform.forward, _stats.CrossingRoadLayer);
+            _isStreetInFront = _query.ShootRay(ref _hit, _stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
+
             CheckChangeIsStreetInFront();
-            _isCloseToCrossingRoad = _query.CastSphere(_stats.Transform.position, 10f, _stats.CrossingRoadLayer);
-            _isCrossingRoadInFront = _query.ShootRay(_stats.Transform.position, _stats.DistanceToStreet/2, _stats.Transform.forward, _stats.CrossingRoadLayer);
             CheckCorrectStreetCross();
 
             Commit();
@@ -64,11 +76,15 @@ namespace Model
 
         private void CheckCorrectStreetCross()
         {
-            if (_mistakeCounted) return;
+            RoadBehaviour beh = _hit.transform?.GetComponent<RoadBehaviour>();
+            if (beh == null) return;
 
             if (_isCrossingRoadInFront) _stats.IsOnCrossingRoad = true;
-            if (_stats.IsOnStreet && _isCloseToCrossingRoad && !_stats.IsOnCrossingRoad)
+            if (_stats.IsOnStreet && _isCloseToCrossingRoad && !_stats.IsOnCrossingRoad && !beh.IsSafeRoad)
             {
+                if (_mistakeCrossingRoad) return;
+
+                _mistakeCrossingRoad = true;
                 CountMistake();
             }
 
@@ -81,14 +97,19 @@ namespace Model
         private void CountMistake()
         {
             OnMistake?.Invoke();
-            _mistakeCounted = true;
+            _mistakeCrossingRoad = true;
         }
 
         private void CheckWalkInStraightLine()
         {
-            float angle = Mathf.Asin(Vector3.Cross(_stats.Transform.forward, _previousForwardPosition).y) * Mathf.Rad2Deg;
+            if (_mistakeStraightCross) return;
+
+                float angle = Mathf.Asin(Vector3.Cross(_stats.Transform.forward, _previousForwardPosition).y) * Mathf.Rad2Deg;
             if (angle > _stats.MaxAngleDifference || angle < -_stats.MaxAngleDifference)
+            {
+                _mistakeStraightCross = true;
                 CountMistake();
+            }
             _previousForwardPosition = _stats.Transform.forward;
         }
 

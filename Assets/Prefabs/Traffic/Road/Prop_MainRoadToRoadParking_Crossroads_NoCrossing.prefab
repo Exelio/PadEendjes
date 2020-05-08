@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 1913563335614922043}
   - component: {fileID: 9167059638389512544}
   - component: {fileID: 7916419504738508093}
+  - component: {fileID: 1436837764792992376}
   m_Layer: 14
   m_Name: StreetLayer
   m_TagString: Untagged
@@ -154,3 +155,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.996153, y: 1, z: 11.967165}
   m_Center: {x: -0.7090354, y: 0, z: 0}
+--- !u!114 &1436837764792992376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6897066648879668230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94fdf777db0448a459c8e48c54407dad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsSafeRoad: 0

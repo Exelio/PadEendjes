@@ -113,6 +113,7 @@ MonoBehaviour:
     TimeTillBored: 5
     DistanceToStreet: 0.25
     MaxAngleDifference: 2.5
+    MaxRadius: 10
     Rigidbody: {fileID: 0}
     Collider: {fileID: 0}
     InteractableObject: {fileID: 0}
