@@ -9,8 +9,7 @@ namespace View
     {
         public int DucksNeeded;
         public int MaxMistakes;
-        public Text DucksCollected;
-        public Text DucksMax;
+        public Text DuckCounter;
 
         [HideInInspector] public int MaxDucks;
         [HideInInspector] public bool IsLevelComplete;
@@ -23,10 +22,10 @@ namespace View
         [SerializeField] private RewardVariables _variables;
         public RewardVariables Variables { get => _variables;}
 
-        [HideInInspector] public int _maxDuckAmount;
+        [HideInInspector] public int MaxDuckAmount;
         private void Start()
         {
-            _variables.MaxDucks = _maxDuckAmount;
+            _variables.MaxDucks = MaxDuckAmount;
         }
     }
 }

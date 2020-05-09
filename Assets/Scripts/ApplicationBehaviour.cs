@@ -19,6 +19,7 @@ namespace Game
         [SerializeField] private DuckView[] _ducklings;
         [SerializeField] private TrafficHub _trafficHUb;
         [SerializeField] private MistakeView _mistake;
+        [SerializeField] private ButtonsBehaviour _button;
 
         private PlayerEngine _playerEngine;
         private CameraEngine _cameraEngine;
@@ -36,8 +37,7 @@ namespace Game
 
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            LockCursor(false,CursorLockMode.Locked);
             
             _playerEngine = new PlayerEngine(_player);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
@@ -50,7 +50,8 @@ namespace Game
             _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
             _inputHandler.YCommand = new CameraInteractCommand(_cameraEngine);
 
-            _reward._maxDuckAmount = _ducklings.Length;
+            _reward.MaxDuckAmount = _ducklings.Length;
+            Debug.Log(_reward.MaxDuckAmount);
             _rewardBehaviour = new RewardBehaviour(_reward);
             CreateDucklingModels();
 
@@ -58,23 +59,34 @@ namespace Game
             _playerEngine.OnMistake += AddMistake;
             _mistakeManager.OnPopUp += PauzeGame;
             _mistakeManager.OnPopUpOver += ResumeGame;
+            _button.OnPauze += PauzeGame;
+            _button.OnResume += ResumeGame;
 
             StartCoroutine(LateInitialize());
+        }
+
+        private void LockCursor(bool value,CursorLockMode cursorMode)
+        {
+            if (Cursor.visible == value) return;
+            Cursor.lockState = cursorMode;
+            Cursor.visible = value;
         }
 
         private void ResumeGame()
         {
             _pauzed = false;
+            LockCursor(false, CursorLockMode.Locked);
         }
 
         private void PauzeGame()
         {
             _pauzed = true;
+            LockCursor(true,CursorLockMode.None);
         }
 
         private void AddMistake(Mistakes mistake)
         {
-            //_mistakeManager.OnMistake(mistake);
+            _mistakeManager.OnMistake(mistake);
             _rewardBehaviour.AddMistake();
         }
 
@@ -111,7 +123,7 @@ namespace Game
             if (_pauzed) return;
 
             _inputHandler.Update();
-
+            _button.OnGamePauze();
             UpdateDucks();
         }
 
