@@ -18,6 +18,7 @@ namespace Game
         [SerializeField] private RewardView _reward;
         [SerializeField] private DuckView[] _ducklings;
         [SerializeField] private TrafficHub _trafficHUb;
+        [SerializeField] private MistakeView _mistake;
 
         private PlayerEngine _playerEngine;
         private CameraEngine _cameraEngine;
@@ -29,6 +30,10 @@ namespace Game
         private RewardBehaviour _rewardBehaviour;
         private List<DuckBehaviour> _duckBehaviours = new List<DuckBehaviour>();
 
+        private MistakeManager _mistakeManager;
+
+        private bool _pauzed;
+
         private void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
@@ -37,6 +42,8 @@ namespace Game
             _playerEngine = new PlayerEngine(_player);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _cameraEngine = new CameraEngine(_camera, _player.transform);
+            _mistakeManager = new MistakeManager(_mistake);
+
             _inputHandler = new InputHandler();
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.RightStickCommand = new RotateCameraCommand(_cameraEngine);
@@ -49,11 +56,25 @@ namespace Game
 
             _playerEngine.OnStreetInFront += ChangeCameraView;
             _playerEngine.OnMistake += AddMistake;
+            _mistakeManager.OnPopUp += PauzeGame;
+            _mistakeManager.OnPopUpOver += ResumeGame;
+
             StartCoroutine(LateInitialize());
+        }
+
+        private void ResumeGame()
+        {
+            _pauzed = false;
+        }
+
+        private void PauzeGame()
+        {
+            _pauzed = true;
         }
 
         private void AddMistake(Mistakes mistake)
         {
+            //_mistakeManager.OnMistake(mistake);
             _rewardBehaviour.AddMistake();
         }
 
@@ -87,6 +108,8 @@ namespace Game
 
         private void Update()
         {
+            if (_pauzed) return;
+
             _inputHandler.Update();
 
             UpdateDucks();
@@ -108,6 +131,8 @@ namespace Game
 
         private void FixedUpdate()
         {
+            if (_pauzed) return;
+
             _playerStateMachine.FixedUpdate();
             _cameraEngine.FixedCameraUpdate();
 
