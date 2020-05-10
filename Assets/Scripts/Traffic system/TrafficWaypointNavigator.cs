@@ -24,7 +24,7 @@
                 _tfController.IsStopping = false;
                 _currentWaypoint = _currentWaypoint.NextWaypoint;
                 _tfController.Waypoint = _currentWaypoint;
-                _tfController.ChangeCheckSpeed(_currentWaypoint.PreviousWaypoint.MaxSpeed);
+                _tfController?.ChangeCheckSpeed(_currentWaypoint.PreviousWaypoint.MaxSpeed);
             }
             else { _tfController.Waypoint = null; _tfController.IsStopping = true; }
         }        

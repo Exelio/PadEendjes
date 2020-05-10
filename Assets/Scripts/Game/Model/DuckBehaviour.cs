@@ -47,6 +47,11 @@ public class DuckBehaviour
 		_view.Animator.SetFloat("DuckDistance", _distance);
 	}
 
+	public void OnTargetChange(Transform target)
+	{
+		_view.FollowTarget = target;
+	}
+
 	public void FixedUpdate()
 	{
 		if (_view.FollowTarget != null)

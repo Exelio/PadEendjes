@@ -8,7 +8,7 @@ namespace View
         public event EventHandler OnCaught;
         public event EventHandler OnScared;
 
-        public Transform FollowTarget => _followTarget;
+        public Transform FollowTarget { get => _followTarget; set { _followTarget = value; } }
         public float FollowSpeed => _followSpeed;
         public float TargetOffset => _targetOffset;
         public float MaxDistance => _maxDistance;

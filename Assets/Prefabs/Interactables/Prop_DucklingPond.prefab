@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7945423975449498010}
   - component: {fileID: 4431357766388542819}
   - component: {fileID: 629327595365641079}
+  - component: {fileID: 8042098416287611136}
+  - component: {fileID: 3309747620786865069}
   m_Layer: 0
   m_Name: Prop_DucklingPond
   m_TagString: Untagged
@@ -96,3 +98,31 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5196821417671283835, guid: e21359f76bc38cf469c603eb3f29681e, type: 3}
+--- !u!114 &8042098416287611136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685146370369903039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42f5360847fca3544afa73fc3c4cf56f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _checkLayer:
+    serializedVersion: 2
+    m_Bits: 512
+--- !u!65 &3309747620786865069
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2685146370369903039}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.86808, y: 0.5015553, z: 6.923685}
+  m_Center: {x: 0.21560407, y: 0.13508445, z: 0.24057293}

@@ -6,6 +6,7 @@ using Model;
 using View;
 using System.Collections.Generic;
 using Utils;
+using Boxsun.Math;
 
 namespace Game
 {
@@ -17,9 +18,10 @@ namespace Game
         [SerializeField] private CameraView _camera;
         [SerializeField] private RewardView _reward;
         [SerializeField] private DuckView[] _ducklings;
-        [SerializeField] private TrafficHub _trafficHUb;
+        [SerializeField] private TrafficHubView _trafficHUb;
         [SerializeField] private MistakeView _mistake;
         [SerializeField] private ButtonsBehaviour _button;
+        [SerializeField] private PondView _pond;
 
         private PlayerEngine _playerEngine;
         private CameraEngine _cameraEngine;
@@ -34,6 +36,7 @@ namespace Game
         private MistakeManager _mistakeManager;
 
         private bool _pauzed;
+        private bool _levelComplete;
 
         private void Start()
         {
@@ -57,12 +60,37 @@ namespace Game
 
             _playerEngine.OnStreetInFront += ChangeCameraView;
             _playerEngine.OnMistake += AddMistake;
+
             _mistakeManager.OnPopUp += PauzeGame;
             _mistakeManager.OnPopUpOver += ResumeGame;
+
             _button.OnPauze += PauzeGame;
             _button.OnResume += ResumeGame;
 
+            _pond.OnTrigger += CheckEnoughDucks;
+            _pond.OnLevelEnd += LevelComplete;
+
             StartCoroutine(LateInitialize());
+        }
+
+        private void LevelComplete(Transform obj)
+        {
+            LockCursor(true, CursorLockMode.None);
+            foreach (var duck in _duckBehaviours)
+            {
+                duck.OnTargetChange(obj);
+            }
+
+            _rewardBehaviour.CompletedLevel(); 
+            _playerStateMachine.SetPlayerStateToIdle();
+            _trafficHUb.PauzeCars();
+
+            _levelComplete = true;
+        }
+
+        private void CheckEnoughDucks()
+        {
+            _pond.ChangeInteractable(_rewardBehaviour.CheckEnoughDucks());
         }
 
         private void LockCursor(bool value,CursorLockMode cursorMode)
@@ -75,12 +103,15 @@ namespace Game
         private void ResumeGame()
         {
             _pauzed = false;
+            _trafficHUb.Resume();
             LockCursor(false, CursorLockMode.Locked);
         }
 
         private void PauzeGame()
         {
             _pauzed = true;
+            _playerStateMachine.SetPlayerStateToIdle();
+            _trafficHUb.PauzeCars();
             LockCursor(true,CursorLockMode.None);
         }
 
@@ -121,10 +152,11 @@ namespace Game
         private void Update()
         {
             if (_pauzed) return;
+            UpdateDucks();
 
+            if (_levelComplete) return;
             _inputHandler.Update();
             _button.OnGamePauze();
-            UpdateDucks();
         }
 
         private void UpdateDucks()
@@ -143,10 +175,14 @@ namespace Game
 
         private void FixedUpdate()
         {
-            if (_pauzed) return;
-
             _playerStateMachine.FixedUpdate();
+            if (_pauzed || _levelComplete) 
+            {
+                _playerStateMachine.Direction = MathB.Vector2Conversion(0, 0);
+                return; 
+            }
             _cameraEngine.FixedCameraUpdate();
+            _trafficHUb.FixedUpdateHub();
 
             FixedUpdateDucks();
         }

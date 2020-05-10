@@ -74,11 +74,12 @@ public class TrafficController
 
     #region Updates
 
-    public void Update()
+    public void FixedUpdate()
     {
         _navigator.Update();
         if (_wp != null)
         {
+            Move();
             CheckDestinationReached();
             CheckForward();
         }
@@ -90,12 +91,12 @@ public class TrafficController
         }
     }
 
-    public void FixedUpdate()
-    {
-        if (_wp != null) Move();
-    }
 
     #endregion
+    public void OnPauze()
+    {
+        _variables.RigidBody.velocity = Vector3.zero;
+    }
 
     private void CheckDestinationReached()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrafficHub : MonoBehaviour
+public class TrafficHubView : MonoBehaviour
 {
     private List<TrafficController> _controllerList = new List<TrafficController>();
 
@@ -13,28 +13,31 @@ public class TrafficHub : MonoBehaviour
     private int spawnAmount;
     private List<int> numbersGotten = new List<int>();
 
+    private bool _spawnCars = true;
+
     private void Start()
     {
         spawnAmount = GetRandom(1, _startPoints.Length);
         StartCoroutine(SpawnVehicles(spawnAmount));
     }
 
-    private void Update()
-    {
-        UpdateVehicles();
-    }
-
-    private void FixedUpdate()
+    public void FixedUpdateHub()
     {
         FixedUpdateVehicles();
     }
 
-    private void UpdateVehicles()
+    public void PauzeCars()
     {
+        _spawnCars = false;
         foreach (var controller in _controllerList)
         {
-            controller?.Update();
+            controller.OnPauze();
         }
+    }
+
+    public void Resume()
+    {
+        _spawnCars = true;
     }
 
     private void FixedUpdateVehicles()
@@ -52,7 +55,8 @@ public class TrafficHub : MonoBehaviour
 
     IEnumerator SpawnVehicles(int amount)
     {
-        CreateVehicleModels(amount);
+        if(_spawnCars)
+            CreateVehicleModels(amount);
         yield return new WaitForSeconds(_timeTillNextSpawn);
 
         spawnAmount = GetRandom(1, _startPoints.Length);

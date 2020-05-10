@@ -37,10 +37,6 @@ namespace Model
             }
 
             _view.PopUpPanel.SetActive(true);
-            
         }
-
-
-
     }
 }

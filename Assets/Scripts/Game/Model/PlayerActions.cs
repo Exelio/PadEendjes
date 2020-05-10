@@ -1,4 +1,5 @@
 ﻿using State;
+using System;
 
 namespace Model
 {
@@ -31,7 +32,16 @@ namespace Model
     {
         private readonly PlayerEngine _player;
 
-        public Move(PlayerStateMachine playerStateMachine, PlayerEngine player) : base(playerStateMachine) => _player = player;
+        public Move(PlayerStateMachine playerStateMachine, PlayerEngine player) : base(playerStateMachine)
+        { 
+            _player = player;
+            _playerStateMachine.OnStateSwitch += SwitchState;
+        }
+
+        private void SwitchState()
+        {
+            _playerStateMachine.SetPlayerState(_playerStateMachine.Idle);
+        }
 
         public override void FixedUpdate()
         {
@@ -44,8 +54,6 @@ namespace Model
 
             if (!_player.IsGrounded)
                 _playerStateMachine.SetPlayerState(_playerStateMachine.Fall);
-
-            _player.ApplyIdle();
         }
 
         public override void Interact()

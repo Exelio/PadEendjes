@@ -108,7 +108,7 @@ namespace Model
             if (angle > _stats.MaxAngleDifference || angle < -_stats.MaxAngleDifference)
             {
                 _mistakeStraightCross = true;
-                CountMistake(Mistakes.NotCrossingStraight);
+                //CountMistake(Mistakes.NotCrossingStraight);
             }
             _previousForwardPosition = _stats.Transform.forward;
         }

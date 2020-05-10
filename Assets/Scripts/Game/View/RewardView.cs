@@ -7,9 +7,26 @@ namespace View
     [Serializable]
     public struct RewardVariables
     {
+        [Header("GUI")]
         public int DucksNeeded;
         public int MaxMistakes;
         public Text DuckCounter;
+
+        [Header("EndPanel")]
+        public GameObject EndPanel;
+        public Image[] TopPanelStars;
+        [Space]
+        public Sprite NoStar;
+        public Sprite Star;
+        [Space]
+        public Text LevelComplete;
+        public Image StarLevelComplete;
+        [Space]
+        public Text FoundAllDucks;
+        public Image StarFoundAllDucks;
+        [Space]
+        public Text Mistakes;
+        public Image StarMistakes;
 
         [HideInInspector] public int MaxDucks;
         [HideInInspector] public bool IsLevelComplete;

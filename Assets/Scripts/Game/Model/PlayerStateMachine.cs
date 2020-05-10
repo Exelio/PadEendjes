@@ -1,9 +1,11 @@
-﻿using System.Numerics;
+﻿using System;
+using System.Numerics;
 
 namespace Model
 {
     public class PlayerStateMachine : StateMachine
     {
+        public event Action OnStateSwitch;
         public Vector2 Direction { get; set; }
 
         public Idle Idle { get; }
@@ -23,5 +25,6 @@ namespace Model
 
         public void FixedUpdate() => _playerState?.FixedUpdate();
         public void RequestInteraction() => _playerState?.Interact();
+        public void SetPlayerStateToIdle() => OnStateSwitch?.Invoke();
     }
 }
