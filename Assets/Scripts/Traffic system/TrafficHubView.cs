@@ -9,6 +9,7 @@ public class TrafficHubView : MonoBehaviour
     [SerializeField] private VehicleView _view;
     [SerializeField] private Waypoint[] _startPoints;
     [SerializeField] private float _timeTillNextSpawn = 2f;
+    [SerializeField] private int _maxCarsInScene;
 
     private int spawnAmount;
     private List<int> numbersGotten = new List<int>();
@@ -55,7 +56,7 @@ public class TrafficHubView : MonoBehaviour
 
     IEnumerator SpawnVehicles(int amount)
     {
-        if(_spawnCars)
+        if(_spawnCars && _controllerList.Count < _maxCarsInScene)
             CreateVehicleModels(amount);
         yield return new WaitForSeconds(_timeTillNextSpawn);
 

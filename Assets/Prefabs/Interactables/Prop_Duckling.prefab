@@ -103,10 +103,9 @@ GameObject:
   - component: {fileID: 3688767382431075484}
   - component: {fileID: 8524072389958186684}
   - component: {fileID: 2619819045829162179}
-  - component: {fileID: 830713676}
-  - component: {fileID: 830713677}
   - component: {fileID: 1891097517}
-  m_Layer: 11
+  - component: {fileID: 6039525760425866628}
+  m_Layer: 17
   m_Name: Prop_Duckling
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,6 +128,7 @@ Transform:
   - {fileID: 571516864960045727}
   - {fileID: 1706400606971567423}
   - {fileID: 5286451968586385402}
+  - {fileID: 576992395549153419}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -169,34 +169,7 @@ MonoBehaviour:
   _timeUntilIdleChange: {x: 10, y: 15}
   _animator: {fileID: 8524072389958186684}
   _rigidbody: {fileID: 1891097517}
-  _collider: {fileID: 830713677}
---- !u!136 &830713676
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390260361335209615}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.11961223
-  m_Height: 0.23922446
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.11129986, z: -0.09777404}
---- !u!135 &830713677
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 390260361335209615}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  _trigger: {fileID: 4096553511751891581}
 --- !u!54 &1891097517
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -213,6 +186,64 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!136 &6039525760425866628
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390260361335209615}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.11961223
+  m_Height: 0.23922446
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.11129986, z: -0.09777404}
+--- !u!1 &587296194030373680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 576992395549153419}
+  - component: {fileID: 4096553511751891581}
+  m_Layer: 11
+  m_Name: Bitch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &576992395549153419
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587296194030373680}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3688767382431075484}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &4096553511751891581
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587296194030373680}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &650093608424622318
 GameObject:
   m_ObjectHideFlags: 0
