@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils;
 
 public class TrafficController
 {
@@ -34,11 +35,14 @@ public class TrafficController
     private VehicleVariables _variables;
     private VehicleView _view; //view of the vehicle
 
+    private EnvironmentQuery _query;
+
     #endregion
 
     public TrafficController(VehicleView view)
     {
         _view = view;
+        _query = new EnvironmentQuery();
         _variables = view.ViewVariables;
         _navigator = new TrafficWaypointNavigator(this, _view.StartWaypoint);
         Initialize();
@@ -80,7 +84,7 @@ public class TrafficController
         if (_wp != null)
         {
             Move();
-            CheckDestinationReached();
+            DestinationReached();
             CheckForward();
         }
         else 
@@ -91,14 +95,14 @@ public class TrafficController
         }
     }
 
-
     #endregion
+
     public void OnPauze()
     {
         _variables.RigidBody.velocity = Vector3.zero;
     }
 
-    private void CheckDestinationReached()
+    private void DestinationReached()
     {
         if (Vector3.Distance(_view.transform.position, _wp.transform.position) <= _view.ViewVariables.Distance) _reachedDestination = true;
         else  _reachedDestination = false;
@@ -112,7 +116,9 @@ public class TrafficController
             _view.DestroyVehicle();
         }
     }
-    
+
+    #region Movement
+
     private void Move()
     {
         Vector3 destinationDirection = _wp.transform.position - _view.transform.position;
@@ -143,6 +149,29 @@ public class TrafficController
         _view.transform.rotation = slerp;
     }
 
+    #endregion
+
+    private bool _startChecking = false;
+    public void ToggleForwardChecking(bool value)
+    {
+        if (_startChecking == value) return;
+        _startChecking = value;
+    }
+
+    private void SetVelocityToZero()
+    {
+        _variables.RigidBody.velocity = new Vector3(0, 0, 0);
+    }
+
+    public IEnumerator FindTargetWithDelay(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            _query.FindVisibleTargets(ref _visibleTargets, _variables.CarFront, _variables.ViewRadius, _variables.ViewAngle, _variables.TargetMask, _variables.ObstacleMask);
+        }
+    }    
+
     private void CheckForward()
     {
         if (_visibleTargets.Count <= 0) { ChangeCheckSpeed(_wp.PreviousWaypoint.MaxSpeed); return; }
@@ -151,9 +180,11 @@ public class TrafficController
         {
             VehicleView targetView = visibleTarget.GetComponent<VehicleView>();
             float distance = Vector3.Distance(_view.transform.position, visibleTarget.transform.position);
-            float forwardAngle = CheckAngle(visibleTarget.transform.forward, _view.transform.forward);
-            float angle = CheckAngle(visibleTarget.transform.position, _view.transform.position);
-            float dotResult = CheckDotProduct(visibleTarget);
+
+            float forwardAngle = _query.CheckAngle(visibleTarget.transform.forward, _view.transform.forward);
+            float angle = _query.CheckAngle(visibleTarget.transform.position, _view.transform.position);
+            float dotResult = _query.CheckDotProduct(_view.transform, visibleTarget);
+
             bool checkAngles = CheckAngles(forwardAngle, _variables.AngleMaxMin.x, _variables.AngleMaxMin.y, dotResult);
 
             //Debug.Log($"Distance between {_view.name} and {visibleTarget.name} = {distance}, angle = {angle}");
@@ -161,6 +192,9 @@ public class TrafficController
             {
                 CheckCarDirection(targetView, forwardAngle, dotResult);
             }
+
+            if (!_startChecking) return;
+
             else if (distance <= _variables.PedestrianDistance && checkAngles)
             {
                 //Debug.Log($"Player wants to cross road = true");
@@ -216,50 +250,5 @@ public class TrafficController
             ChangeCheckSpeed(0f);
             SetVelocityToZero();
         }
-
     }
-
-    private void SetVelocityToZero()
-    {
-        _variables.RigidBody.velocity = new Vector3(0, 0, 0);
-    }
-
-    private float CheckDotProduct(Transform trans)
-    {
-        return Vector3.Dot(_view.transform.forward, trans.transform.forward);
-    }
-
-    private float CheckAngle(Vector3 target, Vector3 self)
-    {
-        return Vector3.Angle(self, target);
-    }
-
-    private void FindVisibleTargets()
-    {
-        _visibleTargets.Clear();
-        Collider[] targets = Physics.OverlapSphere(_variables.CarFront.position, _variables.ViewRadius, _variables.TargetMask);
-        
-        foreach (var target in targets)
-        {
-            Transform targetTrans = target.transform;
-            Vector3 dirToTarget = (targetTrans.position - _view.transform.position).normalized;
-
-            if (Vector3.Angle(_view.transform.forward, dirToTarget) < _variables.ViewAngle / 2)
-            {
-                float disToTarget = Vector3.Distance(_view.transform.position, targetTrans.position);
-
-                if (!Physics.Raycast(_view.transform.position + _variables.CarFront.position, dirToTarget, disToTarget, _variables.ObstacleMask) && targetTrans != _view.transform) 
-                    _visibleTargets.Add(targetTrans);
-            }
-        }
-    }
-
-    public IEnumerator FindTargetWithDelay(float delay)
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(delay);
-            FindVisibleTargets();
-        }
-    }    
 }

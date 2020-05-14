@@ -129,6 +129,7 @@ namespace Game
         private void ChangeCameraView(bool value)
         {
             _cameraEngine.ToggleAnchorPoint(value);
+            _trafficHUb.SetForwardChecking(value);
         }
 
         private void CreateDucklingModels()

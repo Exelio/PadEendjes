@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Utils
 {
@@ -28,6 +29,36 @@ namespace Utils
         public bool CastSphere(Vector3 origin, float checkRadius, LayerMask crossingRoadLayer)
         {
             return Physics.CheckSphere(origin, checkRadius, crossingRoadLayer);
+        }
+
+        public float CheckDotProduct(Transform self, Transform target)
+        {
+            return Vector3.Dot(self.forward, target.forward);
+        }
+
+        public float CheckAngle(Vector3 target, Vector3 self)
+        {
+            return Vector3.Angle(self, target);
+        }
+
+        public void FindVisibleTargets(ref List<Transform> transformList, Transform origin, float radius, float viewAngle,LayerMask targetMask, LayerMask obstacleMask)
+        {
+            transformList.Clear();
+            Collider[] targets = Physics.OverlapSphere(origin.position, radius, targetMask);
+
+            foreach (var target in targets)
+            {
+                Transform targetTrans = target.transform;
+                Vector3 dirToTarget = (targetTrans.position - origin.position).normalized;
+
+                if (Vector3.Angle(origin.forward, dirToTarget) < viewAngle / 2)
+                {
+                    float disToTarget = Vector3.Distance(origin.position, targetTrans.position);
+
+                    if (!Physics.Raycast(origin.position, dirToTarget, disToTarget, obstacleMask) && targetTrans != origin)
+                        transformList.Add(targetTrans);
+                }
+            }
         }
     }
 }

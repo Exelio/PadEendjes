@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 576992395549153419}
   - component: {fileID: 4096553511751891581}
   m_Layer: 11
-  m_Name: Bitch
+  m_Name: DuckTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
