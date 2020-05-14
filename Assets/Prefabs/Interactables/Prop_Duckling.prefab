@@ -170,6 +170,7 @@ MonoBehaviour:
   _animator: {fileID: 8524072389958186684}
   _rigidbody: {fileID: 1891097517}
   _trigger: {fileID: 4096553511751891581}
+  _timeBetweenAudio: {x: 5, y: 10}
 --- !u!54 &1891097517
 Rigidbody:
   m_ObjectHideFlags: 0

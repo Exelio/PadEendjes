@@ -18,6 +18,8 @@ namespace View
 
         public Transform Transform { get => transform; set { transform.position = value.position; transform.rotation = value.rotation; } }
 
+        public Vector2 TimeBetweenAudio { get => _timeBetweenAudio; set => _timeBetweenAudio = value; }
+
         [Header("Movement variables")]
         [SerializeField] private float _followSpeed;
         [SerializeField] private float _targetOffset;
@@ -30,6 +32,10 @@ namespace View
         [SerializeField] private Animator _animator;
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private Collider _trigger;
+
+        [Header("Audio variables")]
+        [Tooltip("Max/Min time between audio clip played")]
+        [SerializeField] private Vector2 _timeBetweenAudio;
 
         private Transform _followTarget;
 

@@ -14,6 +14,7 @@ namespace Game
     {
         public event EventHandler Initialized;
 
+        [SerializeField] private AudioView _audioView;
         [SerializeField] private PlayerView _player;
         [SerializeField] private CameraView _camera;
         [SerializeField] private RewardView _reward;
@@ -22,6 +23,8 @@ namespace Game
         [SerializeField] private MistakeView _mistake;
         [SerializeField] private ButtonsBehaviour _button;
         [SerializeField] private PondView _pond;
+
+        private AudioManager _audioManager;
 
         private PlayerEngine _playerEngine;
         private CameraEngine _cameraEngine;
@@ -41,7 +44,9 @@ namespace Game
         private void Start()
         {
             LockCursor(false,CursorLockMode.Locked);
-            
+
+            _audioManager = new AudioManager(_audioView);
+
             _playerEngine = new PlayerEngine(_player);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _cameraEngine = new CameraEngine(_camera, _player.transform);
@@ -54,7 +59,7 @@ namespace Game
             _inputHandler.YCommand = new CameraInteractCommand(_cameraEngine);
 
             _reward.MaxDuckAmount = _ducklings.Length;
-            Debug.Log(_reward.MaxDuckAmount);
+            //Debug.Log(_reward.MaxDuckAmount);
             _rewardBehaviour = new RewardBehaviour(_reward);
             CreateDucklingModels();
 
@@ -132,7 +137,7 @@ namespace Game
 
             foreach (var view in _ducklings)
             {
-                DuckBehaviour controller = new DuckBehaviour(view);
+                DuckBehaviour controller = new DuckBehaviour(view, _audioManager);
                 _duckBehaviours.Add(controller);
                 controller.OnCaught += DuckCaught;
                 controller.OnScared += DuckScared;

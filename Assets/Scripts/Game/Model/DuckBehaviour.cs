@@ -2,98 +2,121 @@
 using UnityEngine;
 using View;
 
-public class DuckBehaviour
+namespace Model
 {
-	public event Action OnCaught;
-	public event Action OnScared;
-    private DuckView _view;
+    public class DuckBehaviour
+    {
+        public event Action OnCaught;
+        public event Action OnScared;
 
-	private float _time;
-	private float _timeTillIdleChange;
+        private DuckView _view;
+        private Vector3 _lastPosition = Vector3.zero;
 
-	private float _distance = 0;
-	private Vector3 _lastPosition = Vector3.zero;
+        private float _time;
+        private float _timeTillIdleChange;
+        private float _distance = 0;
+        private float _timer;
 
-	public DuckBehaviour(DuckView view)
-	{
-		_view = view;
+        private bool _isDuckCaught;
 
-		_view.OnCaught += DuckCaught;
-		_view.OnScared += DuckScared;
+        private readonly AudioManager _audioManager;
 
-		GetRandomTime();
-	}
+        public DuckBehaviour(DuckView view, AudioManager audioManager)
+        {
+            _view = view;
+            _audioManager = audioManager;
+            _view.OnCaught += DuckCaught;
+            _view.OnScared += DuckScared;
 
-	private void DuckScared(object sender, EventArgs e)
-	{
-		OnScared?.Invoke();
-	}
+            GetRandomTime();
+        }
 
-	private void DuckCaught(object sender, EventArgs e)
-	{
-		OnCaught?.Invoke();
-	}
+        private void DuckScared(object sender, EventArgs e)
+        {
+            OnScared?.Invoke();
+        }
 
-	public void Update()
-	{
-		if(_distance <= _view.MaxDistance)
-			CheckIdleChange();
+        private void DuckCaught(object sender, EventArgs e)
+        {
+            OnCaught?.Invoke();
 
-		CheckSpeed();
-	}
+            _isDuckCaught = true;
+        }
 
-	private void CheckSpeed()
-	{
-		_view.Animator.SetFloat("DuckDistance", _distance);
-	}
+        public void Update()
+        {
+            if (_distance <= _view.MaxDistance)
+                CheckIdleChange();
 
-	public void OnTargetChange(Transform target)
-	{
-		_view.FollowTarget = target;
-	}
+            CheckSpeed();
+            PlaySoundAtRandom();
+        }
 
-	public void FixedUpdate()
-	{
-		if (_view.FollowTarget != null)
-		{
-			FollowTarget();
-			LookAtTarget();
-		}
-	}
+        private void CheckSpeed()
+        {
+            _view.Animator.SetFloat("DuckDistance", _distance);
+        }
 
-	private void CheckIdleChange()
-	{
-		if(_time >= _timeTillIdleChange)
-		{
-			_view.Animator.SetTrigger("OnIdle2");
-			GetRandomTime();
-			_time = 0;
-		}
+        public void OnTargetChange(Transform target)
+        {
+            _view.FollowTarget = target;
+        }
 
-		_time += Time.deltaTime;
-	}
+        public void FixedUpdate()
+        {
+            if (_view.FollowTarget != null)
+            {
+                FollowTarget();
+                LookAtTarget();
+            }
+        }
 
-	private void GetRandomTime()
-	{
-		_timeTillIdleChange = UnityEngine.Random.Range(_view.TimeUntilIdleChange.x, _view.TimeUntilIdleChange.y);
-	}
+        private void CheckIdleChange()
+        {
+            if (_time >= _timeTillIdleChange)
+            {
+                _view.Animator.SetTrigger("OnIdle2");
+                GetRandomTime();
+                _time = 0;
+            }
 
-	private void LookAtTarget()
-	{
-		_view.Transform.LookAt(_view.FollowTarget.position);
-	}
+            _time += Time.deltaTime;
+        }
 
-	private void FollowTarget()
-	{
-		_distance = Vector3.Distance(_view.transform.position, _view.FollowTarget.position);
-		if (_distance >= _view.MaxDistance)
-		{
-			_view.transform.position = Vector3.Lerp(_view.Transform.position, _view.FollowTarget.position - (_view.FollowTarget.forward * _view.TargetOffset), _view.FollowSpeed);
-		}
-		else
-		{
-			_lastPosition = _view.transform.position;
-			_distance = 0;
-		}
-	}
+        private void GetRandomTime()
+        {
+            _timeTillIdleChange = UnityEngine.Random.Range(_view.TimeUntilIdleChange.x, _view.TimeUntilIdleChange.y);
+        }
+
+        private void LookAtTarget()
+        {
+            _view.Transform.LookAt(_view.FollowTarget.position);
+        }
+
+        private void FollowTarget()
+        {
+            _distance = Vector3.Distance(_view.transform.position, _view.FollowTarget.position);
+            if (_distance >= _view.MaxDistance)
+            {
+                _view.transform.position = Vector3.Lerp(_view.Transform.position, _view.FollowTarget.position - (_view.FollowTarget.forward * _view.TargetOffset), _view.FollowSpeed);
+            }
+            else
+            {
+                _lastPosition = _view.transform.position;
+                _distance = 0;
+            }
+        }
+
+        private void PlaySoundAtRandom()
+        {
+            if (_timer <= 0f && !_isDuckCaught)
+            {
+                _timer = UnityEngine.Random.Range(_view.TimeBetweenAudio.x, _view.TimeBetweenAudio.y);
+
+                _audioManager.Play("DuckQuack");
+            }
+            else
+                _timer -= Time.deltaTime;
+        }
+    }
 }
