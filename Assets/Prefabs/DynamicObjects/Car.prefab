@@ -144,6 +144,12 @@ MonoBehaviour:
   StartWaypoint: {fileID: 0}
   _showDebug: 1
   _variables:
+    Renderer: {fileID: 3822983449256417100}
+    ChangeableMaterialNumber: 0
+    CarColors:
+    - {fileID: 2100000, guid: 28875aa76a1e66144abf11eac12834a5, type: 2}
+    - {fileID: 2100000, guid: 33af9b2f4a73a5640bbeffecf6cafd16, type: 2}
+    - {fileID: 2100000, guid: be3d4c8be0aea244bb52615878ff86f9, type: 2}
     AccelerationSpeed: 60
     MaxSpeed: 6
     RotationSpeed: 3
@@ -545,6 +551,12 @@ PrefabInstance:
 --- !u!4 &1975524313396449667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4746334195248373676, guid: f521a23458bd3c344b662e562ebbae18,
+    type: 3}
+  m_PrefabInstance: {fileID: 6535889816644816431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &3822983449256417100 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8050696817862859107, guid: f521a23458bd3c344b662e562ebbae18,
     type: 3}
   m_PrefabInstance: {fileID: 6535889816644816431}
   m_PrefabAsset: {fileID: 0}

@@ -5234,7 +5234,7 @@ MonoBehaviour:
     SpatialBlend: 1
     DopplerLevel: 1
     Spread: 0
-    MinDistance: 1
+    MinDistance: 0.2
     MaxDistance: 10
     AudioSource: {fileID: 0}
 --- !u!4 &1856810720

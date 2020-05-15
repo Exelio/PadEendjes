@@ -6,7 +6,8 @@ public class PondView : MonoBehaviour
     public event Action<Transform> OnLevelEnd;
     public event Action OnTrigger;
 
-    [SerializeField] private LayerMask _checkLayer;
+    [SerializeField]
+    private string _checkingTag = "Player";
 
     private bool _isInteractable;
     private bool _isInTrigger;
@@ -26,7 +27,7 @@ public class PondView : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Player") 
+        if (other.gameObject.tag == _checkingTag) 
         {
             if(!_isInTrigger)
                 OnTrigger?.Invoke();

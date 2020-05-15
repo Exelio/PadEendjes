@@ -4,6 +4,11 @@ using UnityEngine;
 [Serializable]
 public struct VehicleVariables
 {
+    [Header("Car materials")]
+    public Renderer Renderer;
+    public int ChangeableMaterialNumber;
+    [Tooltip("colors the car can choose from when spawned in")] public Material[] CarColors;
+
     [Header("Movement variables")]
     [Tooltip("The acceleration of the vehicle")] public float AccelerationSpeed;
     [Range(1, 15)] [Tooltip("Max car speed")] public float MaxSpeed; 
@@ -38,6 +43,13 @@ public class VehicleView : MonoBehaviour
     [SerializeField] private bool _showDebug; 
 
     [SerializeField] private VehicleVariables _variables;
+
+    private void Start()
+    {
+        Material[] materials = _variables.Renderer.sharedMaterials;
+        materials[_variables.ChangeableMaterialNumber] = _variables.CarColors[UnityEngine.Random.Range(0, _variables.CarColors.Length)];
+        _variables.Renderer.sharedMaterials = materials;
+    }
 
     public void DestroyVehicle() { Destroy(this.gameObject); }
     
