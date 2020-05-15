@@ -146,6 +146,7 @@ MonoBehaviour:
   _variables:
     Renderer: {fileID: 3822983449256417100}
     ChangeableMaterialNumber: 0
+    RainbowCarChance: 1000
     CarColors:
     - {fileID: 2100000, guid: e0ec1f907deacfd4c9326f078229099d, type: 2}
     - {fileID: 2100000, guid: 28875aa76a1e66144abf11eac12834a5, type: 2}

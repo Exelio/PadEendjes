@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -7,6 +8,7 @@ public struct VehicleVariables
     [Header("Car materials")]
     public Renderer Renderer;
     public int ChangeableMaterialNumber;
+    public int RainbowCarChance;
     [Tooltip("colors the car can choose from when spawned in")] public Material[] CarColors;
 
     [Header("Movement variables")]
@@ -44,7 +46,17 @@ public class VehicleView : MonoBehaviour
 
     [SerializeField] private VehicleVariables _variables;
 
+    private bool _isRainbowCar = false;
+
     private void Start()
+    {
+        if (UnityEngine.Random.Range(1, _variables.RainbowCarChance) == 1) _isRainbowCar = true;
+        ChangeMaterial();
+
+        if (_isRainbowCar) StartCoroutine(changeMaterials(.2f));
+    }
+
+    private void ChangeMaterial()
     {
         Material[] materials = _variables.Renderer.sharedMaterials;
         materials[_variables.ChangeableMaterialNumber] = _variables.CarColors[UnityEngine.Random.Range(0, _variables.CarColors.Length)];
@@ -52,6 +64,15 @@ public class VehicleView : MonoBehaviour
     }
 
     public void DestroyVehicle() { Destroy(this.gameObject); }
+
+    private IEnumerator changeMaterials(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            ChangeMaterial();
+        }
+    }
     
     #region DrawGizmos
 
