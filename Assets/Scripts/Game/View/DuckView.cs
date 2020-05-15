@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace View
 {
+    [RequireComponent(typeof(AudioSource))]
     public class DuckView : MonoBehaviour
     {
         public event EventHandler OnCaught;
@@ -19,6 +20,7 @@ namespace View
         public Transform Transform { get => transform; set { transform.position = value.position; transform.rotation = value.rotation; } }
 
         public Vector2 TimeBetweenAudio { get => _timeBetweenAudio; set => _timeBetweenAudio = value; }
+        public AudioSource Source { get => _source; set => _source = value; }
 
         [Header("Movement variables")]
         [SerializeField] private float _followSpeed;
@@ -36,6 +38,7 @@ namespace View
         [Header("Audio variables")]
         [Tooltip("Max/Min time between audio clip played")]
         [SerializeField] private Vector2 _timeBetweenAudio;
+        [SerializeField] private AudioSource _source; 
 
         private Transform _followTarget;
 

@@ -78,6 +78,14 @@ public class TrafficHubView : MonoBehaviour
         controller.OnDestroy += Remove;
     }
 
+    public void SetForwardChecking(bool value)
+    {
+        foreach (var controller in _controllerList)
+        {
+            controller.ToggleForwardChecking(value);
+        }
+    }
+
     private int GetNumber()
     {
         int number = GetRandom(1, _startPoints.Length);

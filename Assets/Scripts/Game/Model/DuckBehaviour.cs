@@ -113,7 +113,7 @@ namespace Model
             {
                 _timer = UnityEngine.Random.Range(_view.TimeBetweenAudio.x, _view.TimeBetweenAudio.y);
 
-                _audioManager.Play("DuckQuack");
+                _audioManager.Play("DuckQuack", _view.Source);
             }
             else
                 _timer -= Time.deltaTime;

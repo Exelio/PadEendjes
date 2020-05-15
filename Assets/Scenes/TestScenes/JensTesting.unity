@@ -218,7 +218,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-24900
+  m_Name: pb_Mesh-4098
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2134,7 +2134,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-24882
+  m_Name: pb_Mesh-4080
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5235,7 +5235,7 @@ MonoBehaviour:
     DopplerLevel: 1
     Spread: 0
     MinDistance: 1
-    MaxDistance: 500
+    MaxDistance: 10
     AudioSource: {fileID: 0}
 --- !u!4 &1856810720
 Transform:
