@@ -147,9 +147,18 @@ MonoBehaviour:
     Renderer: {fileID: 3822983449256417100}
     ChangeableMaterialNumber: 0
     CarColors:
+    - {fileID: 2100000, guid: e0ec1f907deacfd4c9326f078229099d, type: 2}
     - {fileID: 2100000, guid: 28875aa76a1e66144abf11eac12834a5, type: 2}
+    - {fileID: 2100000, guid: baf572f482821a04ea20777830370500, type: 2}
+    - {fileID: 2100000, guid: 06acd7960b537594f930ef0ecdb159c6, type: 2}
     - {fileID: 2100000, guid: 33af9b2f4a73a5640bbeffecf6cafd16, type: 2}
+    - {fileID: 2100000, guid: d128c2bfe237f584a9eba39065354231, type: 2}
+    - {fileID: 2100000, guid: 66d81a8d6a743bf4b91b939fc9d503f4, type: 2}
+    - {fileID: 2100000, guid: 3f39900d3bb0dc941a79ce271eae8d35, type: 2}
     - {fileID: 2100000, guid: be3d4c8be0aea244bb52615878ff86f9, type: 2}
+    - {fileID: 2100000, guid: 846b8458a761dc547948f4fd48af4031, type: 2}
+    - {fileID: 2100000, guid: f4e6c6955dd826646a5fd6d8a55948ef, type: 2}
+    - {fileID: 2100000, guid: 6c61734cf24ab954eaf220afbdfff52f, type: 2}
     AccelerationSpeed: 60
     MaxSpeed: 6
     RotationSpeed: 3

@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_GreenMetal
+  m_Name: MAT_GreyMetal
   m_Shader: {fileID: -6465566751694194690, guid: ca99d082bc75f9a45a8e02a978a3e72a,
     type: 3}
   m_ShaderKeywords: 
@@ -73,7 +73,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 0.9339623, g: 0.2775454, b: 0.2775454, a: 1}
-    - _Color: {r: 0.028924897, g: 0.4716981, b: 0.06604358, a: 1}
+    - _Color: {r: 0.2719829, g: 0.29690284, b: 0.3018868, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
 --- !u!114 &4027465220922403822
