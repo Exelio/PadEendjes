@@ -21,6 +21,7 @@ namespace Model
         private Vector3 _velocity;
 
         private readonly PlayerView _view;
+        private readonly AudioManager _audioManager;
         private readonly EnvironmentQuery _query;
 
         private List<GameObject> _duckList = new List<GameObject>();
@@ -37,11 +38,12 @@ namespace Model
         private Vector3 _previousForwardPosition;
         private RaycastHit _hit;
 
-        public PlayerEngine(PlayerView view)
+        public PlayerEngine(PlayerView view,AudioManager audioManager)
         {
             view.Initialize();
 
             _view = view;
+            _audioManager = audioManager;
             _stats = _view.Stats;
             _query = new EnvironmentQuery();
             _boredTimer = _stats.TimeTillBored;
@@ -69,9 +71,18 @@ namespace Model
 
             CheckChangeIsStreetInFront();
             CheckCorrectStreetCross();
+            PlayFootStepSounds();
 
             Commit();
             ApplyAnimation();
+        }
+
+        private void PlayFootStepSounds()
+        {
+            if(_view.Animator.GetFloat("FootCurve")>0.9)
+            {
+                _audioManager.PlayRandomClip(_stats.AudioSource);
+            }
         }
 
         private void CheckCorrectStreetCross()

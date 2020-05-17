@@ -10,11 +10,13 @@ namespace Model
         private AudioView _view;
 
         private Sound[] _sounds;
+        private Sound[] _clips;
 
         public AudioManager(AudioView view)
         {
             _view = view;
             _sounds = _view.Sounds;
+            _clips = _view.Clips;
         }
 
         public void Play(string clipName, AudioSource source)
@@ -23,6 +25,13 @@ namespace Model
             SetAudioSource(ref source, sound);
 
             source.Play();
+        }
+
+        public void PlayRandomClip(AudioSource source)
+        {
+            Sound sound = _clips[UnityEngine.Random.Range(0, _clips.Length)];
+            SetAudioSource(ref source, sound);
+            source.PlayOneShot(sound.AudioClip);
         }
 
         private void SetAudioSource(ref AudioSource source, Sound audio)

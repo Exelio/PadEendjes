@@ -16,6 +16,8 @@ namespace View
             }
         }
 
+        public Animator Animator { get => _animator; set => _animator = value; }
+
         [SerializeField] private Animator _animator;
         [SerializeField] private PlayerStats _stats;
 
@@ -29,6 +31,8 @@ namespace View
         {
             _stats.Rigidbody = gameObject.GetComponent<Rigidbody>();
             _stats.Collider = gameObject.GetComponent<CapsuleCollider>();
+            _stats.AudioSource = gameObject.GetComponent<AudioSource>();
+
             _stats.InteractableObject = null;
 
             _interactLayer = LayerMask.NameToLayer("Interactable");

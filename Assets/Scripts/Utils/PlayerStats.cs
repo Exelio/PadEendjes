@@ -45,6 +45,9 @@ namespace Utils
         public int MaxRadius;
 
         [HideInInspector]
+        public AudioSource AudioSource;
+
+        [HideInInspector]
         public Rigidbody Rigidbody;
 
         [HideInInspector]

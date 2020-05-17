@@ -47,7 +47,7 @@ namespace Game
 
             _audioManager = new AudioManager(_audioView);
 
-            _playerEngine = new PlayerEngine(_player);
+            _playerEngine = new PlayerEngine(_player,_audioManager);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _cameraEngine = new CameraEngine(_camera, _player.transform);
             _mistakeManager = new MistakeManager(_mistake);
