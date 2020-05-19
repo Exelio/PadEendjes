@@ -21,11 +21,6 @@ namespace Model
             if (!_player.IsGrounded)
                 _playerStateMachine.SetPlayerState(_playerStateMachine.Fall);
         }
-
-        public override void Interact()
-        {
-            _player.ApplyInteraction();
-        }
     }
 
     public class Move : PlayerStates
@@ -54,11 +49,6 @@ namespace Model
 
             if (!_player.IsGrounded)
                 _playerStateMachine.SetPlayerState(_playerStateMachine.Fall);
-        }
-
-        public override void Interact()
-        {
-            _player.ApplyInteraction();
         }
     }
 

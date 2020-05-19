@@ -5,7 +5,6 @@ namespace InputHandling
 {
     public class InputHandler
     {
-        public IImpulseCommand ACommand;
         public IImpulseCommand YCommand;
 
         public IDirectionalCommand LeftStickCommand;
@@ -13,9 +12,6 @@ namespace InputHandling
 
         public void Update()
         {
-            if (Input.GetButtonDown("AButton"))
-                ACommand?.Execute();
-
             if (Input.GetButtonDown("YButton"))
                 YCommand?.Execute();
 

@@ -42,7 +42,7 @@ namespace Model
 
         public void Execute()
         {
-            _playerStateMachine.RequestInteraction();
+            //_playerStateMachine.RequestInteraction();
         }
     }
 

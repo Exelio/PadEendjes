@@ -49,6 +49,7 @@ namespace Model
             _boredTimer = _stats.TimeTillBored;
 
             _view.OnExitRoad += ResetMistakeBools;
+            _view.OnInteract += ApplyInteraction;
 
             ApplicationBehaviour.Instance.Initialized += (obj, args) => AssignPlayerStats();
         }
@@ -188,9 +189,11 @@ namespace Model
             }
         }
 
-        public void ApplyInteraction()
+        public void ApplyInteraction(GameObject obj)
         {
-            DuckView view = _stats.InteractableObject?.GetComponent<DuckView>();
+            Debug.Log("Interact");
+            DuckView view = obj?.GetComponent<DuckView>();
+            Debug.Log(view);
 
             if (view != null && view.FollowTarget == null)
             {

@@ -3,6 +3,12 @@ using UnityEngine;
 
 namespace View
 {
+    [Serializable]
+    public struct DuckVariables
+    {
+
+    }
+
     [RequireComponent(typeof(AudioSource))]
     public class DuckView : MonoBehaviour
     {

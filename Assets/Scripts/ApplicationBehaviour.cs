@@ -55,7 +55,6 @@ namespace Game
             _inputHandler = new InputHandler();
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.RightStickCommand = new RotateCameraCommand(_cameraEngine);
-            _inputHandler.ACommand = new InteractCommand(_playerStateMachine);
             _inputHandler.YCommand = new CameraInteractCommand(_cameraEngine);
 
             _reward.MaxDuckAmount = _ducklings.Length;

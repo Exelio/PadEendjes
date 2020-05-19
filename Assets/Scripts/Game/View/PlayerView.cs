@@ -18,6 +18,8 @@ namespace View
 
         public Animator Animator { get => _animator; set => _animator = value; }
 
+        public event Action<GameObject> OnInteract;
+
         [SerializeField] private Animator _animator;
         [SerializeField] private PlayerStats _stats;
 
@@ -55,7 +57,10 @@ namespace View
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer == _interactLayer)
+            {
                 _stats.InteractableObject = other.transform.parent.gameObject;
+                OnInteract?.Invoke(other.transform.parent.gameObject);
+            }
         }
 
         private void OnTriggerStay(Collider other)
