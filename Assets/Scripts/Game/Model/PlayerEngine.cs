@@ -203,6 +203,11 @@ namespace Model
             }
         }
 
+        public void RemoveDucks()
+        {
+            _duckList.Clear();
+        }
+
         private void CheckDuckList(DuckView view)
         {
             if (_duckList.Count <= 1)
