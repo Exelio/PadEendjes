@@ -12,6 +12,8 @@ namespace Model
         public event Action<bool> OnStreetInFront;
         public event Action<Mistakes> OnMistake;
 
+        public List<GameObject> DuckList { get => _duckList; set => _duckList = value; }
+
         public bool IsGrounded { get; private set; }
 
         public PlayerStats Stats => _stats;

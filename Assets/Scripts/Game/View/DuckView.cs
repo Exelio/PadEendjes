@@ -13,7 +13,7 @@ namespace View
     public class DuckView : MonoBehaviour
     {
         public event EventHandler OnCaught;
-        public event EventHandler OnScared;
+        public event Action OnScared;
 
         public Transform FollowTarget { get => _followTarget; set { _followTarget = value; } }
         public float FollowSpeed => _followSpeed;
@@ -58,10 +58,11 @@ namespace View
             }
         }
 
-        public void OnGettingScared()
+        public void OnGettingScared(Transform target)
         {
-            _followTarget = null;
-            OnScared?.Invoke(this, EventArgs.Empty);
+            _followTarget = target;
+
+            OnScared?.Invoke();
         }
 
         public void ResetAnimTrigger(string triggerName)

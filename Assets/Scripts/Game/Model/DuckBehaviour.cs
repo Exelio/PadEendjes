@@ -31,7 +31,7 @@ namespace Model
             GetRandomTime();
         }
 
-        private void DuckScared(object sender, EventArgs e)
+        private void DuckScared()
         {
             OnScared?.Invoke();
         }

@@ -14,7 +14,7 @@ namespace Game
     {
         public event EventHandler Initialized;
 
-        [SerializeField] private AudioView _audioView;
+        [SerializeField] private AudioView _audio;
         [SerializeField] private PlayerView _player;
         [SerializeField] private CameraView _camera;
         [SerializeField] private RewardView _reward;
@@ -23,6 +23,7 @@ namespace Game
         [SerializeField] private MistakeView _mistake;
         [SerializeField] private ButtonsBehaviour _button;
         [SerializeField] private PondView _pond;
+        [SerializeField] private RallyView _rally;
 
         private AudioManager _audioManager;
 
@@ -38,6 +39,8 @@ namespace Game
 
         private MistakeManager _mistakeManager;
 
+        private RallyBehaviour _rallyBehaviour;
+
         private bool _pauzed;
         private bool _levelComplete;
 
@@ -45,7 +48,7 @@ namespace Game
         {
             LockCursor(false,CursorLockMode.Locked);
 
-            _audioManager = new AudioManager(_audioView);
+            _audioManager = new AudioManager(_audio);
 
             _playerEngine = new PlayerEngine(_player,_audioManager);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
@@ -60,6 +63,9 @@ namespace Game
             _reward.MaxDuckAmount = _ducklings.Length;
             //Debug.Log(_reward.MaxDuckAmount);
             _rewardBehaviour = new RewardBehaviour(_reward);
+
+            _rallyBehaviour = new RallyBehaviour(_rally);
+
             CreateDucklingModels();
 
             _playerEngine.OnStreetInFront += ChangeCameraView;
@@ -123,6 +129,10 @@ namespace Game
         {
             _mistakeManager.OnMistake(mistake);
             _rewardBehaviour.AddMistake();
+            _rallyBehaviour.PlaceRallyPoints(_player.transform, _playerEngine.DuckList.Count);
+
+            for (int i = 0; i < _playerEngine.DuckList.Count; i++)
+                _playerEngine.DuckList[i].GetComponent<DuckView>().OnGettingScared(_rallyBehaviour.RallyPoints[i].transform);
         }
 
         private void ChangeCameraView(bool value)
