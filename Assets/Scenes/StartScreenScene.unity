@@ -257,7 +257,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 1
   m_CellSize: {x: 692.8, y: 180.45}
-  m_Spacing: {x: 0, y: 51.34}
+  m_Spacing: {x: 0, y: 120}
   m_Constraint: 1
   m_ConstraintCount: 1
 --- !u!114 &201942319
@@ -668,7 +668,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &941598320
 RectTransform:
   m_ObjectHideFlags: 0
@@ -684,10 +684,10 @@ RectTransform:
   m_Father: {fileID: 201942317}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 407.25, y: -1097.575}
+  m_SizeDelta: {x: 692.8, y: 180.45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &941598321
 Animator:

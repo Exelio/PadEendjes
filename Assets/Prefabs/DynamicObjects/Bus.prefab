@@ -310,7 +310,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7d05f17b3179a243be843c1c5b1c9d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _checkSpeed: 0
+  StartWaypoint: {fileID: 0}
+  _showDebug: 0
   _variables:
+    Renderer: {fileID: 0}
+    ChangeableMaterialNumber: 0
+    RainbowCarChance: 0
+    CarColors: []
     AccelerationSpeed: 40
     MaxSpeed: 5
     RotationSpeed: 3
@@ -324,13 +331,13 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 0
     AngleMaxMin: {x: 0, y: 0}
+    PedestrianCrossingAngle: 0
+    PedestrianInFrontAngle: 0
     VehicleMaxDistance: 0
     VehicleMinDistance: 0
     PedestrianDistance: 0
     ViewRadius: 0
     ViewAngle: 0
-  StartWaypoint: {fileID: 0}
-  _checkSpeed: 0
 --- !u!65 &9062010585786319238
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -409,7 +416,7 @@ PrefabInstance:
     - target: {fileID: 746348314893308075, guid: 849038f7c41a3e748be36a20f1becd11,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6666667
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 4323690999579386552, guid: 849038f7c41a3e748be36a20f1becd11,
         type: 3}
