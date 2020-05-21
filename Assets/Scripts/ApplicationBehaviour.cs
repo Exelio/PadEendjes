@@ -156,13 +156,14 @@ namespace Game
 
         private void DuckScared()
         {
-            _rewardBehaviour.LostDuck();
             _playerEngine.RemoveDucks();
+            _rewardBehaviour.LostDuck(_playerEngine.DuckList.Count);
         }
 
         private void DuckCaught()
         {
-            _rewardBehaviour.CaughtDuck();
+            Debug.Log($"{_playerEngine.DuckList.Count}, caught a duck");
+            _rewardBehaviour.CaughtDuck(_playerEngine.DuckList.Count);
         }
 
         private void Update()

@@ -32,7 +32,8 @@ public class TrafficHubView : MonoBehaviour
         _spawnCars = false;
         foreach (var controller in _controllerList)
         {
-            controller.OnPauze();
+            if (controller == null) return;
+            controller?.OnPauze();
         }
     }
 
@@ -45,6 +46,7 @@ public class TrafficHubView : MonoBehaviour
     {
         foreach (var controller in _controllerList)
         {
+            if (controller == null) return;
             controller?.FixedUpdate();
         }
     }
@@ -82,7 +84,8 @@ public class TrafficHubView : MonoBehaviour
     {
         foreach (var controller in _controllerList)
         {
-            controller.ToggleForwardChecking(value);
+            if (controller == null) return;
+            controller?.ToggleForwardChecking(value);
         }
     }
 

@@ -68,14 +68,19 @@ public class RewardBehaviour
         uiText.text = text;
     }
 
-    public void CaughtDuck() 
-    { 
-        _variables.DuckCount += 1;
-        _view.Variables.DuckCounter.text = _variables.DuckCount + "/" + _view.MaxDuckAmount;
+    public void CaughtDuck(int duckcount)
+    {
+        _variables.DuckCount = duckcount;
+        ChangeText();
         //Debug.Log($"{_variables.DuckCount} ducks/ {_variables.DucksNeeded} ducks TO complete level \n{_variables.DuckCount} ducks/ {_variables.MaxDucks}"); 
     }
 
-    public void LostDuck() { _variables.DuckCount -= 1; }
+    private void ChangeText()
+    {
+        _view.Variables.DuckCounter.text = _variables.DuckCount + "/" + _view.MaxDuckAmount;
+    }
+
+    public void LostDuck(int duckcount) { _variables.DuckCount = duckcount; ChangeText(); }
 
     public void AddMistake() 
     {

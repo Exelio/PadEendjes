@@ -193,11 +193,9 @@ namespace Model
 
         public void ApplyInteraction(GameObject obj)
         {
-            Debug.Log("Interact");
             DuckView view = obj?.GetComponent<DuckView>();
-            Debug.Log(view);
 
-            if (view != null && view.FollowTarget == null)
+            if (view != null && view.FollowTarget != _view.transform)
             {
                 _duckList.Add(view.gameObject);
                 CheckDuckList(view);

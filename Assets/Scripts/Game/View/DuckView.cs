@@ -12,8 +12,8 @@ namespace View
     [RequireComponent(typeof(AudioSource))]
     public class DuckView : MonoBehaviour
     {
-        public event EventHandler OnCaught;
-        public event Action OnScared;
+        public event Action<Transform> OnCaught;
+        public event Action<Transform> OnScared;
 
         public Transform FollowTarget { get => _followTarget; set { _followTarget = value; } }
         public float FollowSpeed => _followSpeed;
@@ -27,6 +27,7 @@ namespace View
 
         public Vector2 TimeBetweenAudio { get => _timeBetweenAudio; set => _timeBetweenAudio = value; }
         public AudioSource Source { get => _source; set => _source = value; }
+        public Collider Trigger { get => _trigger; set => _trigger = value; }
 
         [Header("Movement variables")]
         [SerializeField] private float _followSpeed;
@@ -50,19 +51,15 @@ namespace View
 
         public void OnInteract(Transform target)
         {
-            if (_followTarget == null)
+            if (_followTarget != target)
             {
-                _trigger.enabled = false;
-                _followTarget = target;
-                OnCaught?.Invoke(this, EventArgs.Empty);
+                OnCaught?.Invoke(target);
             }
         }
 
         public void OnGettingScared(Transform target)
         {
-            _followTarget = target;
-
-            OnScared?.Invoke();
+            OnScared?.Invoke(target);
         }
 
         public void ResetAnimTrigger(string triggerName)
