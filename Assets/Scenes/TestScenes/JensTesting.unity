@@ -8696,6 +8696,11 @@ PrefabInstance:
       propertyPath: _variables.DucksMax
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 34414055556582568, guid: d821bcd852dd0c04cbd9c39292a6fee1,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0.36
+      objectReference: {fileID: 0}
     - target: {fileID: 338147169960424975, guid: d821bcd852dd0c04cbd9c39292a6fee1,
         type: 3}
       propertyPath: m_Layer
@@ -9490,6 +9495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -2.0097487
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639626556746042854, guid: d821bcd852dd0c04cbd9c39292a6fee1,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 5664610004815178573, guid: d821bcd852dd0c04cbd9c39292a6fee1,
         type: 3}
