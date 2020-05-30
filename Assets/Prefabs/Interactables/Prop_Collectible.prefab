@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7212677256730387361}
   - component: {fileID: 3973330094771920728}
   - component: {fileID: 1596573386588892060}
+  - component: {fileID: 5060662396688246940}
   m_Layer: 0
   m_Name: Prop_Collectible
   m_TagString: Untagged
@@ -93,3 +94,15 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.3763231
   m_Center: {x: 0, y: 1.5881837e-22, z: -0.00000010803341}
+--- !u!114 &5060662396688246940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3393687340607990660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2657725d3599464b8fba39898919ea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
