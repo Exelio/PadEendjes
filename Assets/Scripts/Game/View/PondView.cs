@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using UnityEngine;
 
 public class PondView : MonoBehaviour
@@ -6,11 +7,21 @@ public class PondView : MonoBehaviour
     public event Action<Transform> OnLevelEnd;
     public event Action OnTrigger;
 
+    public AudioManager AudioManager;
+
     [SerializeField]
     private string _checkingTag = "Player";
 
+    [SerializeField]
+    private AudioSource _audioSource;
+
     private bool _isInteractable;
     private bool _isInTrigger;
+
+    private void Start()
+    {
+        AudioManager.Play("PondAmbient", _audioSource);
+    }
 
     public void ChangeInteractable(bool value)
     {
@@ -19,11 +30,6 @@ public class PondView : MonoBehaviour
         if(value)
             OnLevelEnd?.Invoke(this.transform);
     }
-
-    //public void OnButtonPress()
-    //{
-    //    if (_isInTrigger && _isInteractable)
-    //}
 
     private void OnTriggerStay(Collider other)
     {

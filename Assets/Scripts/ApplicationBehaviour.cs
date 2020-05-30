@@ -53,12 +53,18 @@ namespace Game
             _playerEngine = new PlayerEngine(_player,_audioManager);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _cameraEngine = new CameraEngine(_camera, _player.transform);
-            _mistakeManager = new MistakeManager(_mistake);
+            _mistakeManager = new MistakeManager(_mistake, _audioManager);
 
             _inputHandler = new InputHandler();
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.RightStickCommand = new RotateCameraCommand(_cameraEngine);
             _inputHandler.YCommand = new CameraInteractCommand(_cameraEngine);
+
+            _button.AudioManager = _audioManager;
+
+            _pond.AudioManager = _audioManager;
+
+            _trafficHUb.AudioManager = _audioManager;
 
             _reward.MaxDuckAmount = _ducklings.Length;
             //Debug.Log(_reward.MaxDuckAmount);

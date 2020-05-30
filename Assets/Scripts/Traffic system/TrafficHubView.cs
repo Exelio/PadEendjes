@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Model;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class TrafficHubView : MonoBehaviour
     private List<TrafficController> _controllerList = new List<TrafficController>();
 
     [SerializeField] private VehicleView _view;
+    public AudioManager AudioManager;
     [SerializeField] private Waypoint[] _startPoints;
     [SerializeField] private float _timeTillNextSpawn = 2f;
     [SerializeField] private int _maxCarsInScene;
@@ -73,7 +75,7 @@ public class TrafficHubView : MonoBehaviour
         VehicleView view = obj.GetComponent<VehicleView>();
         view.StartWaypoint = _startPoints[number - 1];
         view.transform.parent = null;
-        TrafficController controller = new TrafficController(view);
+        TrafficController controller = new TrafficController(view, AudioManager);
         StartCoroutine(controller.FindTargetWithDelay(.2f));
         _controllerList.Add(controller);
 

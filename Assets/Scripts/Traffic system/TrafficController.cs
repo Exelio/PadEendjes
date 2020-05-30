@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,18 +35,20 @@ public class TrafficController
     private TrafficWaypointNavigator _navigator;
     private VehicleVariables _variables;
     private VehicleView _view; //view of the vehicle
-
+    private readonly AudioManager _audioManager;
     private EnvironmentQuery _query;
 
     #endregion
 
-    public TrafficController(VehicleView view)
+    public TrafficController(VehicleView view, AudioManager audioManager)
     {
         _view = view;
+        _audioManager = audioManager;
         _query = new EnvironmentQuery();
         _variables = view.ViewVariables;
         _navigator = new TrafficWaypointNavigator(this, _view.StartWaypoint);
         Initialize();
+
     }
 
     #region Initialize
@@ -55,6 +58,7 @@ public class TrafficController
         _navigator.Initialize();
         SetPosition();
         _speed = _view.ViewVariables.MaxSpeed;
+        PlaySound();
     }
 
     private void SetPosition()
@@ -93,6 +97,11 @@ public class TrafficController
             _currentSpeed = 0;
             CheckDestroy();
         }
+    }
+
+    private void PlaySound()
+    {
+        _audioManager.Play("CarDriving", _variables.AudioSource);
     }
 
     #endregion

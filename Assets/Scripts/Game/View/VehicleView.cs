@@ -34,6 +34,8 @@ public struct VehicleVariables
     [Tooltip("The distance the player has to be in to let the car stop")] public float PedestrianDistance;
     [Tooltip("The max fov radius of the car")] public float ViewRadius;
     [Tooltip("The fov angle the car looks in")] [Range(0, 360)] public float ViewAngle;
+
+    public AudioSource AudioSource;
 }
 
 public class VehicleView : MonoBehaviour

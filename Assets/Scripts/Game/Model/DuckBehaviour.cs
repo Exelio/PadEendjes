@@ -40,6 +40,7 @@ namespace Model
             _view.Trigger.enabled = true;
             _isDuckCaught = false;
             OnTargetChange(trans);
+            _audioManager.Play("DuckPanic", _view.Source);
             OnScared?.Invoke();
         }
 

@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Model;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,14 +10,24 @@ public class ButtonsBehaviour : MonoBehaviour
 
     public event Action OnPauze;
     public event Action OnResume;
+
+    public AudioManager AudioManager;
+
+    public AudioSource AudioSource;
+
     private void Start()
     {
         ChangePanel(StartingPanel);
     }
 
+    private void PlaySound()
+    {
+        AudioManager.Play("Button", AudioSource);
+    }
     
     public void LoadScene(string SceneToLoad)
     {
+        PlaySound();
         SceneManager.LoadScene(SceneToLoad);
     }
 
@@ -29,6 +38,7 @@ public class ButtonsBehaviour : MonoBehaviour
             if(item.name==name)
             {
                 item.SetActive(true);
+                PlaySound();
             }
             else
             {
@@ -44,6 +54,7 @@ public class ButtonsBehaviour : MonoBehaviour
 
     public void Resume()
     {
+        PlaySound();
         OnResume?.Invoke();
         ChangePanel(null);
     }

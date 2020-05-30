@@ -12,5 +12,6 @@ namespace View
         public GameObject PopUpPanel { get => _popUpPanel; set => _popUpPanel = value; }
         public Text Title { get => _title; set => _title = value; }
         public Text Text { get => _text; set => _text = value; }
+        public AudioSource AudioSource;
     }
 }

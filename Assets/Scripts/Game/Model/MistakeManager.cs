@@ -10,10 +10,12 @@ namespace Model
         public event Action OnPopUpOver;
 
         private MistakeView _view;
+        private readonly AudioManager _audioManager;
 
-        public MistakeManager(MistakeView view)
+        public MistakeManager(MistakeView view, AudioManager audioManager)
         {
             _view = view;
+            _audioManager = audioManager;
         }
 
         public void OnMistake(Mistakes mistake)
@@ -37,6 +39,8 @@ namespace Model
             }
 
             _view.PopUpPanel.SetActive(true);
+
+            _audioManager.Play("Mistake", _view.AudioSource);
         }
     }
 }
