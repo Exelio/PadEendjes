@@ -24,6 +24,7 @@ namespace Game
         [SerializeField] private ButtonsBehaviour _button;
         [SerializeField] private PondView _pond;
         [SerializeField] private RallyView _rally;
+        [SerializeField] private CoinView[] _coins;
 
         private AudioManager _audioManager;
 
@@ -86,7 +87,22 @@ namespace Game
             _pond.OnTrigger += CheckEnoughDucks;
             _pond.OnLevelEnd += LevelComplete;
 
+            CheckCoins();
+
             StartCoroutine(LateInitialize());
+        }
+
+        private void CheckCoins()
+        {
+            foreach (var coin in _coins)
+            {
+                coin.OnCoinTrigger += AddCoin;
+            }
+        }
+
+        private void AddCoin(int obj)
+        {
+            _rewardBehaviour.AddCoin(obj);
         }
 
         private void LevelComplete(Transform obj)

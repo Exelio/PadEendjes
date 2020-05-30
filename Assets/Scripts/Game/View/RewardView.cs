@@ -11,6 +11,7 @@ namespace View
         public int DucksNeeded;
         public int MaxMistakes;
         public Text DuckCounter;
+        public Text CoinCounter;
 
         [Header("EndPanel")]
         public GameObject EndPanel;

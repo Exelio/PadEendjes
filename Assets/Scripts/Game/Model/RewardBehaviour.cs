@@ -8,11 +8,14 @@ public class RewardBehaviour
     private RewardVariables _variables;
     private RewardView _view;
 
+    private int _coins = 0;
+
     public RewardBehaviour(RewardView view)
     {
         _view = view;
         _variables = _view.Variables;
         _view.Variables.DuckCounter.text = "0/"+_view.MaxDuckAmount;
+        _variables.CoinCounter.text = _coins.ToString();
     }
 
     public void CompletedLevel()
@@ -78,6 +81,7 @@ public class RewardBehaviour
     private void ChangeText()
     {
         _view.Variables.DuckCounter.text = _variables.DuckCount + "/" + _view.MaxDuckAmount;
+        _variables.CoinCounter.text = _coins.ToString();
     }
 
     public void LostDuck(int duckcount) { _variables.DuckCount = duckcount; ChangeText(); }
@@ -93,4 +97,10 @@ public class RewardBehaviour
     public bool CheckEnoughDucks() => _variables.DuckCount >= _variables.DucksNeeded;
 
     public bool CheckMaxDucks() => _variables.DuckCount >= _variables.MaxDucks;
+
+    internal void AddCoin(int obj)
+    {
+        _coins += obj;
+        ChangeText();
+    }
 }
