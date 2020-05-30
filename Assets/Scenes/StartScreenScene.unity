@@ -1493,6 +1493,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Panel_Controls
       objectReference: {fileID: 0}
+    - target: {fileID: 1691090900220575303, guid: 2288d835da978a64c8502a077c995f9c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2288d835da978a64c8502a077c995f9c, type: 3}
 --- !u!1001 &7541402975343024536
@@ -1505,7 +1510,7 @@ PrefabInstance:
     - target: {fileID: 7541402975117531859, guid: 3c1f2eca604057b4688cd1a7e2e97626,
         type: 3}
       propertyPath: m_Name
-      value: Button
+      value: Button_Start
       objectReference: {fileID: 0}
     - target: {fileID: 7541402975117531860, guid: 3c1f2eca604057b4688cd1a7e2e97626,
         type: 3}
@@ -1620,7 +1625,7 @@ PrefabInstance:
     - target: {fileID: 7541402975117531861, guid: 3c1f2eca604057b4688cd1a7e2e97626,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: JensTesting
+      value: LevelSelectionScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c1f2eca604057b4688cd1a7e2e97626, type: 3}
@@ -1636,10 +1641,30 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1824304423}
+    - target: {fileID: 7768806793505980070, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806793505980070, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806793505980070, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7768806793565879802, guid: c4cad026530cd204fa80accda3190e40,
         type: 3}
       propertyPath: m_Name
       value: Panel_Options
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806793565879802, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7768806793565879803, guid: c4cad026530cd204fa80accda3190e40,
         type: 3}
@@ -1746,10 +1771,45 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7768806794113612353, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806794113612353, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806794499456568, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806794499456568, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806794499456568, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7768806794557446959, guid: c4cad026530cd204fa80accda3190e40,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1824304423}
+    - target: {fileID: 7768806794774721946, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768806794774721946, guid: c4cad026530cd204fa80accda3190e40,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4cad026530cd204fa80accda3190e40, type: 3}
