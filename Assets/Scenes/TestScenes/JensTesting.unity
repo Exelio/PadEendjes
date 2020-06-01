@@ -218,7 +218,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-82328
+  m_Name: pb_Mesh-4368
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2318,7 +2318,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-82310
+  m_Name: pb_Mesh-4350
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8540,6 +8540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
         type: 3}
+      propertyPath: _variables.StartPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
       propertyPath: _startPoints.Array.data[0]
       value: 
       objectReference: {fileID: 1782105525}
@@ -8574,6 +8579,42 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5536887934966365632, guid: a5767032e132f9c47917834e263aad02,
         type: 3}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
+      propertyPath: _variables.View
+      value: 
+      objectReference: {fileID: 5536887934966365632, guid: a5767032e132f9c47917834e263aad02,
+        type: 3}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
+      propertyPath: _variables.TimeTillNextSpawn
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
+      propertyPath: _variables.MaxCarsInScene
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
+      propertyPath: _variables.StartPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1782105525}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
+      propertyPath: _variables.StartPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 756931730}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
+      propertyPath: _variables.StartPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 769911233}
+    - target: {fileID: 7350961927477939729, guid: ae6811b80431be7409b4967cbc5499d2,
+        type: 3}
+      propertyPath: _variables.StartPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 386670636}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae6811b80431be7409b4967cbc5499d2, type: 3}
 --- !u!1001 &7386229913520209348

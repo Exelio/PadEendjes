@@ -10,6 +10,7 @@ namespace Model
         public event Action OnScared;
 
         private DuckView _view;
+        private DuckVariables _variables;
         private Vector3 _lastPosition = Vector3.zero;
 
         private float _time;
@@ -17,7 +18,7 @@ namespace Model
         private float _distance = 0;
         private float _animationTimer;
 
-        private float _timeBetweenTargetChanges = 1f;
+        private float _timeBetweenTargetChanges = 5f;
         private float _targetTimer;
 
         private bool _canTargetChange;
@@ -28,6 +29,7 @@ namespace Model
         public DuckBehaviour(DuckView view, AudioManager audioManager)
         {
             _view = view;
+            _variables = _view.Variables;
             _audioManager = audioManager;
             _view.OnCaught += DuckCaught;
             _view.OnScared += DuckScared;
@@ -37,10 +39,9 @@ namespace Model
 
         private void DuckScared(Transform trans)
         {
-            _view.Trigger.enabled = true;
             _isDuckCaught = false;
             OnTargetChange(trans);
-            _audioManager.Play("DuckPanic", _view.Source);
+            _audioManager.Play("DuckPanic", _variables.Source);
             OnScared?.Invoke();
         }
 
@@ -52,12 +53,12 @@ namespace Model
             OnCaught?.Invoke();
 
             _isDuckCaught = true;
-            _view.Trigger.enabled = false;
+            _variables.Trigger.enabled = false;
         }
 
         public void Update()
         {
-            if (_distance <= _view.MaxDistance)
+            if (_distance <= _variables.MaxDistance)
                 CheckIdleChange();
 
             TargetChangeTimer();
@@ -72,6 +73,9 @@ namespace Model
             {
                 _canTargetChange = true;
                 _targetTimer = 0;
+
+                if(!_isDuckCaught && !_variables.Trigger.enabled)
+                    _variables.Trigger.enabled = true;
             }
 
             if (!_canTargetChange) _targetTimer += Time.deltaTime;
@@ -79,18 +83,18 @@ namespace Model
 
         private void CheckSpeed()
         {
-            _view.Animator.SetFloat("DuckDistance", _distance);
+            _variables.Animator.SetFloat("DuckDistance", _distance);
         }
 
         public void OnTargetChange(Transform target)
         {
-            _view.FollowTarget = target;
+            _variables.FollowTarget = target;
             _canTargetChange = false;
         }
 
         public void FixedUpdate()
         {
-            if (_view.FollowTarget != null)
+            if (_variables.FollowTarget != null)
             {
                 FollowTarget();
                 LookAtTarget();
@@ -101,7 +105,7 @@ namespace Model
         {
             if (_time >= _timeTillIdleChange)
             {
-                _view.Animator.SetTrigger("OnIdle2");
+                _variables.Animator.SetTrigger("OnIdle2");
                 GetRandomTime();
                 _time = 0;
             }
@@ -111,20 +115,22 @@ namespace Model
 
         private void GetRandomTime()
         {
-            _timeTillIdleChange = UnityEngine.Random.Range(_view.TimeUntilIdleChange.x, _view.TimeUntilIdleChange.y);
+            _timeTillIdleChange = UnityEngine.Random.Range(_variables.TimeUntilIdleChange.x, _variables.TimeUntilIdleChange.y);
         }
 
         private void LookAtTarget()
         {
-            _view.Transform.LookAt(_view.FollowTarget.position);
+            _view.transform.LookAt(_variables.FollowTarget.position);
         }
 
         private void FollowTarget()
         {
-            _distance = Vector3.Distance(_view.transform.position, _view.FollowTarget.position);
-            if (_distance >= _view.MaxDistance)
+            _distance = Vector3.Distance(_view.transform.position, _variables.FollowTarget.position);
+            if (_distance >= _variables.MaxDistance)
             {
-                _view.transform.position = Vector3.Lerp(_view.Transform.position, _view.FollowTarget.position - (_view.FollowTarget.forward * _view.TargetOffset), _view.FollowSpeed);
+                _view.transform.position = Vector3.Lerp(_view.transform.position,
+                    _variables.FollowTarget.position - (_variables.FollowTarget.forward * _variables.TargetOffset),
+                    _variables.FollowSpeed);
             }
             else
             {
@@ -137,9 +143,9 @@ namespace Model
         {
             if (_animationTimer <= 0f && !_isDuckCaught)
             {
-                _animationTimer = UnityEngine.Random.Range(_view.TimeBetweenAudio.x, _view.TimeBetweenAudio.y);
+                _animationTimer = UnityEngine.Random.Range(_variables.TimeBetweenAudio.x, _variables.TimeBetweenAudio.y);
 
-                _audioManager.Play("DuckQuack", _view.Source);
+                _audioManager.Play("DuckQuack", _variables.Source);
             }
             else
                 _animationTimer -= Time.deltaTime;

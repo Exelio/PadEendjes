@@ -17,6 +17,7 @@
     // Update is called once per frame
     public void Update()
     {
+        if (_tfController == null) return;
         if (_tfController.ReachedDestination && _currentWaypoint != null)
         {
             if (_currentWaypoint.IsDriveable)
@@ -24,6 +25,8 @@
                 _tfController.IsStopping = false;
                 _currentWaypoint = _currentWaypoint.NextWaypoint;
                 _tfController.Waypoint = _currentWaypoint;
+
+                if (_currentWaypoint.PreviousWaypoint == null) return;
                 _tfController?.ChangeCheckSpeed(_currentWaypoint.PreviousWaypoint.MaxSpeed);
             }
             else { _tfController.Waypoint = null; _tfController.IsStopping = true; }

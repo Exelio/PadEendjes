@@ -195,7 +195,7 @@ namespace Model
         {
             DuckView view = obj?.GetComponent<DuckView>();
 
-            if (view != null && view.FollowTarget != _view.transform)
+            if (view != null)
             {
                 _duckList.Add(view.gameObject);
                 CheckDuckList(view);

@@ -75,7 +75,6 @@ public class RewardBehaviour
     {
         _variables.DuckCount = duckcount;
         ChangeText();
-        //Debug.Log($"{_variables.DuckCount} ducks/ {_variables.DucksNeeded} ducks TO complete level \n{_variables.DuckCount} ducks/ {_variables.MaxDucks}"); 
     }
 
     private void ChangeText()
@@ -84,12 +83,11 @@ public class RewardBehaviour
         _variables.CoinCounter.text = _coins.ToString();
     }
 
-    public void LostDuck(int duckcount) { _variables.DuckCount = duckcount; ChangeText(); }
+    public void LostDuck() { _variables.DuckCount--; ChangeText(); }
 
     public void AddMistake() 
     {
         _variables.MistakeCount += 1;
-        //Debug.Log($"{_variables.MistakeCount}");
     }
 
     public bool CheckMistakes() =>  _variables.MistakeCount <= _variables.MaxMistakes;

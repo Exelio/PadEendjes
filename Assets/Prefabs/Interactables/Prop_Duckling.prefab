@@ -164,6 +164,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8205300ed7f8fdf4fbd7dadf42ffe366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _variables:
+    FollowTarget: {fileID: 0}
+    FollowSpeed: 0.05
+    TargetOffset: 0.4
+    MaxDistance: 0.75
+    Animator: {fileID: 8524072389958186684}
+    TimeUntilIdleChange: {x: 10, y: 15}
+    Rigidbody: {fileID: 1891097517}
+    Trigger: {fileID: 4096553511751891581}
+    Source: {fileID: 8971310964186253753}
+    TimeBetweenAudio: {x: 5, y: 10}
   _followSpeed: 0.05
   _targetOffset: 0.4
   _maxDistance: 0.75

@@ -14,6 +14,8 @@ namespace Game
     {
         public event EventHandler Initialized;
 
+        #region Editor changeable variables
+
         [SerializeField] private AudioView _audio;
         [SerializeField] private PlayerView _player;
         [SerializeField] private CameraView _camera;
@@ -26,21 +28,22 @@ namespace Game
         [SerializeField] private RallyView _rally;
         [SerializeField] private CoinView[] _coins;
 
-        private AudioManager _audioManager;
+        #endregion
 
+        #region Models
+
+        private AudioManager _audioManager;
         private PlayerEngine _playerEngine;
         private CameraEngine _cameraEngine;
-
         private PlayerStateMachine _playerStateMachine;
-
         private InputHandler _inputHandler;
-
         private RewardBehaviour _rewardBehaviour;
         private List<DuckBehaviour> _duckBehaviours = new List<DuckBehaviour>();
-
         private MistakeManager _mistakeManager;
-
         private RallyBehaviour _rallyBehaviour;
+        private TrafficHubBehaviour _trafficHubBehaviour;
+
+        #endregion
 
         private bool _pauzed;
         private bool _levelComplete;
@@ -49,31 +52,43 @@ namespace Game
         {
             LockCursor(false,CursorLockMode.Locked);
 
-            _audioManager = new AudioManager(_audio);
+            #region Model Creation
 
+            _audioManager = new AudioManager(_audio);
             _playerEngine = new PlayerEngine(_player,_audioManager);
             _playerStateMachine = new PlayerStateMachine(_playerEngine);
             _cameraEngine = new CameraEngine(_camera, _player.transform);
             _mistakeManager = new MistakeManager(_mistake, _audioManager);
-
+            _rewardBehaviour = new RewardBehaviour(_reward);
+            _rallyBehaviour = new RallyBehaviour(_rally);
             _inputHandler = new InputHandler();
+            _trafficHubBehaviour = new TrafficHubBehaviour(_trafficHUb, _audioManager);
+            CreateDucklingModels();
+
+            #endregion
+
+            #region Command assigning
+
             _inputHandler.LeftStickCommand = new MoveCommand(_playerStateMachine);
             _inputHandler.RightStickCommand = new RotateCameraCommand(_cameraEngine);
             _inputHandler.YCommand = new CameraInteractCommand(_cameraEngine);
 
-            _button.AudioManager = _audioManager;
+            #endregion
 
+            #region Audio assigning
+
+            _button.AudioManager = _audioManager;
             _pond.AudioManager = _audioManager;
 
-            _trafficHUb.AudioManager = _audioManager;
+            #endregion
+
+            #region Reward assigning
 
             _reward.MaxDuckAmount = _ducklings.Length;
-            //Debug.Log(_reward.MaxDuckAmount);
-            _rewardBehaviour = new RewardBehaviour(_reward);
 
-            _rallyBehaviour = new RallyBehaviour(_rally);
+            #endregion
 
-            CreateDucklingModels();
+            #region Events
 
             _playerEngine.OnStreetInFront += ChangeCameraView;
             _playerEngine.OnMistake += AddMistake;
@@ -89,8 +104,12 @@ namespace Game
 
             CheckCoins();
 
+            #endregion
+
             StartCoroutine(LateInitialize());
         }
+
+        #region Coin related
 
         private void CheckCoins()
         {
@@ -105,6 +124,8 @@ namespace Game
             _rewardBehaviour.AddCoin(obj);
         }
 
+        #endregion
+
         private void LevelComplete(Transform obj)
         {
             LockCursor(true, CursorLockMode.None);
@@ -115,7 +136,7 @@ namespace Game
 
             _rewardBehaviour.CompletedLevel(); 
             _playerStateMachine.SetPlayerStateToIdle();
-            _trafficHUb.PauzeCars();
+            _trafficHubBehaviour.PauzeCars();
 
             _levelComplete = true;
         }
@@ -135,7 +156,7 @@ namespace Game
         private void ResumeGame()
         {
             _pauzed = false;
-            _trafficHUb.Resume();
+            _trafficHubBehaviour.Resume();
             LockCursor(false, CursorLockMode.Locked);
         }
 
@@ -143,7 +164,7 @@ namespace Game
         {
             _pauzed = true;
             _playerStateMachine.SetPlayerStateToIdle();
-            _trafficHUb.PauzeCars();
+            _trafficHubBehaviour.PauzeCars();
             LockCursor(true,CursorLockMode.None);
         }
 
@@ -155,13 +176,17 @@ namespace Game
 
             for (int i = 0; i < _playerEngine.DuckList.Count; i++)
                 _playerEngine.DuckList[i].GetComponent<DuckView>().OnGettingScared(_rallyBehaviour.RallyPoints[i].transform);
+
+            _playerEngine.RemoveDucks();
         }
 
         private void ChangeCameraView(bool value)
         {
             _cameraEngine.ToggleAnchorPoint(value);
-            _trafficHUb.SetForwardChecking(value);
+            _trafficHubBehaviour.SetForwardChecking(value);
         }
+
+        #region Duck related
 
         private void CreateDucklingModels()
         {
@@ -178,24 +203,12 @@ namespace Game
 
         private void DuckScared()
         {
-            _playerEngine.RemoveDucks();
-            _rewardBehaviour.LostDuck(_playerEngine.DuckList.Count);
+            _rewardBehaviour.LostDuck();
         }
 
         private void DuckCaught()
         {
-            Debug.Log($"{_playerEngine.DuckList.Count}, caught a duck");
             _rewardBehaviour.CaughtDuck(_playerEngine.DuckList.Count);
-        }
-
-        private void Update()
-        {
-            if (_pauzed) return;
-            UpdateDucks();
-
-            if (_levelComplete) return;
-            _inputHandler.Update();
-            _button.OnGamePauze();
         }
 
         private void UpdateDucks()
@@ -212,8 +225,21 @@ namespace Game
                 behaviour.FixedUpdate();
         }
 
+        #endregion
+
+        private void Update()
+        {
+            UpdateDucks();
+            if (_pauzed) return;
+
+            if (_levelComplete) return;
+            _inputHandler.Update();
+            _button.OnGamePauze();
+        }
+
         private void FixedUpdate()
         {
+            FixedUpdateDucks();
             _playerStateMachine.FixedUpdate();
             if (_pauzed || _levelComplete) 
             {
@@ -221,9 +247,7 @@ namespace Game
                 return; 
             }
             _cameraEngine.FixedCameraUpdate();
-            _trafficHUb.FixedUpdateHub();
-
-            FixedUpdateDucks();
+            _trafficHubBehaviour.FixedUpdateHub();
         }
 
         private IEnumerator LateInitialize()
