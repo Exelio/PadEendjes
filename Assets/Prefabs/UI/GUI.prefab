@@ -186,7 +186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -76.95003, y: -80.99999}
+  m_AnchoredPosition: {x: -76.95003, y: -98}
   m_SizeDelta: {x: 61, y: 61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &764294087
@@ -333,7 +333,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -96.57501}
-  m_SizeDelta: {x: 0, y: 141.35}
+  m_SizeDelta: {x: -80, y: 141.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1052269058
 CanvasRenderer:
@@ -365,14 +365,14 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 1dfd41c9080de0b47a805b103d99b2d3, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 5
-    m_MaxSize: 193
+    m_MaxSize: 60
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: You DUM DUM
 --- !u!1 &1161660303
@@ -485,7 +485,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 50.174995}
+  m_AnchoredPosition: {x: 0, y: 45}
   m_SizeDelta: {x: -86.9, y: -434.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1491846211
@@ -518,9 +518,9 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 706283c566cb6cd4aa34cb75468fe4c0, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
-    m_MaxSize: 193
+    m_MaxSize: 40
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -545,7 +545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1706329644
 RectTransform:
   m_ObjectHideFlags: 0
@@ -783,6 +783,7 @@ RectTransform:
   - {fileID: 7357654530469966351}
   - {fileID: 1706329644}
   - {fileID: 8026065897590409741}
+  - {fileID: 5944006607514810560}
   m_Father: {fileID: 1391761554645353206}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -882,10 +883,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 880280e184f05734fabf4da164d79654, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioSource: {fileID: 408894053}
   _popUpPanel: {fileID: 1706329643}
+  _goedGekekenPanel: {fileID: 1057793509870041513}
+  _goedGekekenText: {fileID: 4748383013127956148}
   _title: {fileID: 1052269057}
   _text: {fileID: 1491846210}
-  AudioSource: {fileID: 408894053}
+  _mistakes:
+  - MistakeKind: 0
+    TitleText: Gebruik zebrapaden
+    MistakeTextDescription: Wanneer er een zebrapad in de buurt is moet je hem gebruiken!
+  - MistakeKind: 1
+    TitleText: Steek recht over
+    MistakeTextDescription: Steek loodrecht over ten opzichte van de straat zodat
+      je snel aan de overkant bent.
+  - MistakeKind: 2
+    TitleText: Links en rechts kijken
+    MistakeTextDescription: Kijk links en recht voor je oversteekt zodat je eventueel
+      aankomende voetuigen ziet
+  - MistakeKind: 3
+    TitleText: Bewegen tijdens links en rechts kijken
+    MistakeTextDescription: Je mag niet voorwaards, achterwaards, links of rechts
+      bewegen terwijl je aan het links en rechts kijken bent
 --- !u!82 &408894053
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1093,6 +1112,42 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 73, y: -400}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1057793509870041513
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5944006607514810560}
+  m_Layer: 5
+  m_Name: Goed gekeken?
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &5944006607514810560
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057793509870041513}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7771054865997514809}
+  m_Father: {fileID: 158827774290742644}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1490296278725720411
@@ -1769,6 +1824,83 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3558655185264413885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7771054865997514809}
+  - component: {fileID: 8578964360372505753}
+  - component: {fileID: 4748383013127956148}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7771054865997514809
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558655185264413885}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.4392, y: 0.4392, z: 0.4392}
+  m_Children: []
+  m_Father: {fileID: 5944006607514810560}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 400, y: 400}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8578964360372505753
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558655185264413885}
+  m_CullTransparentMesh: 0
+--- !u!114 &4748383013127956148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558655185264413885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 832b60e9389124a40ac803302ff20221, type: 3}
+    m_FontSize: 150
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 0
+    m_MaxSize: 150
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Links goed!
 --- !u!1 &3770915269131573043
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,7 +2014,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 81, y: -81}
+  m_AnchoredPosition: {x: 81, y: -98}
   m_SizeDelta: {x: 61, y: 61}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3771991927157874371
@@ -2004,7 +2136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1391761554645353206}
   m_Layer: 0
-  m_Name: UI
+  m_Name: GUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

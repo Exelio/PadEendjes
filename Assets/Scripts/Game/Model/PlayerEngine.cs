@@ -106,6 +106,10 @@ namespace Model
             {
                 CheckWalkInStraightLine();
             }
+            else
+            {
+                _startAngle = _view.transform.rotation.eulerAngles.y;
+            }
         }
 
         private void CountMistake(Mistakes mistake)
@@ -114,15 +118,18 @@ namespace Model
             _mistakeCrossingRoad = true;
         }
 
+        private float _startAngle;
         private void CheckWalkInStraightLine()
         {
             if (_mistakeStraightCross) return;
 
-                float angle = Mathf.Asin(Vector3.Cross(_stats.Transform.forward, _previousForwardPosition).y) * Mathf.Rad2Deg;
-            if (angle > _stats.MaxAngleDifference || angle < -_stats.MaxAngleDifference)
+            float playerAngle = _view.transform.rotation.eulerAngles.y;
+            float difference = Mathf.DeltaAngle(_startAngle, playerAngle);
+
+            if (difference > _stats.MaxAngleDifference || difference < -_stats.MaxAngleDifference)
             {
                 _mistakeStraightCross = true;
-                //CountMistake(Mistakes.NotCrossingStraight);
+                CountMistake(Mistakes.NotCrossingStraight);
             }
             _previousForwardPosition = _stats.Transform.forward;
         }

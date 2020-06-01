@@ -2,6 +2,6 @@
 {
     public enum Mistakes
     {
-        NotUsingCrossingRoad, NotCrossingStraight, NotLookingLeftAndRight
+        NotUsingCrossingRoad, NotCrossingStraight, NotLookingLeftAndRight, MovingWhileLookingLeftAndRight
     }
 }

@@ -93,6 +93,9 @@ namespace Game
             _playerEngine.OnStreetInFront += ChangeCameraView;
             _playerEngine.OnMistake += AddMistake;
 
+            _cameraEngine.OnMistake += AddMistake;
+            _cameraEngine.OnLookedWell += LookedWell;
+
             _mistakeManager.OnPopUp += PauzeGame;
             _mistakeManager.OnPopUpOver += ResumeGame;
 
@@ -107,6 +110,11 @@ namespace Game
             #endregion
 
             StartCoroutine(LateInitialize());
+        }
+
+        private void LookedWell(string obj)
+        {
+            _mistakeManager.LookCheck(obj);
         }
 
         #region Coin related
@@ -215,7 +223,7 @@ namespace Game
         {
             if (_ducklings.Length == 0) return;
             foreach (var behaviour in _duckBehaviours)
-                behaviour.Update();
+                behaviour.Update(_pauzed);
         }
 
         private void FixedUpdateDucks()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using View;
 
@@ -18,7 +19,7 @@ namespace Model
         private float _distance = 0;
         private float _animationTimer;
 
-        private float _timeBetweenTargetChanges = 5f;
+        private float _timeBetweenTargetChanges = 1.25f;
         private float _targetTimer;
 
         private bool _canTargetChange;
@@ -41,7 +42,8 @@ namespace Model
         {
             _isDuckCaught = false;
             OnTargetChange(trans);
-            _audioManager.Play("DuckPanic", _variables.Source);
+
+            _view.StartCoroutine(DuckPanic(3));
             OnScared?.Invoke();
         }
 
@@ -56,15 +58,16 @@ namespace Model
             _variables.Trigger.enabled = false;
         }
 
-        public void Update()
+        public void Update(bool gamePauzed)
         {
             if (_distance <= _variables.MaxDistance)
                 CheckIdleChange();
 
-            TargetChangeTimer();
-
             CheckSpeed();
             PlaySoundAtRandom();
+
+            if (gamePauzed) return;
+            TargetChangeTimer();
         }
 
         private void TargetChangeTimer()
@@ -145,10 +148,27 @@ namespace Model
             {
                 _animationTimer = UnityEngine.Random.Range(_variables.TimeBetweenAudio.x, _variables.TimeBetweenAudio.y);
 
-                _audioManager.Play("DuckQuack", _variables.Source);
+                if(!_variables.Source.isPlaying)
+                    _audioManager.Play("DuckQuack", _variables.Source);
             }
             else
                 _animationTimer -= Time.deltaTime;
+        }
+
+        private IEnumerator DuckPanic(int amount)
+        {
+            int panicCount = 0;
+            while(panicCount < amount)
+            {
+                if (!_variables.Source.isPlaying)
+                {
+                    yield return new WaitForSeconds(.1f);
+                    panicCount++;
+                    _audioManager.Play("DuckPanic", _variables.Source);
+                    yield return null;
+                }
+                yield return null;
+            }
         }
     }
 }
