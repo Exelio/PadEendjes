@@ -216,7 +216,7 @@ MonoBehaviour:
     CrossingRoadLayer:
       serializedVersion: 2
       m_Bits: 32768
-    Speed: 3
+    Speed: 2.5
     RotationLerpSpeed: 0.05
     Gravity: 9.87
     TimeTillBored: 5
