@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4746334195248373676}
   - component: {fileID: 4360992362514523546}
   - component: {fileID: 8050696817862859107}
+  - component: {fileID: 4762021710737532447}
   m_Layer: 0
   m_Name: Prop_Car_01
   m_TagString: Untagged
@@ -84,3 +85,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &4762021710737532447
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8612294351772937663}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -7827349734099672231, guid: ed606a639b2a9424eaa33ceade6a84fd, type: 3}

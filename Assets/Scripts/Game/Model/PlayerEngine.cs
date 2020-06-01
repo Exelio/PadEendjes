@@ -52,6 +52,7 @@ namespace Model
 
             _view.OnExitRoad += ResetMistakeBools;
             _view.OnInteract += ApplyInteraction;
+            _view.OnUnsaveSpot += OnUnsaveSpot;
 
             ApplicationBehaviour.Instance.Initialized += (obj, args) => AssignPlayerStats();
         }
@@ -60,6 +61,7 @@ namespace Model
         {
             _mistakeCrossingRoad = false;
             _mistakeStraightCross = false;
+            _mistakeUnsaveSpot = false;
         }
 
         public void FixedPlayerUpdate()
@@ -112,10 +114,19 @@ namespace Model
             }
         }
 
+        private bool _mistakeUnsaveSpot;
+        private void OnUnsaveSpot()
+        {
+            if(!_mistakeUnsaveSpot)
+            {
+                CountMistake(Mistakes.CrossingAtAUnsaveSpot);
+                _mistakeUnsaveSpot = true;
+            }
+        }
+
         private void CountMistake(Mistakes mistake)
         {
             OnMistake?.Invoke(mistake);
-            _mistakeCrossingRoad = true;
         }
 
         private float _startAngle;
@@ -129,7 +140,7 @@ namespace Model
             if (difference > _stats.MaxAngleDifference || difference < -_stats.MaxAngleDifference)
             {
                 _mistakeStraightCross = true;
-                CountMistake(Mistakes.NotCrossingStraight);
+                //CountMistake(Mistakes.NotCrossingStraight);
             }
             _previousForwardPosition = _stats.Transform.forward;
         }

@@ -24,10 +24,12 @@ namespace View
         [SerializeField] private PlayerStats _stats;
 
         public event Action OnExitRoad;
+        public event Action OnUnsaveSpot;
 
         private LayerMask _interactLayer;
         private LayerMask _streetLayer;
         private LayerMask _crossingRoadLayer;
+        private LayerMask _unsaveLayer;
 
         public void Initialize()
         {
@@ -41,6 +43,7 @@ namespace View
             _streetLayer = LayerMask.NameToLayer("Street");
 
             _crossingRoadLayer = LayerMask.NameToLayer("CrossingRoad");
+            _unsaveLayer = LayerMask.NameToLayer("UnsaveSpots");
         }
 
         public void MotionAnimation(float direction)
@@ -66,7 +69,8 @@ namespace View
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.layer == _crossingRoadLayer) _stats.IsOnCrossingRoad = true;
-            if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer)
+            if (other.gameObject.layer == _unsaveLayer) OnUnsaveSpot?.Invoke();
+            if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer || other.gameObject.layer == _unsaveLayer)
                 _stats.IsOnStreet = true;
             else
                 _stats.IsOnStreet = false;

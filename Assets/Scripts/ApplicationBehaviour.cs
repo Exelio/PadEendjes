@@ -85,6 +85,7 @@ namespace Game
             #region Reward assigning
 
             _reward.MaxDuckAmount = _ducklings.Length;
+            _rewardBehaviour.ChangeText();
 
             #endregion
 

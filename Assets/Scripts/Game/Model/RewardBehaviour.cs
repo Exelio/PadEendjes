@@ -76,7 +76,7 @@ public class RewardBehaviour
         ChangeText();
     }
 
-    private void ChangeText()
+    public void ChangeText()
     {
         _view.Variables.DuckCounter.text = _variables.DuckCount + "/" + _view.MaxDuckAmount;
         _variables.CoinCounter.text = _coins.ToString();

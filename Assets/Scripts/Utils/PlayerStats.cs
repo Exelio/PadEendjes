@@ -13,6 +13,8 @@ namespace Utils
         public LayerMask StreetLayer;
         [Tooltip("Assign crossing road layer")]
         public LayerMask CrossingRoadLayer;
+        [Tooltip("Assign unsavespot layer")]
+        public LayerMask UnsaveSpot;
 
         [Header("Movement Parameters")]
         [Tooltip("Set the player's movement speed")]
