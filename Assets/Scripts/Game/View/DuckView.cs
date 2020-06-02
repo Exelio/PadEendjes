@@ -6,7 +6,7 @@ namespace View
     [Serializable]
     public struct DuckVariables
     {
-        [HideInInspector] public Transform FollowTarget;
+        public Transform FollowTarget;
 
         [Header("Movement variables")]
         public float FollowSpeed;

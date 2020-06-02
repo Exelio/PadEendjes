@@ -11,6 +11,7 @@ namespace Model
     {
         public event Action<bool> OnStreetInFront;
         public event Action<Mistakes> OnMistake;
+        public event Action<bool> OnUnsaveSpotSet;
 
         public List<GameObject> DuckList { get => _duckList; set => _duckList = value; }
 
@@ -110,7 +111,7 @@ namespace Model
             }
             else
             {
-                _startAngle = _view.transform.rotation.eulerAngles.y;
+                _startPosition = _view.transform.position;
             }
         }
 
@@ -119,8 +120,9 @@ namespace Model
         {
             if(!_mistakeUnsaveSpot)
             {
-                CountMistake(Mistakes.CrossingAtAUnsaveSpot);
                 _mistakeUnsaveSpot = true;
+                CountMistake(Mistakes.CrossingAtAUnsaveSpot);
+                OnUnsaveSpotSet?.Invoke(_mistakeUnsaveSpot);
             }
         }
 
@@ -129,18 +131,18 @@ namespace Model
             OnMistake?.Invoke(mistake);
         }
 
-        private float _startAngle;
+        private Vector3 _startPosition;
         private void CheckWalkInStraightLine()
         {
             if (_mistakeStraightCross) return;
 
-            float playerAngle = _view.transform.rotation.eulerAngles.y;
-            float difference = Mathf.DeltaAngle(_startAngle, playerAngle);
+            float distanceWalked = Vector3.Distance(_startPosition, _view.transform.position);
+            float difference = _query.CheckAngle(_view.transform.position, _startPosition);
 
-            if (difference > _stats.MaxAngleDifference || difference < -_stats.MaxAngleDifference)
+            if ((difference > _stats.MaxAngleDifference || difference < -_stats.MaxAngleDifference) && distanceWalked > 1f)
             {
                 _mistakeStraightCross = true;
-                //CountMistake(Mistakes.NotCrossingStraight);
+                CountMistake(Mistakes.NotCrossingStraight);
             }
             _previousForwardPosition = _stats.Transform.forward;
         }

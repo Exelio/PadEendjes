@@ -1,35 +1,38 @@
-﻿public class TrafficWaypointNavigator
+﻿namespace Model
 {
-    private Waypoint _currentWaypoint;
-    private TrafficController _tfController;
-
-    public TrafficWaypointNavigator(TrafficController controller, Waypoint startWaypoint)
+    public class TrafficWaypointNavigator
     {
-        _tfController = controller;
-        _currentWaypoint = startWaypoint;
-    }
+        private Waypoint _currentWaypoint;
+        private TrafficController _tfController;
 
-    public void Initialize()
-    {
-        _tfController.Waypoint = _currentWaypoint;
-    }
-
-    // Update is called once per frame
-    public void Update()
-    {
-        if (_tfController == null) return;
-        if (_tfController.ReachedDestination && _currentWaypoint != null)
+        public TrafficWaypointNavigator(TrafficController controller, Waypoint startWaypoint)
         {
-            if (_currentWaypoint.IsDriveable)
-            {
-                _tfController.IsStopping = false;
-                _currentWaypoint = _currentWaypoint.NextWaypoint;
-                _tfController.Waypoint = _currentWaypoint;
+            _tfController = controller;
+            _currentWaypoint = startWaypoint;
+        }
 
-                if (_currentWaypoint.PreviousWaypoint == null) return;
-                _tfController?.ChangeCheckSpeed(_currentWaypoint.PreviousWaypoint.MaxSpeed);
+        public void Initialize()
+        {
+            _tfController.Waypoint = _currentWaypoint;
+        }
+
+        // Update is called once per frame
+        public void Update()
+        {
+            if (_tfController == null) return;
+            if (_tfController.ReachedDestination && _currentWaypoint != null)
+            {
+                if (_currentWaypoint.IsDriveable)
+                {
+                    _tfController.IsStopping = false;
+                    _currentWaypoint = _currentWaypoint.NextWaypoint;
+                    _tfController.Waypoint = _currentWaypoint;
+
+                    if (_currentWaypoint.PreviousWaypoint == null) return;
+                    _tfController?.ChangeCheckSpeed(_currentWaypoint.PreviousWaypoint.MaxSpeed);
+                }
+                else { _tfController.Waypoint = null; _tfController.IsStopping = true; }
             }
-            else { _tfController.Waypoint = null; _tfController.IsStopping = true; }
-        }        
+        }
     }
 }

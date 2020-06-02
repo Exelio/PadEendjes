@@ -52,14 +52,23 @@ namespace Model
             {
                 _previousPosition = _target.transform.position;
                 _startAngle = _view.transform.rotation.eulerAngles.y;
+                _mistakeCrossAtUnsaveSpot = false;
                 return; 
             }
 
             CheckDistanceChange();
         }
 
+        public void SetCrossUnsaveSpot(bool value)
+        {
+            _mistakeCrossAtUnsaveSpot = value;
+        }
+
+        private bool _mistakeCrossAtUnsaveSpot;
         private void CheckDistanceChange()
         {
+            if (_mistakeCrossAtUnsaveSpot) return;
+
             float distance = Vector3.Distance(_target.transform.position, _previousPosition);
 
             if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake)
@@ -117,21 +126,7 @@ namespace Model
             float forwardAngleInDegrees = Mathf.Sin(forward.y) * Mathf.Rad2Deg;
             float upAngleInDegrees = Mathf.Tan(up.z) * Mathf.Rad2Deg;
 
-            //if (_isToggled)
-            //{
-            //    float angle = _target.transform.rotation.eulerAngles.y;
-            //    float leftDifference = Mathf.DeltaAngle(angle, upAngleInDegrees + _stats.YawClamp.x);
-            //    float rightDifference = Mathf.DeltaAngle(angle, upAngleInDegrees + _stats.YawClamp.x);
-
-            //    if (horizontal > 0 && leftDifference < 0)
-            //        _stats.PrimaryAnchorPoint.Rotate(Vector3.up, horizontal * _stats.RotationSpeed * Time.deltaTime, Space.World);
-            //    else if (horizontal < 0 && rightDifference < 0)
-            //        _stats.PrimaryAnchorPoint.Rotate(Vector3.up, horizontal * _stats.RotationSpeed * Time.deltaTime, Space.World);
-            //}
-            //else 
-            //{
-                _stats.PrimaryAnchorPoint.Rotate(Vector3.up, horizontal * _stats.RotationSpeed * Time.deltaTime, Space.World); 
-            //}
+            _stats.PrimaryAnchorPoint.Rotate(Vector3.up, horizontal * _stats.RotationSpeed * Time.deltaTime, Space.World); 
 
             if (_stats.IsVerticalInverted)
                 vertical *= -1;
@@ -161,9 +156,7 @@ namespace Model
         private void ToggleAnchorPoints()
         {
             if (_isToggled)
-            {
                 _stats.CameraTransform.SetParent(_stats.ForwardAnchorPoint);
-            }
             else
             {
                 _stats.CameraTransform.SetParent(_stats.BackwardAnchorPoint);

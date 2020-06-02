@@ -93,6 +93,7 @@ namespace Game
 
             _playerEngine.OnStreetInFront += ChangeCameraView;
             _playerEngine.OnMistake += AddMistake;
+            _playerEngine.OnUnsaveSpotSet += _cameraEngine.SetCrossUnsaveSpot;
 
             _cameraEngine.OnMistake += AddMistake;
             _cameraEngine.OnLookedWell += LookedWell;

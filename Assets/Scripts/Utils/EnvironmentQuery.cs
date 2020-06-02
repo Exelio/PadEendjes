@@ -51,7 +51,7 @@ namespace Utils
                 Transform targetTrans = target.transform;
                 Vector3 dirToTarget = (targetTrans.position - origin.position).normalized;
 
-                if (Vector3.Angle(origin.forward, dirToTarget) < viewAngle / 2)
+                if (CheckAngle(origin.forward, dirToTarget) < viewAngle / 2)
                 {
                     float disToTarget = Vector3.Distance(origin.position, targetTrans.position);
 

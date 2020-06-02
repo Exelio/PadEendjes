@@ -1,6 +1,7 @@
 ﻿using Utils;
 using UnityEngine;
 using System;
+using System.Collections;
 
 namespace View
 {
@@ -66,15 +67,28 @@ namespace View
             }
         }
 
+        private GameObject unsaveObj;
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.layer == _crossingRoadLayer) _stats.IsOnCrossingRoad = true;
-            if (other.gameObject.layer == _unsaveLayer) OnUnsaveSpot?.Invoke();
+            if (other.gameObject.layer == _unsaveLayer && !_stats.IsOnStreet) { OnUnsaveSpot?.Invoke(); SetUnsaveObj(other); }
             if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer || other.gameObject.layer == _unsaveLayer)
+            {
                 _stats.IsOnStreet = true;
+                if(other.gameObject.layer == _unsaveLayer)
+                {
+                    SetUnsaveObj(other);
+                }
+            }
             else
                 _stats.IsOnStreet = false;
 
+        }
+
+        private void SetUnsaveObj(Collider other)
+        {
+            unsaveObj = other.gameObject;
+            unsaveObj.SetActive(false);
         }
 
         private void OnTriggerExit()
@@ -84,6 +98,14 @@ namespace View
             _stats.IsOnCrossingRoad = false;
 
             OnExitRoad?.Invoke();
+            StartCoroutine(timer(1f));
+        }
+
+        IEnumerator timer(float time)
+        {
+            yield return new WaitForSeconds(time);
+            if(unsaveObj != null)
+                unsaveObj.SetActive(true);
         }
 
         private void OnDrawGizmos()
