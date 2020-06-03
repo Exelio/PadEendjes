@@ -72,7 +72,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 2
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3763,6 +3763,38 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_IsSelectable: 1
-  m_SelectedFaces: 
-  m_SelectedEdges: []
-  m_SelectedVertices: 
+  m_SelectedFaces: 3c000000310000003d00000032000000
+  m_SelectedEdges:
+  - a: 240
+    b: 241
+  - a: 242
+    b: 240
+  - a: 241
+    b: 243
+  - a: 243
+    b: 242
+  - a: 196
+    b: 197
+  - a: 198
+    b: 196
+  - a: 197
+    b: 199
+  - a: 199
+    b: 198
+  - a: 244
+    b: 245
+  - a: 246
+    b: 244
+  - a: 245
+    b: 247
+  - a: 247
+    b: 246
+  - a: 200
+    b: 201
+  - a: 202
+    b: 200
+  - a: 201
+    b: 203
+  - a: 203
+    b: 202
+  m_SelectedVertices: f0000000f1000000f2000000f3000000c4000000c5000000c6000000c7000000f4000000f5000000f6000000f7000000c8000000c9000000ca000000cb000000
