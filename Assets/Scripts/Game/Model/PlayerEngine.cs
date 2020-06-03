@@ -72,8 +72,12 @@ namespace Model
             IsGrounded = _query.IsGrounded(_stats.Transform.position, _stats.Collider.radius * 0.9f, _stats.WalkableLayer);
             
             _isCloseToCrossingRoad = _query.CastSphere(_stats.Transform.position, _stats.MaxRadius, _stats.CrossingRoadLayer);
-            _isCrossingRoadInFront = _query.ShootRay(ref _hit, _stats.Transform.position, _stats.DistanceToStreet/2, _stats.Transform.forward, _stats.CrossingRoadLayer);
-            _isStreetInFront = _query.ShootRay(ref _hit, _stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
+
+            if (!_stats.IsOnCrossingRoad && !_stats.IsOnStreet)
+            {
+                _isCrossingRoadInFront = _query.ShootRay(ref _hit, _stats.Transform.position, _stats.DistanceToStreet / 2, _stats.Transform.forward, _stats.CrossingRoadLayer);
+                _isStreetInFront = _query.ShootRay(ref _hit, _stats.Transform.position, _stats.DistanceToStreet, _stats.Transform.forward, _stats.StreetLayer);
+            }
 
             CheckChangeIsStreetInFront();
             CheckCorrectStreetCross();
@@ -93,6 +97,9 @@ namespace Model
 
         private void CheckCorrectStreetCross()
         {
+            Debug.Log(_stats.IsOnWalkingArea);
+            if (_stats.IsOnWalkingArea) return;
+
             RoadBehaviour beh = _hit.transform?.GetComponent<RoadBehaviour>();
             if (beh == null) return;
 
@@ -101,8 +108,12 @@ namespace Model
             {
                 if (_mistakeCrossingRoad) return;
 
-                _mistakeCrossingRoad = true;
-                CountMistake(Mistakes.NotUsingCrossingRoad);
+                float distanceWalked = Vector3.Distance(_startPosition, _view.transform.position);
+                if (distanceWalked > 1.5f)
+                {
+                    _mistakeCrossingRoad = true;
+                    CountMistake(Mistakes.NotUsingCrossingRoad);
+                }
             }
 
             if (_stats.IsOnStreet || _stats.IsOnCrossingRoad)

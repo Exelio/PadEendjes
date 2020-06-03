@@ -14,7 +14,9 @@ namespace Utils
         [Tooltip("Assign crossing road layer")]
         public LayerMask CrossingRoadLayer;
         [Tooltip("Assign unsavespot layer")]
-        public LayerMask UnsaveSpot;
+        public LayerMask UnsaveSpotLayer;
+        [Tooltip("Assign walk Area layer")]
+        public LayerMask WalkAreaLayer;
 
         [Header("Movement Parameters")]
         [Tooltip("Set the player's movement speed")]
@@ -65,5 +67,7 @@ namespace Utils
         public bool IsOnStreet;
         [HideInInspector]
         public bool IsOnCrossingRoad;
+        [HideInInspector]
+        public bool IsOnWalkingArea;
     }
 }

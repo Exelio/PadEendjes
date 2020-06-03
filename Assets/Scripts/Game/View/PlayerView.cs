@@ -31,6 +31,7 @@ namespace View
         private LayerMask _streetLayer;
         private LayerMask _crossingRoadLayer;
         private LayerMask _unsaveLayer;
+        private LayerMask _areaToWalkLayer;
 
         public void Initialize()
         {
@@ -42,9 +43,9 @@ namespace View
 
             _interactLayer = LayerMask.NameToLayer("Interactable");
             _streetLayer = LayerMask.NameToLayer("Street");
-
             _crossingRoadLayer = LayerMask.NameToLayer("CrossingRoad");
             _unsaveLayer = LayerMask.NameToLayer("UnsaveSpots");
+            _areaToWalkLayer = LayerMask.NameToLayer("WalkingArea");
         }
 
         public void MotionAnimation(float direction)
@@ -71,8 +72,9 @@ namespace View
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.layer == _crossingRoadLayer) _stats.IsOnCrossingRoad = true;
+            if (other.gameObject.layer == _areaToWalkLayer) _stats.IsOnWalkingArea = true;
             if (other.gameObject.layer == _unsaveLayer && !_stats.IsOnStreet) { OnUnsaveSpot?.Invoke(); SetUnsaveObj(other); }
-            if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer || other.gameObject.layer == _unsaveLayer)
+            if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer || other.gameObject.layer == _unsaveLayer || other.gameObject.layer == _areaToWalkLayer)
             {
                 _stats.IsOnStreet = true;
                 if(other.gameObject.layer == _unsaveLayer)
@@ -96,6 +98,7 @@ namespace View
             _stats.InteractableObject = null;
             _stats.IsOnStreet = false;
             _stats.IsOnCrossingRoad = false;
+            _stats.IsOnWalkingArea = false;
 
             OnExitRoad?.Invoke();
             StartCoroutine(timer(1f));
