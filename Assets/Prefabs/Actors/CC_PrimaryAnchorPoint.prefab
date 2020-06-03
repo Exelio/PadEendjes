@@ -204,7 +204,7 @@ MonoBehaviour:
     FollowLerpSpeed: 0.2
     SwitchLerpSpeed: 0.075
     RotationSpeed: 120
-    PitchClamp: {x: -30, y: 30}
+    PitchClamp: {x: -15, y: 15}
     YawClamp: {x: -60, y: 60}
     IsVerticalInverted: 1
     VehicleWindowLayer:

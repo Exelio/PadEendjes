@@ -10,6 +10,8 @@ namespace Model
     {
         public event Action<Mistakes> OnMistake;
         public event Action<string> OnLookedWell;
+        public event Action<bool> OnCameraRotateToForward;
+
         private CameraStats _stats;
 
         private Vector3 _dollyDirection;
@@ -44,7 +46,8 @@ namespace Model
             ToggleAnchorPoints();
             ObstacleCollision();
 
-            CheckCorrectCrossing();
+            if(!_isRotatingToForward)
+                CheckCorrectCrossing();
         }
 
         private void CheckCorrectCrossing()
@@ -71,8 +74,8 @@ namespace Model
             if (_mistakeCrossAtUnsaveSpot) return;
 
             float distance = Vector3.Distance(_target.transform.position, _previousPosition);
-
-            if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake)
+            
+            if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake && !_isRotatingToForward)
             {
                 _hasDoneMovingMistake = true;
                 OnMistake?.Invoke(Mistakes.NotLookingLeftAndRight);
@@ -123,6 +126,8 @@ namespace Model
 
         public void ApplyRotation(float horizontal, float vertical)
         {
+            if (_isRotatingToForward) return;
+
             Vector3 forward = _stats.PrimaryAnchorPoint.forward;
             Vector3 up = _stats.ForwardAnchorPoint.forward;
 
@@ -140,6 +145,7 @@ namespace Model
                 _stats.PrimaryAnchorPoint.Rotate(Vector3.right, vertical * _stats.RotationSpeed * Time.deltaTime, Space.Self);
         }
 
+        private bool _isRotatingToForward;
         public void ToggleAnchorPoint(bool value)
         {
             if (_isToggled != value)
@@ -148,7 +154,10 @@ namespace Model
 
                 if (_isToggled)
                 {
-                    _view.StartCoroutine(StartChecking());                }
+                    _isRotatingToForward = true;
+                    OnCameraRotateToForward?.Invoke(_isRotatingToForward);
+                    _view.StartCoroutine(StartChecking());                
+                }
             }
         }
 
@@ -184,21 +193,33 @@ namespace Model
 
         IEnumerator StartChecking()
         {
-            float angle = 100;
-            while(Mathf.Abs(angle) == 0)
+            float angle = Mathf.DeltaAngle(_stats.PrimaryAnchorPoint.rotation.y, _target.rotation.y);
+
+            while (Mathf.Abs(angle) != 0)
             {
-                Debug.Log(angle);
                 angle = Mathf.DeltaAngle(_stats.PrimaryAnchorPoint.rotation.y, _target.rotation.y);
-                _stats.PrimaryAnchorPoint.rotation = Quaternion.Lerp(_stats.PrimaryAnchorPoint.rotation, _target.rotation, 1f);
+                Debug.Log(angle);
+                _stats.PrimaryAnchorPoint.rotation = Quaternion.Lerp(_stats.PrimaryAnchorPoint.rotation, _target.rotation, _stats.FollowLerpSpeed);
+
+                if (Mathf.Abs(angle) < .05f) _stats.PrimaryAnchorPoint.rotation = _target.rotation;
+
+                if (!_isToggled)
+                    break;
                 yield return null;
             }
 
-            Debug.Log(angle);
-            _hasDoneMovingMistake = false;
-            _hasLookedLeft = false;
-            _hasLookedRight = false;
-            _hasToWatchLeftAndRight = true;
-             yield return null;
+            if (_isToggled)
+            {
+                _hasDoneMovingMistake = false;
+                _hasLookedLeft = false;
+                _hasLookedRight = false;
+                _hasToWatchLeftAndRight = true;
+            }
+
+            _isRotatingToForward = false;
+            OnCameraRotateToForward?.Invoke(_isRotatingToForward);
+            _startAngle = _view.transform.rotation.eulerAngles.y;
+            _previousPosition = _target.transform.position;
         }
     }
 }

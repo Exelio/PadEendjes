@@ -209,8 +209,15 @@ namespace Model
             _velocity = Vector3.zero;
         }
 
+        private bool _canRotate = true;
+        public void ToggleRotation(bool value)
+        {
+            if (_canRotate == value) _canRotate = !value;
+        }
+
         public void ApplyRotation(float horizontal, float vertical)
         {
+            if (!_canRotate) return;
             if (horizontal != 0f || vertical != 0f)
             {
                 Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;

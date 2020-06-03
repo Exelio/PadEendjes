@@ -18,8 +18,8 @@ namespace InputHandling
             float horizontalLeft = Input.GetAxis("LStickHorizontal");
             float verticalLeft = Input.GetAxis("LStickVertical");
 
-            float horizontalRight = Input.GetAxisRaw("RStickHorizontal");
-            float verticalRight = Input.GetAxisRaw("RStickVertical");
+            float horizontalRight = Input.GetAxis("RStickHorizontal");
+            float verticalRight = Input.GetAxis("RStickVertical");
 
             Vector2 directionLeft = new Vector2(horizontalLeft, verticalLeft);
             Vector2 directionRight = new Vector2(horizontalRight, verticalRight);
