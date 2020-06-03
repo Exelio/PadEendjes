@@ -73,7 +73,7 @@ namespace View
         {
             if (other.gameObject.layer == _crossingRoadLayer) _stats.IsOnCrossingRoad = true;
             if (other.gameObject.layer == _areaToWalkLayer) _stats.IsOnWalkingArea = true;
-            if (other.gameObject.layer == _unsaveLayer && !_stats.IsOnStreet) { OnUnsaveSpot?.Invoke(); SetUnsaveObj(other); }
+            if (other.gameObject.layer == _unsaveLayer && !_stats.IsOnStreet) { OnUnsaveSpot?.Invoke(); }
             if (other.gameObject.layer == _streetLayer || 
                 other.gameObject.layer == _crossingRoadLayer || 
                 other.gameObject.layer == _unsaveLayer || 
