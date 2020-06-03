@@ -4,6 +4,7 @@ using Utils;
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 namespace Model
 {
@@ -157,19 +158,28 @@ namespace Model
             _previousForwardPosition = _stats.Transform.forward;
         }
 
+        private bool _isMeshActive = true;
         private void CheckChangeIsStreetInFront()
         {
             bool value = false;
             if (_isStreetInFront || _stats.IsOnStreet)
             {
                 value = true;
+                if (_isMeshActive) { _isMeshActive = false; _view.StartCoroutine(SetMesh(1f)); }
             }
             else
             {
                 value = false;
+                if (!_isMeshActive) { _isMeshActive = true; _stats.MeshObj.SetActive(true); }
             }
-
+                       
             OnStreetInFront?.Invoke(value);
+        }
+
+        private IEnumerator SetMesh(float time)
+        {
+            yield return new WaitForSeconds(time);
+            _stats.MeshObj.SetActive(false);
         }
 
         public void ApplyGravity()

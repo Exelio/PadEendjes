@@ -48,6 +48,8 @@ namespace Utils
         [Tooltip("Radius to check for a crossing road")]
         public int MaxRadius;
 
+        public GameObject MeshObj;
+
         [HideInInspector]
         public AudioSource AudioSource;
 
