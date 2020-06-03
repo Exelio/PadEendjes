@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 6244430373954930807}
   - component: {fileID: 401987208333341838}
   - component: {fileID: 5280595942313715884}
-  - component: {fileID: -8010392619575040090}
   m_Layer: 0
   m_Name: Prop_FlowerPotHanging_05
   m_TagString: Untagged
@@ -27,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2137225413916065874}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -97,18 +96,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.49991596, y: 0.5107813, z: 0.38371506}
-  m_Center: {x: 0.0000001937151, y: 0.36997098, z: -0.5130663}
---- !u!65 &-8010392619575040090
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2137225413916065874}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.49991596, y: 0.67997175, z: 0.18068632}
-  m_Center: {x: 0.0000001937151, y: 0.12370467, z: -0.020533524}
+  m_Size: {x: 0.49991596, y: 0.5107813, z: 0.52950245}
+  m_Center: {x: 0.0000001937151, y: -0.47000003, z: -0.358103}
