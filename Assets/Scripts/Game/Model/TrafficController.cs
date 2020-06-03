@@ -113,6 +113,11 @@ namespace Model
             _variables.RigidBody.velocity = Vector3.zero;
         }
 
+        public void OnResume()
+        {
+            _variables.RigidBody.velocity = Vector3.forward;
+        }
+
         private void DestinationReached()
         {
             if (Vector3.Distance(_view.transform.position, _wp.transform.position) <= _view.ViewVariables.Distance) _reachedDestination = true;
@@ -194,7 +199,7 @@ namespace Model
                 float distance = Vector3.Distance(_view.transform.position, visibleTarget.transform.position);
 
                 float forwardAngle = _query.CheckAngle(visibleTarget.transform.forward, _view.transform.forward);
-                float angle = _query.CheckAngle(visibleTarget.transform.position, _view.transform.position);
+                float angle = Mathf.DeltaAngle(visibleTarget.transform.position.y, _view.transform.position.y);
                 float dotResult = _query.CheckDotProduct(_view.transform, visibleTarget);
 
                 bool checkAngles = CheckAngles(forwardAngle, _variables.AngleMaxMin.x, _variables.AngleMaxMin.y, dotResult);
@@ -246,6 +251,7 @@ namespace Model
 
         private void CheckCarDirection(VehicleView view, float angle, float dotResult)
         {
+            Debug.Log($"angle between {_view.name}, and {view.name} = {angle}");
             if (angle < 25 && angle > -25 && Vector3.Distance(_view.transform.position, view.transform.position) <= _variables.VehicleMinDistance)
             {
                 ChangeCheckSpeed(view.CheckSpeed);

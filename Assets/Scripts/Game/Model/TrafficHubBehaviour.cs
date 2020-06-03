@@ -34,6 +34,8 @@ namespace Model
 
         private void FixedUpdateVehicles()
         {
+            if (!_spawnCars) return;
+
             foreach (var controller in _controllerList)
             {
                 controller?.FixedUpdate();
@@ -52,7 +54,14 @@ namespace Model
 
         public void Resume()
         {
+            Debug.Log("Spawn cars");
             _spawnCars = true;
+
+            foreach (var controller in _controllerList)
+            {
+                if (controller == null) return;
+                controller?.OnResume();
+            }
         }
 
         public void AddController()

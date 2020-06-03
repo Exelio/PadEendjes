@@ -2,6 +2,7 @@
 using Utils;
 using UnityEngine;
 using System;
+using System.Collections;
 
 namespace Model
 {
@@ -101,7 +102,6 @@ namespace Model
             if (looked) return;
 
             float difference = Mathf.DeltaAngle(angle, startAngle);
-            Debug.Log(difference);
 
             if (difference < 20f && difference > -20f)
             {
@@ -128,7 +128,7 @@ namespace Model
 
             float forwardAngleInDegrees = Mathf.Sin(forward.y) * Mathf.Rad2Deg;
             float upAngleInDegrees = Mathf.Tan(up.z) * Mathf.Rad2Deg;
-
+                        
             _stats.PrimaryAnchorPoint.Rotate(Vector3.up, horizontal * _stats.RotationSpeed * Time.deltaTime, Space.World); 
 
             if (_stats.IsVerticalInverted)
@@ -148,11 +148,7 @@ namespace Model
 
                 if (_isToggled)
                 {
-                    _hasDoneMovingMistake = false;
-                    _hasLookedLeft = false;
-                    _hasLookedRight = false;
-                    _hasToWatchLeftAndRight = true;
-                }
+                    _view.StartCoroutine(StartChecking());                }
             }
         }
 
@@ -184,6 +180,25 @@ namespace Model
                 _distance = _stats.MaximumDistance;
 
             _stats.BackwardAnchorPoint.localPosition = Vector3.Lerp(_stats.BackwardAnchorPoint.localPosition, _dollyDirection * _distance, _stats.ClipLerpSpeed * Time.deltaTime);
+        }
+
+        IEnumerator StartChecking()
+        {
+            float angle = 100;
+            while(Mathf.Abs(angle) == 0)
+            {
+                Debug.Log(angle);
+                angle = Mathf.DeltaAngle(_stats.PrimaryAnchorPoint.rotation.y, _target.rotation.y);
+                _stats.PrimaryAnchorPoint.rotation = Quaternion.Lerp(_stats.PrimaryAnchorPoint.rotation, _target.rotation, 1f);
+                yield return null;
+            }
+
+            Debug.Log(angle);
+            _hasDoneMovingMistake = false;
+            _hasLookedLeft = false;
+            _hasLookedRight = false;
+            _hasToWatchLeftAndRight = true;
+             yield return null;
         }
     }
 }
