@@ -38968,13 +38968,13 @@ MonoBehaviour:
     AudioSource: {fileID: 0}
   - ClipName: CarDriving
     AudioClip: {fileID: 8300000, guid: d83cf4f5ca46efb4db521c098407100b, type: 3}
-    Volume: 1
+    Volume: 0.5
     Pitch: 1
     IsLooping: 1
     SpatialBlend: 1
     DopplerLevel: 1
     Spread: 0
-    MinDistance: 0.2
+    MinDistance: 5
     MaxDistance: 10
     AudioSource: {fileID: 0}
   - ClipName: DuckPanic
