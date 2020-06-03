@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -171,7 +171,7 @@ Animator:
   m_GameObject: {fileID: 159318743}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 66345dd4a9db8d3438fb1551c0186aa5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8b58baebaacb4f64d8949afd59134821, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1176,7 +1176,7 @@ Animator:
   m_GameObject: {fileID: 8289211605605960101}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 66345dd4a9db8d3438fb1551c0186aa5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8b58baebaacb4f64d8949afd59134821, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1426,7 +1426,7 @@ Animator:
   m_GameObject: {fileID: 8289211606623530519}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 66345dd4a9db8d3438fb1551c0186aa5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 8b58baebaacb4f64d8949afd59134821, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
