@@ -871,6 +871,7 @@ MonoBehaviour:
   - {fileID: 1706329643}
   - {fileID: 6509805575871880977}
   AudioSource: {fileID: 408894053}
+  _audioClip: {fileID: 0}
 --- !u!114 &1510605859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2249,7 +2250,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8026065897590409741
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3904,7 +3905,7 @@ PrefabInstance:
     - target: {fileID: 7541402975117531861, guid: 3c1f2eca604057b4688cd1a7e2e97626,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: StartScreenScene
+      value: LevelSelectionScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c1f2eca604057b4688cd1a7e2e97626, type: 3}
