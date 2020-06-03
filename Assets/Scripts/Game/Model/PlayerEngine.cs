@@ -56,7 +56,8 @@ namespace Model
             _view.OnInteract += ApplyInteraction;
             _view.OnUnsaveSpot += OnUnsaveSpot;
 
-            ApplicationBehaviour.Instance.Initialized += (obj, args) => AssignPlayerStats();
+            //ApplicationBehaviour.Instance.Initialized += (obj, args) => AssignPlayerStats();
+            AssignPlayerStats();
         }
 
         private void ResetMistakeBools()

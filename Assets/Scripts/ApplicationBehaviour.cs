@@ -10,7 +10,7 @@ using Boxsun.Math;
 
 namespace Game
 {
-    public class ApplicationBehaviour : SingletonMonoBehaviour<ApplicationBehaviour>
+    public class ApplicationBehaviour : MonoBehaviour /*SingletonMonoBehaviour<ApplicationBehaviour>*/
     {
         public event EventHandler Initialized;
 
