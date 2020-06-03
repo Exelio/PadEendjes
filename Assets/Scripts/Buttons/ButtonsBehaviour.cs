@@ -14,6 +14,8 @@ public class ButtonsBehaviour : MonoBehaviour
     public AudioManager AudioManager;
 
     public AudioSource AudioSource;
+    [SerializeField]
+    private AudioClip _audioClip;
 
     private void Start()
     {
@@ -22,7 +24,16 @@ public class ButtonsBehaviour : MonoBehaviour
 
     private void PlaySound()
     {
-        AudioManager.Play("Button", AudioSource);
+        if (AudioManager != null)
+        {
+            AudioManager.Play("Button", AudioSource);
+        }
+        else
+        {
+            AudioSource.clip = _audioClip;
+            AudioSource.Play();
+        }
+            
     }
     
     public void LoadScene(string SceneToLoad)
