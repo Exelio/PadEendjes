@@ -74,23 +74,16 @@ namespace View
             if (other.gameObject.layer == _crossingRoadLayer) _stats.IsOnCrossingRoad = true;
             if (other.gameObject.layer == _areaToWalkLayer) _stats.IsOnWalkingArea = true;
             if (other.gameObject.layer == _unsaveLayer && !_stats.IsOnStreet) { OnUnsaveSpot?.Invoke(); SetUnsaveObj(other); }
-            if (other.gameObject.layer == _streetLayer || other.gameObject.layer == _crossingRoadLayer || other.gameObject.layer == _unsaveLayer || other.gameObject.layer == _areaToWalkLayer)
+            if (other.gameObject.layer == _streetLayer || 
+                other.gameObject.layer == _crossingRoadLayer || 
+                other.gameObject.layer == _unsaveLayer || 
+                other.gameObject.layer == _areaToWalkLayer)
             {
                 _stats.IsOnStreet = true;
-                if(other.gameObject.layer == _unsaveLayer)
-                {
-                    SetUnsaveObj(other);
-                }
             }
             else
                 _stats.IsOnStreet = false;
 
-        }
-
-        private void SetUnsaveObj(Collider other)
-        {
-            unsaveObj = other.gameObject;
-            unsaveObj.SetActive(false);
         }
 
         private void OnTriggerExit()
@@ -99,16 +92,6 @@ namespace View
             _stats.IsOnStreet = false;
             _stats.IsOnCrossingRoad = false;
             _stats.IsOnWalkingArea = false;
-
-            OnExitRoad?.Invoke();
-            StartCoroutine(timer(1f));
-        }
-
-        IEnumerator timer(float time)
-        {
-            yield return new WaitForSeconds(time);
-            if(unsaveObj != null)
-                unsaveObj.SetActive(true);
         }
 
         private void OnDrawGizmos()

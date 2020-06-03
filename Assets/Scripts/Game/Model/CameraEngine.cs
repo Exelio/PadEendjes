@@ -158,7 +158,14 @@ namespace Model
                     OnCameraRotateToForward?.Invoke(_isRotatingToForward);
                     _view.StartCoroutine(StartChecking());
                 }
-                else _isRotatingToForward = false;
+                else 
+                {
+                    _isRotatingToForward = false;
+                    _hasDoneMovingMistake = false;
+                    _hasLookedLeft = false;
+                    _hasLookedRight = false;
+                    _hasToWatchLeftAndRight = true;
+                }
             }
         }
 

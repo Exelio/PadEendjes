@@ -54,7 +54,6 @@ namespace Model
 
         public void Resume()
         {
-            Debug.Log("Spawn cars");
             _spawnCars = true;
 
             foreach (var controller in _controllerList)
