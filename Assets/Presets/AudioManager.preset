@@ -1,0 +1,475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!181963792 &2655988077585873504
+Preset:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: AudioManager
+  m_TargetType:
+    m_NativeTypeID: 114
+    m_ManagedTypePPtr: {fileID: 11500000, guid: decf893a268650e48a7ae33cac2ab3ff,
+      type: 3}
+    m_ManagedTypeFallback: 
+  m_Properties:
+  - target: {fileID: 0}
+    propertyPath: m_Enabled
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorHideFlags
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: m_EditorClassIdentifier
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.size
+    value: 6
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].ClipName
+    value: DuckQuack
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: a4726fc6ad807ca4ea3a0d1a117df367, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].Volume
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].SpatialBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].DopplerLevel
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].MinDistance
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].MaxDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[0].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].ClipName
+    value: CarDriving
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: d83cf4f5ca46efb4db521c098407100b, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].Volume
+    value: 0.5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].IsLooping
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].SpatialBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].DopplerLevel
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].MinDistance
+    value: 5
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].MaxDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[1].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].ClipName
+    value: DuckPanic
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: 44fe03618ff98474eb78a9e0b606b728, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].Volume
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].SpatialBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].DopplerLevel
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].MinDistance
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].MaxDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[2].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].ClipName
+    value: Mistake
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: 90d6cec41e7eed74f871de99d21f67fa, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].Volume
+    value: 0.25
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].SpatialBlend
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].DopplerLevel
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].MinDistance
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].MaxDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[3].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].ClipName
+    value: Button
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: 9dcc23ba46ddc2341b3a1e42215a0dfa, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].Volume
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].SpatialBlend
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].DopplerLevel
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].MinDistance
+    value: 0.2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].MaxDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[4].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].ClipName
+    value: PondAmbient
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: edfcff3861c6d0e48926df5eed717db1, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].Volume
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].SpatialBlend
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].DopplerLevel
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].MinDistance
+    value: 3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].MaxDistance
+    value: 10
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _sounds.Array.data[5].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.size
+    value: 4
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].ClipName
+    value: FootStep1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: 1944428ff41bd254281215d79c67f3ef, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].Volume
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].SpatialBlend
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].DopplerLevel
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].MinDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].MaxDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[0].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].ClipName
+    value: FootStep2
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: 1e024e84456cb7e4f981e02e5b638f3f, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].Volume
+    value: 0.1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].SpatialBlend
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].DopplerLevel
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].MinDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].MaxDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[1].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].ClipName
+    value: FootStep3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: 6a1fbcd8465a9234ca84f5f0f4e495f7, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].Volume
+    value: 0.08
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].SpatialBlend
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].DopplerLevel
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].MinDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].MaxDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[2].AudioSource
+    value: 
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].ClipName
+    value: FootStep3
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].AudioClip
+    value: 
+    objectReference: {fileID: 8300000, guid: 9f6124cdab3deee44b34a09c85ca1ca8, type: 3}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].Volume
+    value: 0.08
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].Pitch
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].IsLooping
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].SpatialBlend
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].DopplerLevel
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].Spread
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].MinDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].MaxDistance
+    value: 0
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _clips.Array.data[3].AudioSource
+    value: 
+    objectReference: {fileID: 0}
