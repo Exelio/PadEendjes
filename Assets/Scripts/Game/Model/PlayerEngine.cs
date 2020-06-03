@@ -97,7 +97,6 @@ namespace Model
 
         private void CheckCorrectStreetCross()
         {
-            Debug.Log(_stats.IsOnWalkingArea);
             if (_stats.IsOnWalkingArea) return;
 
             RoadBehaviour beh = _hit.transform?.GetComponent<RoadBehaviour>();

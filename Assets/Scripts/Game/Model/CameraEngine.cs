@@ -82,40 +82,43 @@ namespace Model
                 CheckLeftRight();
             }
         }
+
+        float _waitTimeLeft;
+        float _waitTimeRight;
         private void CheckLeftRight()
         {
             if (!_hasToWatchLeftAndRight) return;
 
             float angle = _view.transform.rotation.eulerAngles.y;
-            CheckLeft(angle);
-            CheckRight(angle);
+            CheckAngle(ref _hasLookedLeft, angle, _startAngle - 80f, ref _waitTimeLeft, "Links goed!");
+            CheckAngle(ref _hasLookedRight, angle, _startAngle + 80f, ref _waitTimeRight, "Rechts goed!");
+
             if (_hasLookedRight && _hasLookedLeft) { _hasToWatchLeftAndRight = false; }
         }
 
-        private void CheckLeft(float angle)
+        private void CheckAngle(ref bool looked, float angle, float startAngle, ref float timer, string text)
         {
-            if (_hasLookedLeft) return;
+            if (looked) return;
 
-            float differnce = Mathf.DeltaAngle(angle, _startAngle - 80f);
+            float difference = Mathf.DeltaAngle(angle, startAngle);
+            Debug.Log(difference);
 
-            if (differnce < 10f && differnce > -10f)
+            if (difference < 20f && difference > -20f)
             {
-                _hasLookedLeft = true;
-                OnLookedWell?.Invoke("Links goed!");
+                timer += Time.deltaTime;
+                if (CheckTimePast(timer))
+                {
+                    looked = true;
+                    timer = 0;
+                    OnLookedWell?.Invoke(text);
+                }
             }
+            else timer = 0;
         }
 
-        private void CheckRight(float angle)
+        private bool CheckTimePast(float time)
         {
-            if (_hasLookedRight) return;
-
-            float differnce = Mathf.DeltaAngle(angle, _startAngle + 80f);
-
-            if (differnce < 10f && differnce > -10f)
-            {
-                _hasLookedRight = true;
-                OnLookedWell?.Invoke("Rechts goed!");
-            }
+            return time >= .75f;
         }
 
         public void ApplyRotation(float horizontal, float vertical)

@@ -47,7 +47,7 @@ namespace Model
 
         private IEnumerator SetPanel()
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.4f);
             _view.LookedWellPanel.SetActive(false);
         }
     }
