@@ -97,6 +97,7 @@ namespace Game
 
             _cameraEngine.OnMistake += AddMistake;
             _cameraEngine.OnLookedWell += LookedWell;
+            _cameraEngine.OnCameraRotateToForward += _playerEngine.ToggleRotation;
 
             _mistakeManager.OnPopUp += PauzeGame;
             _mistakeManager.OnPopUpOver += ResumeGame;
