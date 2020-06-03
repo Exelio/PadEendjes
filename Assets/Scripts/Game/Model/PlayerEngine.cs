@@ -118,7 +118,7 @@ namespace Model
 
             if (_stats.IsOnStreet || _stats.IsOnCrossingRoad)
             {
-                CheckWalkInStraightLine();
+                //CheckWalkInStraightLine();
             }
             else
             {
