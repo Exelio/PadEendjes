@@ -29,6 +29,7 @@ namespace View
     [RequireComponent(typeof(AudioSource))]
     public class DuckView : MonoBehaviour
     {
+        public bool IsCaught;
         public event Action<Transform> OnCaught;
         public event Action<Transform> OnScared;
 
@@ -39,12 +40,14 @@ namespace View
         {
             if (_variables.FollowTarget != target)
             {
+                IsCaught = true;
                 OnCaught?.Invoke(target);
             }
         }
 
         public void OnGettingScared(Transform target)
         {
+            IsCaught = false;
             OnScared?.Invoke(target);
         }
 

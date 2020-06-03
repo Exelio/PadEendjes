@@ -23,7 +23,6 @@ namespace Model
         private float _targetTimer;
 
         private bool _canTargetChange;
-        private bool _isDuckCaught;
 
         private readonly AudioManager _audioManager;
 
@@ -40,7 +39,6 @@ namespace Model
 
         private void DuckScared(Transform trans)
         {
-            _isDuckCaught = false;
             OnTargetChange(trans);
 
             _view.StartCoroutine(DuckPanic(3));
@@ -54,7 +52,6 @@ namespace Model
             OnTargetChange(trans);
             OnCaught?.Invoke();
 
-            _isDuckCaught = true;
             _variables.Trigger.enabled = false;
         }
 
@@ -77,7 +74,7 @@ namespace Model
                 _canTargetChange = true;
                 _targetTimer = 0;
 
-                if(!_isDuckCaught && !_variables.Trigger.enabled)
+                if(!_view.IsCaught && !_variables.Trigger.enabled)
                     _variables.Trigger.enabled = true;
             }
 
@@ -144,7 +141,7 @@ namespace Model
 
         private void PlaySoundAtRandom()
         {
-            if (_animationTimer <= 0f && !_isDuckCaught)
+            if (_animationTimer <= 0f && !_view.IsCaught)
             {
                 _animationTimer = UnityEngine.Random.Range(_variables.TimeBetweenAudio.x, _variables.TimeBetweenAudio.y);
 

@@ -156,8 +156,9 @@ namespace Model
                 {
                     _isRotatingToForward = true;
                     OnCameraRotateToForward?.Invoke(_isRotatingToForward);
-                    _view.StartCoroutine(StartChecking());                
+                    _view.StartCoroutine(StartChecking());
                 }
+                else _isRotatingToForward = false;
             }
         }
 
@@ -195,19 +196,24 @@ namespace Model
         {
             float angle = Mathf.DeltaAngle(_stats.PrimaryAnchorPoint.rotation.y, _target.rotation.y);
 
-            while (Mathf.Abs(angle) != 0)
+            if (Mathf.Abs(angle) > 0.075f)
             {
-                angle = Mathf.DeltaAngle(_stats.PrimaryAnchorPoint.rotation.y, _target.rotation.y);
-                Debug.Log(angle);
-                _stats.PrimaryAnchorPoint.rotation = Quaternion.Lerp(_stats.PrimaryAnchorPoint.rotation, _target.rotation, _stats.FollowLerpSpeed);
+                while (Mathf.Abs(angle) != 0)
+                {
+                    angle = Mathf.DeltaAngle(_stats.PrimaryAnchorPoint.rotation.y, _target.rotation.y);
+                    _stats.PrimaryAnchorPoint.rotation = Quaternion.Lerp(_stats.PrimaryAnchorPoint.rotation, _target.rotation, _stats.FollowLerpSpeed);
 
-                if (Mathf.Abs(angle) < .05f) _stats.PrimaryAnchorPoint.rotation = _target.rotation;
+                    if (Mathf.Abs(angle) < .075f) { _stats.PrimaryAnchorPoint.rotation = _target.rotation; break; }
 
-                if (!_isToggled)
-                    break;
-                yield return null;
+                    if (!_isToggled)
+                        break;
+                    yield return null;
+                }
             }
-
+            else
+            {
+                _stats.PrimaryAnchorPoint.rotation = _target.rotation;
+            }
             if (_isToggled)
             {
                 _hasDoneMovingMistake = false;

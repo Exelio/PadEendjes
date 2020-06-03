@@ -195,6 +195,7 @@ namespace Model
             foreach (var visibleTarget in _visibleTargets)
             {
                 VehicleView targetView = visibleTarget.GetComponent<VehicleView>();
+                DuckView duckView = visibleTarget.GetComponent<DuckView>();
 
                 float distance = Vector3.Distance(_view.transform.position, visibleTarget.transform.position);
 
@@ -209,37 +210,38 @@ namespace Model
                     CheckCarDirection(targetView, forwardAngle, dotResult);
                 }
 
-                if (!_startChecking)
+                if ((duckView != null && duckView.IsCaught) || duckView == null)
                 {
-                    if (_isCrossingRoad)
+
+                    if (!_startChecking)
                     {
                         ChangeCheckSpeed(_wp.PreviousWaypoint.MaxSpeed);
                         _isCrossingRoad = false;
+                        return;
                     }
-                    return; 
-                }
 
-                if (distance <= _variables.PedestrianDistance && checkAngles)
-                {
-                    _isCrossingRoad = true;
-                    ChangeCheckSpeed(0f);
-                    SetVelocityToZero();
-                }
-                else if (_isCrossingRoad && angle < _variables.PedestrianCrossingAngle && angle > -_variables.PedestrianCrossingAngle)
-                {
-                    ChangeCheckSpeed(0f);
-                    SetVelocityToZero();
-                }
-                else if (!_isCrossingRoad && angle < _variables.PedestrianInFrontAngle && angle > -_variables.PedestrianInFrontAngle)
-                {
-                    _isCrossingRoad = true;
-                    ChangeCheckSpeed(0f);
-                    SetVelocityToZero();
-                }
+                    if (distance <= _variables.PedestrianDistance && checkAngles)
+                    {
+                        _isCrossingRoad = true;
+                        ChangeCheckSpeed(0f);
+                        SetVelocityToZero();
+                    }
+                    else if (_isCrossingRoad && angle < _variables.PedestrianCrossingAngle && angle > -_variables.PedestrianCrossingAngle)
+                    {
+                        ChangeCheckSpeed(0f);
+                        SetVelocityToZero();
+                    }
+                    else if (!_isCrossingRoad && angle < _variables.PedestrianInFrontAngle && angle > -_variables.PedestrianInFrontAngle)
+                    {
+                        _isCrossingRoad = true;
+                        ChangeCheckSpeed(0f);
+                        SetVelocityToZero();
+                    }
 
-                if (!checkAngles && distance >= _variables.PedestrianDistance)
-                {
-                    _isCrossingRoad = false;
+                    if (!checkAngles && distance >= _variables.PedestrianDistance)
+                    {
+                        _isCrossingRoad = false;
+                    }
                 }
             }
         }
@@ -251,7 +253,6 @@ namespace Model
 
         private void CheckCarDirection(VehicleView view, float angle, float dotResult)
         {
-            Debug.Log($"angle between {_view.name}, and {view.name} = {angle}");
             if (angle < 25 && angle > -25 && Vector3.Distance(_view.transform.position, view.transform.position) <= _variables.VehicleMinDistance)
             {
                 ChangeCheckSpeed(view.CheckSpeed);
