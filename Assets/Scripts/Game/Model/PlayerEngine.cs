@@ -228,7 +228,7 @@ namespace Model
 
         public void ApplyRotation(float horizontal, float vertical)
         {
-            if (!_canRotate) return;
+            //if (!_canRotate) return;
             if (horizontal != 0f || vertical != 0f)
             {
                 Vector3 cameraForward = Vector3.Scale(Camera.main.transform.forward, new Vector3(1, 0, 1)).normalized;
