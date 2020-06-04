@@ -60034,6 +60034,7 @@ MonoBehaviour:
     IsOnStreet: 0
     IsOnCrossingRoad: 0
     IsOnWalkingArea: 0
+  IsOnSafeRoad: 0
 --- !u!4 &3996529489756986044
 Transform:
   m_ObjectHideFlags: 0
@@ -61279,6 +61280,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102988687240811130, guid: c823539bf720fd3498863220a84e1965,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Level_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c823539bf720fd3498863220a84e1965, type: 3}

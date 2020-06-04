@@ -106,6 +106,8 @@ namespace Model
 
         private void CheckCorrectStreetCross()
         {
+            if (_stats.IsOnWalkingArea) return;
+
             if (_isCrossingRoadInFront) _stats.IsOnCrossingRoad = true;
 
             if (_mistakeCrossingRoad) return;
@@ -120,8 +122,6 @@ namespace Model
                     CountMistake(Mistakes.NotUsingCrossingRoad);
                 }
             }
-
-            Debug.Log(_mistakeCrossingRoad);
 
             if (_stats.IsOnStreet || _stats.IsOnCrossingRoad)
             {

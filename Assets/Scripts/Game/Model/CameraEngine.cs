@@ -92,6 +92,8 @@ namespace Model
 
         private void CheckLeftRight()
         {
+            Debug.Log(_hasToWatchLeftAndRight);
+
             if (!_hasToWatchLeftAndRight)
                 return;
 
@@ -162,6 +164,7 @@ namespace Model
                 _hasToWatchLeftAndRight = true;
                 _hasLookedLeft = false;
                 _hasLookedRight = false;
+                _hasDoneMovingMistake = false;
 
                 _stats.CameraTransform.SetParent(_stats.BackwardAnchorPoint);
 
