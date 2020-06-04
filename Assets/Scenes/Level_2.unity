@@ -4950,6 +4950,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073950137}
     m_Modifications:
+    - target: {fileID: 4909514575432323599, guid: ef3579bdc1fbe0042b1132e2830352dd,
+        type: 3}
+      propertyPath: IsSafeRoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5483941982191857089, guid: ef3579bdc1fbe0042b1132e2830352dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6146,6 +6151,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073950137}
     m_Modifications:
+    - target: {fileID: 4909514575432323599, guid: ef3579bdc1fbe0042b1132e2830352dd,
+        type: 3}
+      propertyPath: IsSafeRoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5483941982191857089, guid: ef3579bdc1fbe0042b1132e2830352dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15010,6 +15020,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073950137}
     m_Modifications:
+    - target: {fileID: 4909514575432323599, guid: ef3579bdc1fbe0042b1132e2830352dd,
+        type: 3}
+      propertyPath: IsSafeRoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5483941982191857089, guid: ef3579bdc1fbe0042b1132e2830352dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15846,6 +15861,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073950137}
     m_Modifications:
+    - target: {fileID: 4909514575432323599, guid: ef3579bdc1fbe0042b1132e2830352dd,
+        type: 3}
+      propertyPath: IsSafeRoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5483941982191857089, guid: ef3579bdc1fbe0042b1132e2830352dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19646,6 +19666,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073950137}
     m_Modifications:
+    - target: {fileID: 4909514575432323599, guid: ef3579bdc1fbe0042b1132e2830352dd,
+        type: 3}
+      propertyPath: IsSafeRoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5483941982191857089, guid: ef3579bdc1fbe0042b1132e2830352dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33631,6 +33656,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073950137}
     m_Modifications:
+    - target: {fileID: 4909514575432323599, guid: ef3579bdc1fbe0042b1132e2830352dd,
+        type: 3}
+      propertyPath: IsSafeRoad
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5483941982191857089, guid: ef3579bdc1fbe0042b1132e2830352dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -41445,7 +41475,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-228460
+  m_Name: pb_Mesh-3686
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -43975,7 +44005,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572203445}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9e2fdc861dba7e341b685f448b2fde3e, type: 3}
   m_Name: 
