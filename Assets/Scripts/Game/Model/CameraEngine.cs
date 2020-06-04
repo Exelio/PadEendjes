@@ -161,7 +161,7 @@ namespace Model
             {
                 _isToggled = value;
 
-                if (_isToggled)
+                if (!_isToggled)
                 {
                     _hasToWatchLeftAndRight = true;
                     //_view.StartCoroutine(StartChecking());
@@ -176,6 +176,10 @@ namespace Model
                 _stats.CameraTransform.SetParent(_stats.ForwardAnchorPoint);
             else
             {
+                _hasToWatchLeftAndRight = true;
+                _hasLookedLeft = false;
+                _hasLookedRight = false;
+
                 _stats.CameraTransform.SetParent(_stats.BackwardAnchorPoint);
 
                 _dollyDirection = _stats.BackwardAnchorPoint.localPosition.normalized;
