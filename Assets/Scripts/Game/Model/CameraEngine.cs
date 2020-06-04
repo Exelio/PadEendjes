@@ -34,20 +34,22 @@ namespace Model
         public CameraEngine(CameraView view, Transform target)
         {
             _view = view;
+            _stats = _view.Stats;
             _target = target;
 
             _query = new EnvironmentQuery();
         }
 
-        public void FixedCameraUpdate()
+        public void FixedCameraUpdate(bool pauzed)
         {
-            _stats = _view.Stats;
-
             ToggleAnchorPoints();
-            ObstacleCollision();
+             _stats = _view.Stats;
 
-            if(!_isRotatingToForward)
+            if (!pauzed)
+            {
+                ObstacleCollision();
                 CheckCorrectCrossing();
+            }
         }
 
         private void CheckCorrectCrossing()
@@ -74,16 +76,19 @@ namespace Model
             if (_mistakeCrossAtUnsaveSpot) return;
 
             float distance = Vector3.Distance(_target.transform.position, _previousPosition);
-            
-            if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake && !_isRotatingToForward)
+
+            if (!_isRotatingToForward)
             {
-                _hasDoneMovingMistake = true;
-                OnMistake?.Invoke(Mistakes.NotLookingLeftAndRight);
-                _previousPosition = _target.transform.position;
-            }
-            else
-            {
-                CheckLeftRight();
+                if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake)
+                {
+                    _hasDoneMovingMistake = true;
+                    OnMistake?.Invoke(Mistakes.NotLookingLeftAndRight);
+                    _previousPosition = _target.transform.position;
+                }
+                else
+                {
+                    CheckLeftRight();
+                }
             }
         }
 
@@ -155,8 +160,8 @@ namespace Model
                 if (_isToggled)
                 {
                     _isRotatingToForward = true;
-                    OnCameraRotateToForward?.Invoke(_isRotatingToForward);
                     _view.StartCoroutine(StartChecking());
+                    OnCameraRotateToForward?.Invoke(_isRotatingToForward);
                 }
                 else 
                 {
@@ -230,9 +235,9 @@ namespace Model
             }
 
             _isRotatingToForward = false;
-            OnCameraRotateToForward?.Invoke(_isRotatingToForward);
             _startAngle = _view.transform.rotation.eulerAngles.y;
             _previousPosition = _target.transform.position;
+            OnCameraRotateToForward?.Invoke(_isRotatingToForward);
         }
     }
 }

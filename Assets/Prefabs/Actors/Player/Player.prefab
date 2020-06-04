@@ -228,6 +228,7 @@ MonoBehaviour:
     DistanceToStreet: 0.5
     MaxAngleDifference: 2.5
     MaxRadius: 10
+    MeshObj: {fileID: 0}
     AudioSource: {fileID: 0}
     Rigidbody: {fileID: 0}
     Collider: {fileID: 0}

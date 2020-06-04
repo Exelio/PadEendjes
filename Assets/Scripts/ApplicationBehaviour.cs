@@ -251,13 +251,13 @@ namespace Game
         private void FixedUpdate()
         {
             FixedUpdateDucks();
+            _cameraEngine.FixedCameraUpdate(_pauzed);
             _playerStateMachine.FixedUpdate();
             if (_pauzed || _levelComplete) 
             {
                 _playerStateMachine.Direction = MathB.Vector2Conversion(0, 0);
                 return; 
             }
-            _cameraEngine.FixedCameraUpdate();
             _trafficHubBehaviour.FixedUpdateHub();
         }
 
