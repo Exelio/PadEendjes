@@ -163,7 +163,7 @@ namespace Model
 
                 if (_isToggled)
                 {
-                    _isRotatingToForward = true;
+                    _hasToWatchLeftAndRight = true;
                     //_view.StartCoroutine(StartChecking());
                     OnCameraRotateToForward?.Invoke(_isRotatingToForward);
                 }
