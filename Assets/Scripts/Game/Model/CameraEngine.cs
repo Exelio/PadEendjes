@@ -158,13 +158,21 @@ namespace Model
         private void ToggleAnchorPoints()
         {
             if (_isToggled)
+            {
                 _stats.CameraTransform.SetParent(_stats.ForwardAnchorPoint);
+
+                _view.LeftPoint.SetActive(true);
+                _view.RightPoint.SetActive(true);
+            }
             else
             {
                 _hasToWatchLeftAndRight = true;
                 _hasLookedLeft = false;
                 _hasLookedRight = false;
                 _hasDoneMovingMistake = false;
+
+                _view.LeftPoint.SetActive(false);
+                _view.RightPoint.SetActive(false);
 
                 _stats.CameraTransform.SetParent(_stats.BackwardAnchorPoint);
 
