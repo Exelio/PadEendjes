@@ -20,7 +20,7 @@ namespace Model
         private float _startAngle;
 
         private bool _isToggled;
-        private bool _hasToWatchLeftAndRight;
+        private bool _hasToWatchLeftAndRight = true;
 
         private bool _hasDoneMovingMistake;
         private bool _hasLookedLeft = false;
@@ -96,6 +96,8 @@ namespace Model
         float _waitTimeRight;
         private void CheckLeftRight()
         {
+            Debug.Log(_hasToWatchLeftAndRight);
+
             if (!_hasToWatchLeftAndRight) return;
 
             float angle = _view.transform.rotation.eulerAngles.y;
@@ -131,7 +133,7 @@ namespace Model
 
         public void ApplyRotation(float horizontal, float vertical)
         {
-            Debug.Log(_isRotatingToForward);
+            //Debug.Log(_isRotatingToForward);
 
             //if (!_isRotatingToForward) return;
 
@@ -164,14 +166,6 @@ namespace Model
                     _isRotatingToForward = true;
                     //_view.StartCoroutine(StartChecking());
                     OnCameraRotateToForward?.Invoke(_isRotatingToForward);
-                }
-                else 
-                {
-                    _isRotatingToForward = false;
-                    _hasDoneMovingMistake = false;
-                    _hasLookedLeft = false;
-                    _hasLookedRight = false;
-                    _hasToWatchLeftAndRight = true;
                 }
             }
         }
