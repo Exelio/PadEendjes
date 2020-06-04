@@ -77,8 +77,8 @@ namespace Model
 
             float distance = Vector3.Distance(_target.transform.position, _previousPosition);
 
-            if (!_isRotatingToForward)
-            {
+            //if (!_isRotatingToForward)
+            //{
                 if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake)
                 {
                     _hasDoneMovingMistake = true;
@@ -89,7 +89,7 @@ namespace Model
                 {
                     CheckLeftRight();
                 }
-            }
+            //}
         }
 
         float _waitTimeLeft;
