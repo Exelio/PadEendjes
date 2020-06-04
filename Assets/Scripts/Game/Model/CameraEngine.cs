@@ -133,7 +133,7 @@ namespace Model
         {
             Debug.Log(_isRotatingToForward);
 
-            if (!_isRotatingToForward) return;
+            //if (!_isRotatingToForward) return;
 
             Vector3 forward = _stats.PrimaryAnchorPoint.forward;
             Vector3 up = _stats.ForwardAnchorPoint.forward;
