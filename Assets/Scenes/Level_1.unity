@@ -7304,6 +7304,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3996529488288691723, guid: 6a3b9017379bd6543b4b90baed8cc2dd,
+        type: 3}
+      propertyPath: _stats.MeshObj
+      value: 
+      objectReference: {fileID: 437716421}
     - target: {fileID: 3996529488288691732, guid: 6a3b9017379bd6543b4b90baed8cc2dd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7361,6 +7366,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a3b9017379bd6543b4b90baed8cc2dd, type: 3}
+--- !u!1 &437716421 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8127482474298417936, guid: 6a3b9017379bd6543b4b90baed8cc2dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 437716420}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &439791815
 PrefabInstance:
   m_ObjectHideFlags: 0

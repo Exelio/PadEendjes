@@ -131,7 +131,9 @@ namespace Model
 
         public void ApplyRotation(float horizontal, float vertical)
         {
-            if (_isRotatingToForward) return;
+            Debug.Log(_isRotatingToForward);
+
+            if (!_isRotatingToForward) return;
 
             Vector3 forward = _stats.PrimaryAnchorPoint.forward;
             Vector3 up = _stats.ForwardAnchorPoint.forward;
