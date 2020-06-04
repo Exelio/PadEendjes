@@ -145,8 +145,11 @@ namespace Model
             {
                 _animationTimer = UnityEngine.Random.Range(_variables.TimeBetweenAudio.x, _variables.TimeBetweenAudio.y);
 
-                if(!_variables.Source.isPlaying)
+                if (!_variables.Source.isPlaying)
+                {
                     _audioManager.Play("DuckQuack", _variables.Source);
+                    _variables.ParticleSystem.Play();
+                }
             }
             else
                 _animationTimer -= Time.deltaTime;

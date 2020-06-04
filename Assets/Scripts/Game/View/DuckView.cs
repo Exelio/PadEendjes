@@ -24,6 +24,9 @@ namespace View
         [Header("Audio variables")]
         public AudioSource Source;
         public Vector2 TimeBetweenAudio;
+
+        [Header("Particle variables")]
+        public ParticleSystem ParticleSystem;
     }
 
     [RequireComponent(typeof(AudioSource))]
