@@ -162,7 +162,7 @@ namespace Model
                 if (_isToggled)
                 {
                     _isRotatingToForward = true;
-                    _view.StartCoroutine(StartChecking());
+                    //_view.StartCoroutine(StartChecking());
                     OnCameraRotateToForward?.Invoke(_isRotatingToForward);
                 }
                 else 
