@@ -27,11 +27,14 @@ namespace View
         public event Action OnExitRoad;
         public event Action OnUnsaveSpot;
 
+        public bool IsOnSafeRoad;
+
         private LayerMask _interactLayer;
         private LayerMask _streetLayer;
         private LayerMask _crossingRoadLayer;
         private LayerMask _unsaveLayer;
         private LayerMask _areaToWalkLayer;
+        private LayerMask _safeRoadLayer;
 
         public void Initialize()
         {
@@ -46,6 +49,7 @@ namespace View
             _crossingRoadLayer = LayerMask.NameToLayer("CrossingRoad");
             _unsaveLayer = LayerMask.NameToLayer("UnsaveSpots");
             _areaToWalkLayer = LayerMask.NameToLayer("WalkingArea");
+            _safeRoadLayer = LayerMask.NameToLayer("SafeRoad");
         }
 
         public void MotionAnimation(float direction)
@@ -66,23 +70,31 @@ namespace View
                 _stats.InteractableObject = other.transform.parent.gameObject;
                 OnInteract?.Invoke(other.transform.parent.gameObject);
             }
+
+            if (other.gameObject.layer == _safeRoadLayer)
+                IsOnSafeRoad = true;
         }
 
         private GameObject unsaveObj;
         private void OnTriggerStay(Collider other)
         {
             if (other.gameObject.layer == _crossingRoadLayer) _stats.IsOnCrossingRoad = true;
+
             if (other.gameObject.layer == _areaToWalkLayer) _stats.IsOnWalkingArea = true;
+
             if (other.gameObject.layer == _unsaveLayer && !_stats.IsOnStreet) { OnUnsaveSpot?.Invoke(); }
+
             if (other.gameObject.layer == _streetLayer || 
                 other.gameObject.layer == _crossingRoadLayer || 
                 other.gameObject.layer == _unsaveLayer || 
-                other.gameObject.layer == _areaToWalkLayer)
+                other.gameObject.layer == _areaToWalkLayer ||
+                IsOnSafeRoad)
             {
                 _stats.IsOnStreet = true;
             }
             else
                 _stats.IsOnStreet = false;
+
 
         }
 
@@ -92,6 +104,9 @@ namespace View
             _stats.IsOnStreet = false;
             _stats.IsOnCrossingRoad = false;
             _stats.IsOnWalkingArea = false;
+            IsOnSafeRoad = false;
+
+            OnExitRoad?.Invoke();
         }
 
         private void OnDrawGizmos()

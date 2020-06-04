@@ -24,6 +24,8 @@ namespace Model
 
         private Vector3 _velocity;
 
+        private RoadBehaviour _roadBehaviour;
+
         private readonly PlayerView _view;
         private readonly AudioManager _audioManager;
         private readonly EnvironmentQuery _query;
@@ -97,25 +99,29 @@ namespace Model
             }
         }
 
+        private void AssignRoad(RoadBehaviour roadBehaviour)
+        {
+            _roadBehaviour = roadBehaviour;
+        }
+
         private void CheckCorrectStreetCross()
         {
-            if (_stats.IsOnWalkingArea) return;
-
-            RoadBehaviour beh = _hit.transform?.GetComponent<RoadBehaviour>();
-            if (beh == null) return;
-
             if (_isCrossingRoadInFront) _stats.IsOnCrossingRoad = true;
-            if (_stats.IsOnStreet && _isCloseToCrossingRoad && !_stats.IsOnCrossingRoad && !beh.IsSafeRoad)
-            {
-                if (_mistakeCrossingRoad) return;
 
+            if (_mistakeCrossingRoad) return;
+
+            if (_stats.IsOnStreet && _isCloseToCrossingRoad && !_stats.IsOnCrossingRoad && !_view.IsOnSafeRoad)
+            {
                 float distanceWalked = Vector3.Distance(_startPosition, _view.transform.position);
+
                 if (distanceWalked > 1.5f)
                 {
                     _mistakeCrossingRoad = true;
                     CountMistake(Mistakes.NotUsingCrossingRoad);
                 }
             }
+
+            Debug.Log(_mistakeCrossingRoad);
 
             if (_stats.IsOnStreet || _stats.IsOnCrossingRoad)
             {

@@ -185,6 +185,8 @@ namespace Game
             _rewardBehaviour.AddMistake();
             _rallyBehaviour.PlaceRallyPoints(_player.transform, _playerEngine.DuckList.Count);
 
+            Debug.Log("Triggered");
+
             for (int i = 0; i < _playerEngine.DuckList.Count; i++)
                 _playerEngine.DuckList[i].GetComponent<DuckView>().OnGettingScared(_rallyBehaviour.RallyPoints[i].transform);
 

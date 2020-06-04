@@ -23,7 +23,7 @@ namespace Utils
 
         public bool ShootRay(ref RaycastHit hitinfo, Vector3 origin, float distance, Vector3 direction, LayerMask streetLayer)
         {
-            return Physics.Raycast(origin, direction, out hitinfo, distance, streetLayer);
+            return Physics.Raycast(origin, direction, out _hitInfo, distance, streetLayer);
         }
 
         public bool CastSphere(Vector3 origin, float checkRadius, LayerMask crossingRoadLayer)

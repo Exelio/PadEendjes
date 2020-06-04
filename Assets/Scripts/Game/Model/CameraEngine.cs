@@ -18,6 +18,8 @@ namespace Model
 
         private float _distance;
         private float _startAngle;
+        private float _waitTimeLeft;
+        private float _waitTimeRight;
 
         private bool _isToggled;
         private bool _hasToWatchLeftAndRight = true;
@@ -25,6 +27,7 @@ namespace Model
         private bool _hasDoneMovingMistake;
         private bool _hasLookedLeft = false;
         private bool _hasLookedRight = false;
+        private bool _mistakeCrossAtUnsaveSpot;
 
         private readonly Transform _target;
         private Vector3 _previousPosition;
@@ -70,46 +73,40 @@ namespace Model
             _mistakeCrossAtUnsaveSpot = value;
         }
 
-        private bool _mistakeCrossAtUnsaveSpot;
         private void CheckDistanceChange()
         {
-            if (_mistakeCrossAtUnsaveSpot) return;
+            if (_mistakeCrossAtUnsaveSpot)
+                return;
 
             float distance = Vector3.Distance(_target.transform.position, _previousPosition);
 
-            //if (!_isRotatingToForward)
-            //{
-                if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake)
-                {
-                    _hasDoneMovingMistake = true;
-                    OnMistake?.Invoke(Mistakes.NotLookingLeftAndRight);
-                    _previousPosition = _target.transform.position;
-                }
-                else
-                {
-                    CheckLeftRight();
-                }
-            //}
+            if (distance > 1.5f && _hasToWatchLeftAndRight && !_hasDoneMovingMistake)
+            {
+                _hasDoneMovingMistake = true;
+                OnMistake?.Invoke(Mistakes.NotLookingLeftAndRight);
+                _previousPosition = _target.transform.position;
+            }
+            else
+                CheckLeftRight();
         }
 
-        float _waitTimeLeft;
-        float _waitTimeRight;
         private void CheckLeftRight()
         {
-            Debug.Log(_hasToWatchLeftAndRight);
-
-            if (!_hasToWatchLeftAndRight) return;
+            if (!_hasToWatchLeftAndRight)
+                return;
 
             float angle = _view.transform.rotation.eulerAngles.y;
             CheckAngle(ref _hasLookedLeft, angle, _startAngle - 80f, ref _waitTimeLeft, "Links goed!");
             CheckAngle(ref _hasLookedRight, angle, _startAngle + 80f, ref _waitTimeRight, "Rechts goed!");
 
-            if (_hasLookedRight && _hasLookedLeft) { _hasToWatchLeftAndRight = false; }
+            if (_hasLookedRight && _hasLookedLeft) 
+                _hasToWatchLeftAndRight = false;
         }
 
         private void CheckAngle(ref bool looked, float angle, float startAngle, ref float timer, string text)
         {
-            if (looked) return;
+            if (looked)
+                return;
 
             float difference = Mathf.DeltaAngle(angle, startAngle);
 
@@ -128,15 +125,11 @@ namespace Model
 
         private bool CheckTimePast(float time)
         {
-            return time >= .75f;
+            return time >= 0.75f;
         }
 
         public void ApplyRotation(float horizontal, float vertical)
         {
-            //Debug.Log(_isRotatingToForward);
-
-            //if (!_isRotatingToForward) return;
-
             Vector3 forward = _stats.PrimaryAnchorPoint.forward;
             Vector3 up = _stats.ForwardAnchorPoint.forward;
 
@@ -154,20 +147,10 @@ namespace Model
                 _stats.PrimaryAnchorPoint.Rotate(Vector3.right, vertical * _stats.RotationSpeed * Time.deltaTime, Space.Self);
         }
 
-        private bool _isRotatingToForward;
         public void ToggleAnchorPoint(bool value)
         {
             if (_isToggled != value)
-            {
                 _isToggled = value;
-
-                if (!_isToggled)
-                {
-                    _hasToWatchLeftAndRight = true;
-                    //_view.StartCoroutine(StartChecking());
-                    OnCameraRotateToForward?.Invoke(_isRotatingToForward);
-                }
-            }
         }
 
         private void ToggleAnchorPoints()
@@ -234,10 +217,8 @@ namespace Model
                 _hasToWatchLeftAndRight = true;
             }
 
-            _isRotatingToForward = false;
             _startAngle = _view.transform.rotation.eulerAngles.y;
             _previousPosition = _target.transform.position;
-            OnCameraRotateToForward?.Invoke(_isRotatingToForward);
         }
     }
 }
